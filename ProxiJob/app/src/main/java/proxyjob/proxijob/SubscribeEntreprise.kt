@@ -1,16 +1,15 @@
-package proxyjob.proxyjob
+package proxyjob.proxijob
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import com.parse.ParseException
-import com.parse.ParseUser
 import com.parse.SignUpCallback
 import kotlinx.android.synthetic.main.activity_subscribe_entreprise.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.find
-import proxyjob.proxyjob.model.KUser
+import proxyjob.proxijob.model.KUser
 
 /**
  * Created by alexandre on 04/02/2018.
@@ -49,6 +48,7 @@ class SubscribeEntreprise : AppCompatActivity() {
                         override fun done(e: ParseException?) {
                             if (e == null) {
                                 alert( "INSCRIPTION ... OKAY") {
+                                    startActivity(Intent(this@SubscribeEntreprise, Login::class.java))
 
                                 }.show()
                             } else {

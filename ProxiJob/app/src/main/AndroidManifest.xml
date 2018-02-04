@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="proxyjob.proxyjob">
+    package="proxyjob.proxijob">
 
     <application
-        android:name=".App"
+        android:name="proxyjob.proxijob.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,16 +16,17 @@
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="@string/parse_app_id" />
-        <activity android:name=".MainActivity">
+        <activity android:name="proxyjob.proxijob.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Subscribe"></activity>
-        <activity android:name=".SubscribeEntreprise"></activity>
-        <activity android:name=".SubscribeClient"></activity>
+        <activity android:name="proxyjob.proxijob.Subscribe"></activity>
+        <activity android:name="proxyjob.proxijob.SubscribeEntreprise"></activity>
+        <activity android:name="proxyjob.proxijob.SubscribeClient"></activity>
+        <activity android:name="proxyjob.proxijob.Login"></activity>
     </application>
 
 </manifest>

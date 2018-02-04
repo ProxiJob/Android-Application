@@ -1,4 +1,4 @@
-package proxyjob.proxyjob
+package proxyjob.proxijob
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,16 +7,11 @@ import android.widget.CheckBox
 import android.widget.EditText
 import com.parse.ParseException
 import com.parse.SignUpCallback
-import kotlinx.android.synthetic.main.activity_subscribe_entreprise.*
 import org.jetbrains.anko.alert
-import proxyjob.proxyjob.model.KUser
+import proxyjob.proxijob.model.KUser
 import java.util.*
-import android.widget.DatePicker
 import android.app.DatePickerDialog
-import android.util.Log
-import android.view.View
-import com.parse.ParseUser
-import org.jetbrains.anko.find
+import android.content.Intent
 import java.text.SimpleDateFormat
 
 
@@ -77,7 +72,8 @@ class SubscribeClient : AppCompatActivity() {
                     override fun done(e: ParseException?) {
                         if (e == null) {
                             alert( "INSCRIPTION ... OKAY") {
-                                
+                                startActivity(Intent(this@SubscribeClient, Login::class.java))
+
                             }.show()
                         } else {
                             alert( e.message.toString()) {

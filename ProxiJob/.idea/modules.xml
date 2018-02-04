@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProxyJob.iml" filepath="$PROJECT_DIR$/ProxyJob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProxiJob.iml" filepath="$PROJECT_DIR$/ProxiJob.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

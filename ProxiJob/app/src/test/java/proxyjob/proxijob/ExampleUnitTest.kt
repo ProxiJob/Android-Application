@@ -1,4 +1,4 @@
-package proxyjob.proxyjob
+package proxyjob.proxijob
 
 import org.junit.Test
 

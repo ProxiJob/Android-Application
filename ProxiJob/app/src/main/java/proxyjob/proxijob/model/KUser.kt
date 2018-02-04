@@ -1,4 +1,4 @@
-package proxyjob.proxyjob.model
+package proxyjob.proxijob.model
 
 import com.parse.ParseClassName
 import com.parse.ParseUser

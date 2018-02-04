@@ -1,16 +1,9 @@
-package proxyjob.proxyjob
+package proxyjob.proxijob
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import com.parse.ParseException
-import com.parse.ParseUser
-import com.parse.SignUpCallback
-import org.jetbrains.anko.alert
 
 /**
  * Created by alexandre on 04/02/2018.
