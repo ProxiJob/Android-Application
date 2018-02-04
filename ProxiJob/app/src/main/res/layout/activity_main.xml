@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:layout_alignParentStart="true"
+    tools:layout_alignParentTop="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="275dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_proxijob" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/ident"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+        android:drawablePadding="5dp"
+        android:hint="Identifiant"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorWhite"/>
+
+
+    <EditText
+        android:layout_below="@+id/ident"
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_enhanced_encryption_black_24dp"
+        android:drawablePadding="5dp"
+        android:hint="Mot de passe"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorWhite"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="196dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
+        android:background="@color/proxi_button_green"
+        android:text="Se connecter"
+        android:textColor="@color/proxi_back"
+        android:textSize="12sp" />
+
+    <Button
+        android:layout_below="@+id/login_button"
+        android:id="@+id/signup_button"
+        android:layout_width="196dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
+        android:background="@color/proxi_button_purple"
+        android:text="S'inscrire"
+        android:textColor="@color/proxi_button_green"
+        android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

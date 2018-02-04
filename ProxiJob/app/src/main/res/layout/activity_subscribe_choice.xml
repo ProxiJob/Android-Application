@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:layout_alignParentStart="true"
+    tools:layout_alignParentTop="true">
+
+
+    <Button
+        android:id="@+id/entreprise"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:text="VOUS PROPOSEZ \nUN EMPLOI"
+        android:textColor="@color/proxi_button_purple"
+        android:background="@color/proxi_button_green"/>
+
+    <Button
+        android:id="@+id/client"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:text="VOUS CHERCHEZ \nUN EMPLOI"
+        android:textColor="@color/proxi_button_green"
+        android:background="@color/proxi_button_purple"/>
+</LinearLayout>
