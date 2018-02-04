@@ -22,4 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="proxyjob.proxijob.MapsActivity" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="112dp"
+        android:src="@android:drawable/ic_menu_search"/>
 </LinearLayout>

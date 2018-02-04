@@ -4,6 +4,7 @@ import com.parse.ParseClassName
 import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseUser
+import java.util.*
 
 /**
  * Created by alexandre on 04/02/2018.
@@ -11,9 +12,9 @@ import com.parse.ParseUser
 @ParseClassName("Jobs")
 class Jobs : ParseObject() {
     var job: String?
-        get() = this.getString("business")
+        get() = this.getString("job")
         set(value) {
-            this.put("business", value)
+            this.put("job", value)
         }
     var description: String?
         get() = this.getString("description")
@@ -30,13 +31,13 @@ class Jobs : ParseObject() {
         set(value) {
             this.put("contract", value)
         }
-    var dateStart: String?
-        get() = this.getString("dateStart")
+    var dateStart: Date?
+        get() = this.getDate("dateStart")
         set(value) {
             this.put("dateStart", value)
         }
-    var dateEnd: String?
-        get() = this.getString("dateEnd")
+    var dateEnd: Date?
+        get() = this.getDate("dateEnd")
         set(value) {
             this.put("dateEnd", value)
         }

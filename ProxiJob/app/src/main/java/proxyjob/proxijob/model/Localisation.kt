@@ -10,8 +10,8 @@ import com.parse.ParseObject
 @ParseClassName("Localisation")
 class Localisation : ParseObject() {
     var localisation: ParseGeoPoint?
-        get() = this.getParseGeoPoint("localisation")
+        get() = this.getParseGeoPoint("point")
         set(value) {
-            this.put("localisation", value)
+            this.put("point", value)
         }
 }
