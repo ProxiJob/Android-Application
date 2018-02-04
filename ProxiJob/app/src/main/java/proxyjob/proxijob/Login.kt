@@ -21,7 +21,7 @@ class Login : AppCompatActivity() {
     var subscribe : Button?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("DEBUG", ParseUser.getCurrentUser().objectId)
+        //Log.i("DEBUG", ParseUser.getCurrentUser().objectId)
 
         setContentView(R.layout.activity_login)
 
@@ -35,7 +35,7 @@ class Login : AppCompatActivity() {
                 if (user != null)
                 {
                     alert( "CONNECTION ... OKAY") {
-                        startActivity(Intent(this@Login, Login::class.java))
+                        startActivity(Intent(this@Login, MainActivity::class.java))
                     }.show()
                 } else {
                     alert( e.message.toString()) {
