@@ -24,8 +24,21 @@ class APIManager {
      */
 
     fun getJobs(completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
-        var profilePicture: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
-        profilePicture.findInBackground { objects, e ->
+        var job: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
+        job.findInBackground { objects, e ->
+            Log.i("DEBUG API", "" + objects.size)
+            var jobs = ArrayList<Jobs>(objects)
+            e?.let {
+                completionHandler(false, null, jobs) //e
+            }
+            completionHandler(true, null, jobs)
+        }
+    }
+
+    fun getJob(objectID : String, completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
+        var job: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
+        job.whereEqualTo("objectId", objectID)
+        job.findInBackground { objects, e ->
             Log.i("DEBUG API", "" + objects.size)
             var jobs = ArrayList<Jobs>(objects)
             e?.let {

@@ -14,20 +14,9 @@
         android:layout_gravity="bottom"
         design:menu="@menu/nav_item" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="proxyjob.proxijob.MapsActivity" />
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="112dp"
-        android:src="@android:drawable/ic_menu_search"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

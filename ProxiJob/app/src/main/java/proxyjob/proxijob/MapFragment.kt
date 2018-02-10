@@ -2,8 +2,6 @@ package proxyjob.proxijob
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.app.Activity
-import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
@@ -12,47 +10,46 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.location.places.ui.PlacePicker
-
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import proxyjob.proxijob.R.id.container
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.Localisation
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
+
+/**
+ * Created by alexandre on 09/02/2018.
+ */
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
     override fun onInfoWindowClick(p0: Marker?) {
-
+        var intent = Intent(activity, MapInformationDetails::class.java)
+        intent.putExtra("objectID", Jobs!!.get(p0!!.id.toString().replace("m", "").toInt()).objectId)
+                startActivity(intent)
     }
 
+    fun newInstance(): MapFragment {
+        return MapFragment()
+    }
     var Jobs: ArrayList<Jobs>?= null
     var JobHash = HashMap<Jobs, String>()
     init {
@@ -63,9 +60,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
     companion object {
-        const val LOCATION_PERMISSION_REQUEST_CODE = 1
-        const val REQUEST_CHECK_SETTINGS = 2
-        const val PLACE_PICKER_REQUEST = 3
+        public const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        public const val REQUEST_CHECK_SETTINGS = 2
+        public const val PLACE_PICKER_REQUEST = 3
     }
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -74,12 +71,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private var locationUpdateState = false
-    var mBottomNav : BottomNavigationView?= null
-    override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    private lateinit var myContext: FragmentActivity
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+    override fun onAttach(context: Context?) {
+        myContext = activity as FragmentActivity
+        super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult) {
@@ -89,18 +92,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 //placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
             }
         }
-        mBottomNav = findViewById(R.id.navigation)
-        mBottomNav!!.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                Log.i("DEBUG NAVIG", "" + item)
-                // handle desired action here
-                // One possibility of action is to replace the contents above the nav bar
-                // return true if you want the item to be displayed as the selected item
-                return true
-            }
-        })
         createLocationRequest()
     }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater!!.inflate(R.layout.activity_maps, container, false)
+        val fm = childFragmentManager
+        var mapFragment: SupportMapFragment? = fm.findFragmentByTag("mapFragment") as SupportMapFragment?
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment()
+            val ft = fm.beginTransaction()
+            ft.add(R.id.mapFragment, mapFragment, "mapFragment")
+            ft.commit()
+            fm.executePendingTransactions()
+        }
+        mapFragment.getMapAsync(this)
+        return rootView
+    }
+
     protected fun createMarker(latitude: Double, longitude: Double) {
 
         val position = LatLng(latitude, longitude)
@@ -112,10 +121,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
         //if (requestCode == MainActivity.REQUEST_CHECK_SETTINGS) {
-          //  if (resultCode == Activity.RESULT_OK) {
-                locationUpdateState = true
-                startLocationUpdates()
-          //  }
+        //  if (resultCode == Activity.RESULT_OK) {
+        locationUpdateState = true
+        startLocationUpdates()
+        //  }
         //}
         /*if (requestCode == MainActivity.PLACE_PICKER_REQUEST) {
             if (resultCode == AppCompatActivity.RESULT_OK) {
@@ -156,15 +165,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             this.Jobs = arrayList
             Log.i("DEBUG JOBS", "" + Jobs)
 
-        for(i in Jobs!!.indices) {
-            var localisation = Jobs!![i].fetchIfNeeded<Jobs>().localisation!!.fetchIfNeeded<Localisation>().localisation
-            Log.i("DEBUG LOC", "" + localisation)
-            createMarker(localisation!!.latitude, localisation!!.longitude)
-        }
-        map.uiSettings.isZoomControlsEnabled = true
-        map.setOnMarkerClickListener(this)
+            for(i in Jobs!!.indices) {
+                var localisation = Jobs!![i].fetchIfNeeded<Jobs>().localisation!!.fetchIfNeeded<Localisation>().localisation
+                if (localisation != null) {
+                    Log.i("DEBUG LOC", "" + localisation)
+                    createMarker(localisation!!.latitude, localisation!!.longitude)
+            //createMarker(7.5, 43.7)
+                }
+            }
+            map.uiSettings.isZoomControlsEnabled = true
+            map.setOnMarkerClickListener(this)
 
-        setUpMap()
+            setUpMap()
         }
 
     }
@@ -172,10 +184,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(p0: Marker?) = false
 
     private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(this,
+        if (ActivityCompat.checkSelfPermission(activity,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(activity,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), MapsActivity.LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
 
@@ -230,6 +242,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 return v
             }
         })
+        map.setOnInfoWindowClickListener { marker ->
+            onInfoWindowClick(marker)
+        }
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
@@ -243,7 +258,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun getAddress(latLng: LatLng): String {
         // 1
-        val geocoder = Geocoder(this)
+        val geocoder = Geocoder(activity)
         val addresses: List<Address>?
         val address: Address?
         var addressText = ""
@@ -266,11 +281,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this,
+        if (ActivityCompat.checkSelfPermission(activity,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(activity,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_PERMISSION_REQUEST_CODE)
+                    MapsActivity.LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
@@ -284,7 +299,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         val builder = LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
-        val client = LocationServices.getSettingsClient(this)
+        val client = LocationServices.getSettingsClient(activity)
         val task = client.checkLocationSettings(builder.build())
 
         task.addOnSuccessListener {
@@ -298,8 +313,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    e.startResolutionForResult(this,
-                            REQUEST_CHECK_SETTINGS)
+                    e.startResolutionForResult(activity,
+                            MapsActivity.REQUEST_CHECK_SETTINGS)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
                 }
@@ -311,12 +326,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val builder = PlacePicker.IntentBuilder()
 
         try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST)
+            startActivityForResult(builder.build(activity), MapsActivity.PLACE_PICKER_REQUEST)
         } catch (e: GooglePlayServicesRepairableException) {
             e.printStackTrace()
         } catch (e: GooglePlayServicesNotAvailableException) {
             e.printStackTrace()
         }
     }
-
 }
