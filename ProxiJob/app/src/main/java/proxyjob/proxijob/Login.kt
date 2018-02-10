@@ -1,5 +1,6 @@
 package proxyjob.proxijob
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -14,7 +15,7 @@ import org.jetbrains.anko.alert
  * Created by alexandre on 04/02/2018.
  */
 
-class Login : AppCompatActivity() {
+class Login : Activity() {
     var ident : EditText?= null
     var pass : EditText?= null
     var login : Button?= null

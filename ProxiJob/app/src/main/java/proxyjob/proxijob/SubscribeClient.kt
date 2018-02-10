@@ -1,5 +1,6 @@
 package proxyjob.proxijob
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat
 /**
  * Created by alexandre on 04/02/2018.
  */
-class SubscribeClient : AppCompatActivity() {
+class SubscribeClient : Activity() {
     var firstname : EditText?= null
     var lastname : EditText?= null
     var email : EditText?= null
@@ -42,14 +43,12 @@ class SubscribeClient : AppCompatActivity() {
         homme = findViewById(R.id.homme)
         femme = findViewById(R.id.femme)
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel()
         }
         birthday!!.setOnClickListener({
-                // TODO Auto-generated method stub
                 DatePickerDialog(this@SubscribeClient, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show()
@@ -67,7 +66,7 @@ class SubscribeClient : AppCompatActivity() {
                 user.lastname = lastname!!.text.toString()
                 user.firstname = firstname!!.text.toString()
                 user.birthday = Date(birthday!!.text.toString())
-                user.sexe =  if (homme!!.isChecked) "Homme" else "Femme"
+                user.sex =  if (homme!!.isChecked) "Homme" else "Femme"
                 user.signUpInBackground(object : SignUpCallback {
                     override fun done(e: ParseException?) {
                         if (e == null) {

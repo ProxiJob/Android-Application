@@ -33,71 +33,94 @@
             android:src="@drawable/logo_proxijobs"/>
     </RelativeLayout>
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/entreprise"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                    android:id="@+id/entreprise"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Entreprise"
-                    android:layout_margin="10dp"
-                    android:background="@null"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"/>
-            <EditText
-                    android:layout_below="@+id/entreprise"
-                    android:id="@+id/nb_siret"
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="N° SIRET"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"/>
+            android:layout_height="wrap_content"
+            android:hint="Entreprise"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
 
-            <EditText
-                    android:layout_below="@+id/phone"
-                    android:id="@+id/mail"
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:background="@null"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"/>
+            android:backgroundTint="@color/colorWhite"/>
+        <EditText
+            android:layout_below="@+id/entreprise"
+            android:id="@+id/nb_siret"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="N° SIRET"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
 
-            <EditText
-                    android:layout_below="@+id/nb_siret"
-                    android:id="@+id/phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="N° Télephone"
-                    android:layout_margin="10dp"
-                    android:background="@null"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                android:textColor="@color/colorWhite"
-                    android:backgroundTint="@color/colorWhite"/>
+            android:backgroundTint="@color/colorWhite"/>
 
-            <EditText
-                    android:layout_below="@+id/mail"
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mot de passe"
-                    android:background="@null"
-                android:layout_margin="10dp"
-                android:textColor="@color/colorWhite"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                android:backgroundTint="@color/colorWhite"/>
+        <EditText
+            android:layout_below="@+id/phone"
+            android:id="@+id/mail"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="@color/colorWhite"
+            android:background="@null"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"/>
+
+        <EditText
+            android:layout_below="@+id/nb_siret"
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="N° Télephone"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColorHint="@color/colorWhite"
+
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorWhite"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mail"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="Mot de passe"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorWhite"
+
+            android:textColor="@color/colorAccent" />
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="Adresse"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColorHint="@color/colorWhite"
+
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 
@@ -106,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:layout_margin="40dp"
+            android:layout_margin="10dp"
             android:id="@+id/subscribe"
             android:layout_width="196dp"
             android:layout_height="52dp"

@@ -1,5 +1,6 @@
 package proxyjob.proxijob
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -11,12 +12,15 @@ import android.widget.TextView
 import com.parse.ParseUser
 import proxyjob.proxijob.model.Jobs
 import java.text.SimpleDateFormat
+import android.location.Geocoder
+import java.util.*
+
 
 /**
  * Created by alexandre on 10/02/2018.
  */
 
-class MapInformationDetails: AppCompatActivity()
+class MapInformationDetails: Activity()
 {
     var objectID : String?= null
     var lieuTV : TextView?= null
@@ -24,6 +28,7 @@ class MapInformationDetails: AppCompatActivity()
     var secteurTV : TextView?= null
     var dateTV : TextView?= null
     var priceTV : TextView?= null
+    var addressTV : TextView?= null
     var postuleBT : Button?= null
     var job: ArrayList<Jobs>?= null
 
@@ -38,6 +43,7 @@ class MapInformationDetails: AppCompatActivity()
         dateTV = findViewById(R.id.date)
         priceTV = findViewById(R.id.price)
         postuleBT = findViewById(R.id.postule)
+        addressTV = findViewById(R.id.address)
         objectID = getIntent().getExtras().getString("objectID")
         APIManager.getShared().getJob(objectID!!, {b: Boolean, error: Error?, arrayList: ArrayList<Jobs> ->
             job = arrayList
@@ -49,6 +55,7 @@ class MapInformationDetails: AppCompatActivity()
             dateTV!!.text = (formatter.format(job!![0].dateStart!!) + "\n \t\t\t\tau \n " +
                     formatter.format(job!![0].dateEnd!!))
             priceTV!!.text = job!![0].price
+
         }
         })
         postuleBT!!.setOnClickListener {

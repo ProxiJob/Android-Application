@@ -26,6 +26,11 @@ class Jobs : ParseObject() {
         set(value) {
             this.put("price", value)
         }
+    var status: String?
+        get() = this.getString("status")
+        set(value) {
+            this.put("status", value)
+        }
     var contract: ParseFile?
         get() = this.getParseFile("contract")
         set(value) {
@@ -42,18 +47,13 @@ class Jobs : ParseObject() {
             this.put("dateEnd", value)
         }
     var client: KUser?
-        get() = this.get("Client") as KUser
+        get() = this.get("client") as KUser
         set(value) {
-            this.put("Client", ParseObject.createWithoutData("_User", (value!!.objectId)))
+            this.put("client", ParseObject.createWithoutData("_User", (value!!.objectId)))
         }
-    var company: KUser?
-        get() = this.get("Company") as KUser
+    var company: Company?
+        get() = this.get("company") as Company
         set(value) {
-            this.put("Company", ParseObject.createWithoutData("_User", (value!!.objectId)))
-        }
-    var localisation: Localisation?
-        get() = this.get("Localisation") as Localisation
-        set(value) {
-            this.put("Localisation", ParseObject.createWithoutData("Localisation", (value!!.objectId)))
+            this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
         }
 }

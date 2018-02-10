@@ -30,6 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.Localisation
 import java.io.IOException
@@ -52,13 +53,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
     var Jobs: ArrayList<Jobs>?= null
     var JobHash = HashMap<Jobs, String>()
-    init {
-        APIManager.getShared().getJobs { b, error, arrayList ->
-            this.Jobs = arrayList
-            Log.i("DEBUG JOBS", "" + Jobs)
-
-        }
-    }
     companion object {
         public const val LOCATION_PERMISSION_REQUEST_CODE = 1
         public const val REQUEST_CHECK_SETTINGS = 2
@@ -82,17 +76,17 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         super.onCreate(savedInstanceState)
 
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult) {
-                super.onLocationResult(p0)
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(p0: LocationResult) {
+                    super.onLocationResult(p0)
 
-                lastLocation = p0.lastLocation
-                //placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+                    lastLocation = p0.lastLocation
+                    //placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+                }
             }
-        }
-        createLocationRequest()
+            createLocationRequest()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -142,7 +136,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
 
         if (!locationUpdateState) {
@@ -166,7 +160,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             Log.i("DEBUG JOBS", "" + Jobs)
 
             for(i in Jobs!!.indices) {
-                var localisation = Jobs!![i].fetchIfNeeded<Jobs>().localisation!!.fetchIfNeeded<Localisation>().localisation
+                var localisation = Jobs!![i].fetchIfNeeded<Jobs>().company!!.fetchIfNeeded<Company>().localisation!!.fetchIfNeeded<Localisation>().localisation
                 if (localisation != null) {
                     Log.i("DEBUG LOC", "" + localisation)
                     createMarker(localisation!!.latitude, localisation!!.longitude)
@@ -187,7 +181,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         if (ActivityCompat.checkSelfPermission(activity,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), MapsActivity.LOCATION_PERMISSION_REQUEST_CODE)
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
             return
         }
 
@@ -233,7 +227,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     (v!!.findViewById<TextView>(R.id.date) as TextView).text = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "\n \t\t\t\tau \n " +
                             formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)
                     (v!!.findViewById<TextView>(R.id.job) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).job
-                    (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded().get("businessName") as String
+                   // (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded().get("businessName") as String
 
                 } catch (ev: Exception) {
                     print(ev.message)
@@ -285,7 +279,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    MapsActivity.LOCATION_PERMISSION_REQUEST_CODE)
+                    1)
             return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
@@ -314,7 +308,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
                     e.startResolutionForResult(activity,
-                            MapsActivity.REQUEST_CHECK_SETTINGS)
+                            2)
                 } catch (sendEx: IntentSender.SendIntentException) {
                     // Ignore the error.
                 }
@@ -326,7 +320,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val builder = PlacePicker.IntentBuilder()
 
         try {
-            startActivityForResult(builder.build(activity), MapsActivity.PLACE_PICKER_REQUEST)
+            startActivityForResult(builder.build(activity), 3)
         } catch (e: GooglePlayServicesRepairableException) {
             e.printStackTrace()
         } catch (e: GooglePlayServicesNotAvailableException) {

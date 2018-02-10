@@ -1,12 +1,14 @@
 package proxyjob.proxijob.model
 
 import com.parse.ParseClassName
+import com.parse.ParseObject
 import com.parse.ParseUser
 import java.util.*
 
 /**
  * Created by alexandre on 04/02/2018.
  */
+
 @ParseClassName("_User")
 class KUser : ParseUser() {
     var business: Boolean?
@@ -14,40 +16,34 @@ class KUser : ParseUser() {
         set(value) {
             this.put("business", value)
         }
-    var businessName: String?
-        get() = this.getString("businessName")
-        set(value) {
-            this.put("businessName", value)
-        }
     var firstname: String?
-        get() = this.getString("firstname")
+        get() = this.getString("firstName")
         set(value) {
-            this.put("firstname", value)
+            this.put("firstName", value)
         }
     var lastname: String?
-        get() = this.getString("lastname")
+        get() = this.getString("lastName")
         set(value) {
-            this.put("lastname", value)
+            this.put("lastName", value)
         }
     var phoneNumber: String?
         get() = this.getString("phoneNumber")
         set(value) {
             this.put("phoneNumber", value)
         }
-    var siret: String?
-        get() = this.getString("siret")
-        set(value) {
-            this.put("siret", value)
-        }
     var birthday: Date?
         get() = this.getDate("birthday")
         set(value) {
             this.put("birthday", value)
         }
-    var sexe: String?
-        get() = this.getString("sexe")
+    var sex: String?
+        get() = this.getString("sex")
         set(value) {
-            this.put("sexe", value)
+            this.put("sex", value)
         }
-
+    var company: Company?
+        get() = this.get("company") as Company
+        set(value) {
+            this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
+        }
 }

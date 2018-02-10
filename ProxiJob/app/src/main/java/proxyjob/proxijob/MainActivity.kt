@@ -1,22 +1,11 @@
 package proxyjob.proxijob
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.content.IntentSender
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.NonNull
-import android.util.Log
 import com.parse.ParseUser
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 
 import android.view.MenuItem
@@ -25,8 +14,19 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
-    var Jobs: ArrayList<Jobs>?= null
-    var JobHash = HashMap<Jobs, String>()
+    /**
+     * Called when an item in the bottom navigation menu is selected.
+     *
+     * @param item The selected item
+     *
+     * @return true to display the item as the selected item and false if the item should not
+     * be selected. Consider setting non-selectable items as disabled preemptively to
+     * make them appear non-interactive.
+     */
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     protected lateinit var navigationView: BottomNavigationView
 
     internal val contentViewId: Int = 0
@@ -35,18 +35,21 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (ParseUser.getCurrentUser() == null)
-            startActivity(Intent(this, Login::class.java))
         setContentView(R.layout.activity_main)
-        navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView
-        navigationView.setOnNavigationItemSelectedListener(this)
-        var selectedFragment : Fragment = MapFragment().newInstance()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_layout, selectedFragment)
-        transaction.commit()
+
+        if (ParseUser.getCurrentUser() == null)
+        startActivity(Intent(this, Login::class.java))
+        //navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView
+        //navigationView.setOnNavigationItemSelectedListener(this)
+        if (ParseUser.getCurrentUser() != null) {
+                var selectedFragment: Fragment = MapFragment().newInstance()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.frame_layout, selectedFragment)
+                transaction.commit()
+        }
 
     }
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         updateNavigationBarState()
     }
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
     // Remove inter-activity transition to avoid screen tossing on tapping bottom navigation items
     override fun onPause() {
         super.onPause()
-        overridePendingTransition(0, 0)
+        //overridePendingTransition(0, 0)
     }
 
     override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
@@ -89,5 +92,5 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
             }
             i++
         }
-    }
+    }*/
 }
