@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -18,11 +19,13 @@ import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,10 +33,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.parse.*
+import com.squareup.picasso.Picasso
+import proxyjob.proxijob.R.id.clientPic
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.Localisation
 import java.io.IOException
+import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -160,10 +167,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             Log.i("DEBUG JOBS", "" + Jobs)
 
             for(i in Jobs!!.indices) {
-                var localisation = Jobs!![i].fetchIfNeeded<Jobs>().company!!.fetchIfNeeded<Company>().localisation!!.fetchIfNeeded<Localisation>().localisation
+                var localisation = Jobs!![i].fetchIfNeeded<Jobs>().company?.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.localisation
                 if (localisation != null) {
                     Log.i("DEBUG LOC", "" + localisation)
-                    createMarker(localisation!!.latitude, localisation!!.longitude)
+                    createMarker(localisation?.latitude, localisation?.longitude)
             //createMarker(7.5, 43.7)
                 }
             }
@@ -218,22 +225,31 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                     v = layoutInflater.inflate(R.layout.custom_infowindow, null)
                     var today = Calendar.getInstance().getTime();
+                    var imageV = (v!!.findViewById<ImageView>(R.id.clientPic))
 
                     // (2) create a date "formatter" (the date format we want)
-                    var formatter = SimpleDateFormat("dd/MM/YY à HH.MM");
+                    var formatter = SimpleDateFormat("dd/MM/YY")
 
                     // (3) create a new String using the date format we want
                     var folderName = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!);
-                    (v!!.findViewById<TextView>(R.id.date) as TextView).text = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "\n \t\t\t\tau \n " +
+                    (v!!.findViewById<TextView>(R.id.date) as TextView).text = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
                             formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)
                     (v!!.findViewById<TextView>(R.id.job) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).job
-                   // (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded().get("businessName") as String
+                    (v!!.findViewById<TextView>(R.id.desc) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).description
+                    (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.get("name") as String
+                    var geo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.localisation
+                    (v!!.findViewById<TextView>(R.id.address) as TextView).text = getAddress(LatLng(geo!!.latitude, geo!!.longitude))
+                    var logo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.logo
+                    Picasso.with(context).load(logo!!.url).into(imageV).run {
+                        return v
 
+                    }
+                    sleep(100)
                 } catch (ev: Exception) {
                     print(ev.message)
                 }
-
                 return v
+
             }
         })
         map.setOnInfoWindowClickListener { marker ->
@@ -259,18 +275,17 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         try {
             // 2
+
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+
             // 3
             if (null != addresses && !addresses.isEmpty()) {
                 address = addresses[0]
-                for (i in 0 until address.maxAddressLineIndex) {
-                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(i)
-                }
+                    addressText = address!!.featureName + " " + address!!.thoroughfare
             }
         } catch (e: IOException) {
             Log.e("MapsActivity", e.localizedMessage)
         }
-
         return addressText
     }
 

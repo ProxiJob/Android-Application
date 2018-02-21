@@ -1,5 +1,8 @@
 package proxyjob.proxijob.model
 
+import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import com.parse.ParseClassName
 import com.parse.ParseObject
 import com.parse.ParseUser
@@ -10,7 +13,7 @@ import java.util.*
  */
 
 @ParseClassName("_User")
-class KUser : ParseUser() {
+class KUser() : ParseUser() {
     var business: Boolean?
         get() = this.getBoolean("business")
         set(value) {
@@ -46,4 +49,37 @@ class KUser : ParseUser() {
         set(value) {
             this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
         }
+
+    constructor(parcel: Parcel) : this() {
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        super.writeToParcel(parcel, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<KUser> {
+        override fun createFromParcel(parcel: Parcel): KUser {
+            return KUser(parcel)
+        }
+
+        override fun newArray(size: Int): Array<KUser?> {
+            return arrayOfNulls(size)
+        }
+        fun logOut() : Unit {
+            return ParseUser.logOut()
+        }
+
+        fun getCurrentUser() : KUser {
+            return ParseUser.getCurrentUser() as KUser
+        }
+    }
+
 }

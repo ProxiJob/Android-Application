@@ -2,17 +2,17 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <item
             android:id="@+id/menu_home"
-            android:title="Home"
+            android:title="Contact"
             android:icon="@drawable/ic_account_circle_black_24dp"
             />
         <item
-            android:id="@+id/menu_search"
-            android:title="Search"
+            android:id="@+id/menu_1"
+            android:title="+ Mission"
             android:icon="@drawable/ic_account_circle_black_24dp"
             />
 
         <item
-            android:id="@+id/menu_notifications"
-            android:title="Notifications"
+            android:id="@+id/menu_2"
+            android:title="Profil"
             android:icon="@drawable/ic_account_circle_black_24dp" />
     </menu>

@@ -1,6 +1,7 @@
 package proxyjob.proxijob.model
 
 import com.parse.ParseClassName
+import com.parse.ParseFile
 import com.parse.ParseObject
 
 /**
@@ -28,5 +29,10 @@ class   Company : ParseObject() {
         get() = this.getString("secteur")
         set(value) {
             this.put("secteur", value)
+        }
+    var logo: ParseFile?
+        get() = this.getParseFile("logo")
+        set(value) {
+            this.put("logo", value)
         }
 }

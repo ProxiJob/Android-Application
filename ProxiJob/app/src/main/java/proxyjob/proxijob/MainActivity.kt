@@ -10,22 +10,19 @@ import android.support.v4.app.Fragment
 
 import android.view.MenuItem
 import proxyjob.proxijob.model.Jobs
+import proxyjob.proxijob.model.KUser
 import java.util.*
+import android.util.TypedValue
+import android.util.DisplayMetrics
+import android.view.ViewGroup
+import android.support.design.internal.BottomNavigationMenuView
+import android.view.View
+import android.support.v7.widget.DividerItemDecoration
+
+
 
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
-    /**
-     * Called when an item in the bottom navigation menu is selected.
-     *
-     * @param item The selected item
-     *
-     * @return true to display the item as the selected item and false if the item should not
-     * be selected. Consider setting non-selectable items as disabled preemptively to
-     * make them appear non-interactive.
-     */
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     protected lateinit var navigationView: BottomNavigationView
 
@@ -38,18 +35,31 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
         setContentView(R.layout.activity_main)
 
         if (ParseUser.getCurrentUser() == null)
-        startActivity(Intent(this, Login::class.java))
-        //navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView
-        //navigationView.setOnNavigationItemSelectedListener(this)
-        if (ParseUser.getCurrentUser() != null) {
+            startActivity(Intent(this, Login::class.java))
+        navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView
+        if (ParseUser.getCurrentUser() != null && ParseUser.getCurrentUser().get("business") != true) {
+            navigationView.inflateMenu(R.menu.dm_em)
+            val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView
+            for (i in 0 until menuView.getChildCount()) {
+                val iconView = menuView.getChildAt(i).findViewById<View>(android.support.design.R.id.icon)
+                val layoutParams = iconView.getLayoutParams()
+                val displayMetrics = resources.displayMetrics
+                layoutParams.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32f, displayMetrics).toInt()
+                layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32f, displayMetrics).toInt()
+                iconView.setLayoutParams(layoutParams)
+            }
                 var selectedFragment: Fragment = MapFragment().newInstance()
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.frame_layout, selectedFragment)
                 transaction.commit()
         }
+        else
+            navigationView.inflateMenu(R.menu.dm_em)
+        navigationView.setOnNavigationItemSelectedListener(this)
+
 
     }
-    /*override fun onStart() {
+    override fun onStart() {
         super.onStart()
         updateNavigationBarState()
     }
@@ -63,8 +73,9 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
     override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
         var selectedFragment : Fragment?= null
         when (item.itemId) {
-            R.id.menu_home -> selectedFragment = MapFragment().newInstance()
-           // OTHER FRAGMENT
+            R.id.menu_home -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true ) null else MapFragment().newInstance() //null remplacée par la class Contact Entreprise
+            R.id.menu_1 -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true)  null else Missions().newInstance()
+        // OTHER FRAGMENT
         }
 
         val transaction = supportFragmentManager.beginTransaction()
@@ -92,5 +103,5 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
             }
             i++
         }
-    }*/
+    }
 }
