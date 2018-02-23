@@ -1,4 +1,4 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Client
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
+import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 
@@ -17,13 +20,13 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
 
     private class ViewHolder(row: View?) {
         var txtName: TextView? = null
-        var txtComment: TextView? = null
-        var status: TextView? = null
+        var txtJob: TextView? = null
+        var imageAvatar: ImageView?= null
 
         init {
             this.txtName = row?.findViewById<TextView>(R.id.txtName)
-            this.txtComment = row?.findViewById<TextView>(R.id.txtComment)
-            this.status = row?.findViewById<TextView>(R.id.status_text)
+            this.txtJob = row?.findViewById<TextView>(R.id.job)
+            this.imageAvatar = row?.findViewById<ImageView>(R.id.imgAvatar)
         }
     }
 
@@ -41,9 +44,10 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
         }
 
         var job = items[position]
-        viewHolder.txtName?.text = job.company?.fetchIfNeeded<Company>()?.name
-        viewHolder.txtComment?.text = job.job
-        viewHolder.status?.text = if (job.status == "ACCEPTED") "Votre mission est acceptée" else "Votre mission est en cours de traitement"
+        viewHolder.txtName?.text = checkStatusMission(job)
+        viewHolder.txtJob?.text = job.job
+        var logo = job.company!!.fetchIfNeeded<Company>()?.logo
+        Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
         return view as View
     }
 
@@ -57,5 +61,20 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
 
     override fun getCount(): Int {
         return items.size
+    }
+
+    fun checkStatusMission(job : Jobs) : String
+    {
+        var sentence = ""
+        var name = job.company?.fetchIfNeeded<Company>()?.name
+        var status = job.status
+
+        when (status) {
+            "PENDING" -> sentence = "En attente de réponse."
+            "ACCEPTED" -> sentence = name + " à acceptée ! \nVeuillez signer votre contrat."
+            "CONTRACTED" -> sentence = "Mission confirmée avec " + name + "."
+            "CANCELED" -> sentence = "Votre candidature n'a pas été retenue."
+        }
+        return sentence
     }
 }

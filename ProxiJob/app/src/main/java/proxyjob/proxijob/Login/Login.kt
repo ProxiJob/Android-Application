@@ -1,15 +1,16 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Login
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.parse.LogInCallback
 import com.parse.ParseUser
 import org.jetbrains.anko.alert
+import proxyjob.proxijob.MainActivity
+import proxyjob.proxijob.R
 
 /**
  * Created by alexandre on 04/02/2018.

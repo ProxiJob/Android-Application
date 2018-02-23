@@ -1,10 +1,9 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Company
 
 import android.app.Activity
 import android.content.Intent
 import android.location.Address
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import com.parse.ParseException
@@ -17,6 +16,8 @@ import android.util.Log
 import proxyjob.proxijob.model.Localisation
 import java.util.*
 import com.parse.ParseGeoPoint
+import proxyjob.proxijob.Login.Login
+import proxyjob.proxijob.R
 
 /**
  * Created by alexandre on 04/02/2018.

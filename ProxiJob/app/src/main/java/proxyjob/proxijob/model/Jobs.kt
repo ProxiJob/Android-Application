@@ -47,9 +47,9 @@ class Jobs : ParseObject() {
             this.put("dateEnd", value)
         }
     var client: KUser?
-        get() = this.get("client") as KUser
+        get() = this.get("clients") as KUser
         set(value) {
-            this.put("client", ParseObject.createWithoutData("_User", (value!!.objectId)))
+            this.put("clients", ParseObject.createWithoutData("_User", (value!!.objectId)))
         }
     var company: Company?
         get() = this.get("company") as Company

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/jobDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Job : "/>
+        <EditText
+            android:id="@+id/jobText"
+            android:layout_below="@+id/jobDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/descDesc"
+            android:layout_below="@+id/jobText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description : "/>
+        <EditText
+            android:id="@+id/descText"
+            android:layout_below="@+id/descDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/startDesc"
+            android:layout_below="@+id/descText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date de début : "/>
+        <EditText
+            android:id="@+id/startText"
+            android:layout_below="@+id/startDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/endDesc"
+            android:layout_below="@+id/startText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date de fin : "/>
+        <EditText
+            android:id="@+id/endText"
+            android:layout_below="@+id/endDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/priceDesc"
+            android:layout_below="@+id/endText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prix : "/>
+        <EditText
+            android:id="@+id/priceText"
+            android:layout_below="@+id/priceDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/priceText">
+            <Button
+                android:id="@+id/add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter une mission"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

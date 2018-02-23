@@ -9,17 +9,15 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 
 import android.view.MenuItem
-import proxyjob.proxijob.model.Jobs
-import proxyjob.proxijob.model.KUser
-import java.util.*
 import android.util.TypedValue
-import android.util.DisplayMetrics
-import android.view.ViewGroup
 import android.support.design.internal.BottomNavigationMenuView
 import android.view.View
-import android.support.v7.widget.DividerItemDecoration
-
-
+import proxyjob.proxijob.Client.MapFragment
+import proxyjob.proxijob.Client.Missions
+import proxyjob.proxijob.Client.Profil
+import proxyjob.proxijob.Company.AllMissions
+import proxyjob.proxijob.Company.CompanyMissions
+import proxyjob.proxijob.Login.Login
 
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
@@ -53,8 +51,13 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
                 transaction.replace(R.id.frame_layout, selectedFragment)
                 transaction.commit()
         }
-        else
-            navigationView.inflateMenu(R.menu.dm_em)
+        else if (ParseUser.getCurrentUser() != null && ParseUser.getCurrentUser().get("business") == true){
+            navigationView.inflateMenu(R.menu.ch_em)
+            var selectedFragment: Fragment = CompanyMissions().newInstance()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame_layout, selectedFragment)
+            transaction.commit()
+        }
         navigationView.setOnNavigationItemSelectedListener(this)
 
 
@@ -73,8 +76,9 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
     override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
         var selectedFragment : Fragment?= null
         when (item.itemId) {
-            R.id.menu_home -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true ) null else MapFragment().newInstance() //null remplacée par la class Contact Entreprise
-            R.id.menu_1 -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true)  null else Missions().newInstance()
+            R.id.menu_home -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true ) CompanyMissions().newInstance() else MapFragment().newInstance() //null remplacée par la class Contact Entreprise
+            R.id.menu_1 -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true)  AllMissions().newInstance() else Missions().newInstance()
+            R.id.menu_2 -> selectedFragment = Profil().newInstance()
         // OTHER FRAGMENT
         }
 

@@ -1,8 +1,7 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Client
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -13,6 +12,8 @@ import proxyjob.proxijob.model.KUser
 import java.util.*
 import android.app.DatePickerDialog
 import android.content.Intent
+import proxyjob.proxijob.Login.Login
+import proxyjob.proxijob.R
 import java.text.SimpleDateFormat
 
 

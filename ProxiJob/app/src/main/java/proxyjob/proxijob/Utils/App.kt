@@ -1,4 +1,4 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Utils
 
 import android.app.Application
 import com.parse.Parse

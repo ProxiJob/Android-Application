@@ -1,4 +1,4 @@
-package proxyjob.proxijob
+package proxyjob.proxijob.Client
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -33,9 +32,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.parse.*
 import com.squareup.picasso.Picasso
-import proxyjob.proxijob.R.id.clientPic
+import proxyjob.proxijob.Utils.APIManager
+import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.Localisation
