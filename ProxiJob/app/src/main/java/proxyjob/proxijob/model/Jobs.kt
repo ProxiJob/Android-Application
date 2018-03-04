@@ -5,6 +5,7 @@ import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseUser
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by alexandre on 04/02/2018.
@@ -55,5 +56,10 @@ class Jobs : ParseObject() {
         get() = this.get("company") as Company
         set(value) {
             this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
+        }
+    var postule: ArrayList<*>?
+        get() = this.get("postule") as ArrayList<*>
+        set(value) {
+            this.put("postule", value)
         }
 }

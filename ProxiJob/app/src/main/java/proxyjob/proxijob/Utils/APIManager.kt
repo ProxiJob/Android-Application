@@ -37,10 +37,10 @@ class APIManager {
     }
 
     fun getMissionsForUser(completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
-        val innerQuery = ParseQuery.getQuery<ParseObject>("_User")
-        innerQuery.whereEqualTo("objectId", ParseUser.getCurrentUser().objectId)
         val query = ParseQuery.getQuery<Jobs>("Jobs")
-        query.whereMatchesQuery("clients", innerQuery)
+        val array = ArrayList<String>()
+        array.add(KUser.getCurrentUser().objectId)
+        query.whereContainedIn("postule", array)
         query.findInBackground { objects, e ->
             Log.i("DEBUG API", "" + objects.size)
             var jobs = ArrayList<Jobs>(objects)

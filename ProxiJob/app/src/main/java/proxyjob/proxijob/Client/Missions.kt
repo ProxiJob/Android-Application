@@ -35,7 +35,7 @@ class Missions : Fragment() {
             jobs = arrayList
             var listAdapter = MissionListAdapter(activity, jobs!!)
             list.adapter = listAdapter
-            Log.i("JDK", System.getProperty("java.class.version"))
+            Log.i("JOB ARRAY", "" + arrayList[0].get("postule"))
         }
 
         return view
