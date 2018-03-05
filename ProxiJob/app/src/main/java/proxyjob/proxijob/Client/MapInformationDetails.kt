@@ -4,11 +4,15 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import org.jetbrains.anko.alert
 import proxyjob.proxijob.model.Jobs
 import java.text.SimpleDateFormat
 import proxyjob.proxijob.Utils.APIManager
 import proxyjob.proxijob.R
+import proxyjob.proxijob.model.Company
+import proxyjob.proxijob.model.KUser
 import java.util.*
 
 
@@ -18,44 +22,73 @@ import java.util.*
 
 class MapInformationDetails: Activity()
 {
+    var postule: Boolean= false
     var objectID : String?= null
-    var lieuTV : TextView?= null
-    var jobTV : TextView?= null
-    var secteurTV : TextView?= null
-    var dateTV : TextView?= null
-    var priceTV : TextView?= null
-    var addressTV : TextView?= null
-    var postuleBT : Button?= null
-    var job: ArrayList<Jobs>?= null
-
+    var job: Jobs?= null
+    var company_name: TextView?= null
+    var company_image: ImageView?= null
+    var job_start: TextView?= null
+    var job_end: TextView?= null
+    var job_title: TextView?= null
+    var job_cash: TextView?= null
+    var job_detail: TextView?= null
+    var post: Button?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var formatter = SimpleDateFormat("dd/MM/YY à HH.MM");
         setContentView(R.layout.activity_map_informations_details)
-        lieuTV = findViewById(R.id.lieu)
-        jobTV = findViewById(R.id.job)
-        secteurTV = findViewById(R.id.secteur)
-        dateTV = findViewById(R.id.date)
-        priceTV = findViewById(R.id.price)
-        postuleBT = findViewById(R.id.postule)
-        addressTV = findViewById(R.id.address)
         objectID = getIntent().getExtras().getString("objectID")
+        company_name = findViewById(R.id.companyName)
+        company_image = findViewById(R.id.company_image)
+        job_start = findViewById(R.id.job_start)
+        job_end = findViewById(R.id.job_end)
+        job_title = findViewById(R.id.job_title)
+        job_cash = findViewById(R.id.job_cash)
+        job_detail = findViewById(R.id.job_detail)
+        post = findViewById(R.id.post)
+
+        post!!.setOnClickListener {
+            managePost()
+        }
         APIManager.getShared().getJob(objectID!!, { b: Boolean, error: Error?, arrayList: ArrayList<Jobs> ->
-            job = arrayList
+            job = arrayList[0]
 
         if (job != null) {
-            lieuTV!!.text = "43 RUE LA BALETTE"
-            jobTV!!.text = job!![0]!!.job
-            secteurTV!!.text = "RESTAURATION"
-            dateTV!!.text = (formatter.format(job!![0].dateStart!!) + "\n \t\t\t\tau \n " +
-                    formatter.format(job!![0].dateEnd!!))
-            priceTV!!.text = job!![0].price
-
+            job_start!!.text = formatter.format(job!!.dateStart)
+            job_end!!.text = formatter.format(job!!.dateEnd)
+            Log.i("DEBUG OBJ", job!!.objectId)
+            /*var company = (job!!.get("company") as Company).fetchIfNeeded<Company>()
+            company_name!!.text = company!!.name*/
+            job_title!!.text = job!!.job
+            job_cash!!.text = job!!.price + "€ /h"
+            job_detail!!.text = job!!.description
+            for (g in job!!.postule!!) {
+                if ((g as String).contains(KUser.getCurrentUser().objectId)) {
+                    post!!.text = "Annuler ma candidature"
+                    postule = true
+                    break
+                }
+                else
+                    post!!.text = "Postuler"
+            }
+            arrayList[0]!!.postule!!.add("COUCOUCONNARD")
+arrayList[0]!!.saveInBackground {  }
         }
         })
-        postuleBT!!.setOnClickListener {
-            Log.i("DEBUG", "job" + job!![0].job)
+    }
+    fun managePost() {
+        if (!postule) {
+            job!!.postule!!.add(KUser.getCurrentUser().objectId)
+            post!!.text = "Annuler ma candidature"
         }
+        else {
+            job!!.postule!!.remove(KUser.getCurrentUser().objectId)
+            post!!.text = "Postuler"
+        }
+        job!!.saveInBackground({e ->
+            if (e != null)
+                alert(e.message.toString()){}.show()
+        })
     }
 }

@@ -57,8 +57,8 @@ class Jobs : ParseObject() {
         set(value) {
             this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
         }
-    var postule: ArrayList<*>?
-        get() = this.get("postule") as ArrayList<*>
+    var postule: ArrayList<String>?
+        get() = this.get("postule") as ArrayList<String>
         set(value) {
             this.put("postule", value)
         }

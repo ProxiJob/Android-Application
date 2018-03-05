@@ -82,6 +82,8 @@ class APIManager {
     fun getJob(objectID : String, completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
         var job: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
         job.whereEqualTo("objectId", objectID)
+        job.include("company")
+        job.include("clients")
         job.findInBackground { objects, e ->
             Log.i("DEBUG API", "" + objects.size)
             var jobs = ArrayList<Jobs>(objects)
