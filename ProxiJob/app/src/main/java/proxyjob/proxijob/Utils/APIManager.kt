@@ -1,6 +1,7 @@
 package proxyjob.proxijob.Utils
 
 import android.util.Log
+import com.parse.ParseException
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import proxyjob.proxijob.model.Jobs
@@ -27,7 +28,7 @@ class APIManager {
     fun getJobs(completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
         var job: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
         job.findInBackground { objects, e ->
-            Log.i("DEBUG API", "" + objects.size)
+            //Log.i("DEBUG API", "" + objects.size)
             var jobs = ArrayList<Jobs>(objects)
             e?.let {
                 completionHandler(false, null, jobs) //e
@@ -83,6 +84,8 @@ class APIManager {
         var job: ParseQuery<Jobs> = ParseQuery.getQuery<Jobs>("Jobs")
         job.whereEqualTo("objectId", objectID)
         job.include("company")
+        job.include("company.name")
+        job.include("company.logo")
         job.include("clients")
         job.findInBackground { objects, e ->
             Log.i("DEBUG API", "" + objects.size)
@@ -91,6 +94,15 @@ class APIManager {
                 completionHandler(false, null, jobs) //e
             }
             completionHandler(true, null, jobs)
+        }
+    }
+
+    fun manageJob(job: Jobs, completionHandler: (Boolean, Error?) -> Unit) {
+        job.saveInBackground { e: ParseException? ->
+            e.let {
+                completionHandler(false, null) //e
+            }
+            completionHandler(true, null)
         }
     }
 }

@@ -70,7 +70,7 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
         var status = job.status
 
         when (status) {
-            "PENDING" -> sentence = "En attente de réponse."
+            null, "" -> sentence = "En attente de réponse."
             "ACCEPTED" -> sentence = name + " à acceptée ! \nVeuillez signer votre contrat."
             "CONTRACTED" -> sentence = "Mission confirmée avec " + name + "."
             "CANCELED" -> sentence = "Votre candidature n'a pas été retenue."

@@ -14,7 +14,12 @@ import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.KUser
 import java.util.*
-
+import android.widget.Toast
+import com.parse.ParseObject
+import com.parse.FunctionCallback
+import com.parse.ParseCloud
+import com.parse.ParseException
+import com.squareup.picasso.Picasso
 
 /**
  * Created by alexandre on 10/02/2018.
@@ -39,7 +44,7 @@ class MapInformationDetails: Activity()
         var formatter = SimpleDateFormat("dd/MM/YY à HH.MM");
         setContentView(R.layout.activity_map_informations_details)
         objectID = getIntent().getExtras().getString("objectID")
-        company_name = findViewById(R.id.companyName)
+        company_name = findViewById(R.id.company_name)
         company_image = findViewById(R.id.company_image)
         job_start = findViewById(R.id.job_start)
         job_end = findViewById(R.id.job_end)
@@ -58,11 +63,14 @@ class MapInformationDetails: Activity()
             job_start!!.text = formatter.format(job!!.dateStart)
             job_end!!.text = formatter.format(job!!.dateEnd)
             Log.i("DEBUG OBJ", job!!.objectId)
-            /*var company = (job!!.get("company") as Company).fetchIfNeeded<Company>()
-            company_name!!.text = company!!.name*/
+
             job_title!!.text = job!!.job
             job_cash!!.text = job!!.price + "€ /h"
             job_detail!!.text = job!!.description
+            company_name!!.text = job!!.company!!.fetchIfNeeded<Company>().name
+            var logo = job!!.company!!.fetchIfNeeded<Company>()?.logo
+            if (job!!.postule!!.size == 0)
+                post!!.text = "Postuler"
             for (g in job!!.postule!!) {
                 if ((g as String).contains(KUser.getCurrentUser().objectId)) {
                     post!!.text = "Annuler ma candidature"
@@ -72,23 +80,28 @@ class MapInformationDetails: Activity()
                 else
                     post!!.text = "Postuler"
             }
-            arrayList[0]!!.postule!!.add("COUCOUCONNARD")
-arrayList[0]!!.saveInBackground {  }
+            Picasso.with(applicationContext).load(logo!!.url).into(company_image)
         }
-        })
+            })
     }
     fun managePost() {
         if (!postule) {
-            job!!.postule!!.add(KUser.getCurrentUser().objectId)
+           // job!!.postule!!.add(KUser.getCurrentUser().objectId)
             post!!.text = "Annuler ma candidature"
+            postule = true
         }
         else {
-            job!!.postule!!.remove(KUser.getCurrentUser().objectId)
+            //job!!.postule!!.remove(KUser.getCurrentUser().objectId)
             post!!.text = "Postuler"
+            postule = false
         }
-        job!!.saveInBackground({e ->
-            if (e != null)
-                alert(e.message.toString()){}.show()
+        val params = HashMap<String, String>()
+        params.put("jobId", job!!.objectId)
+        params.put("userID", KUser.getCurrentUser().objectId)
+        ParseCloud.callFunctionInBackground("savePostule", params, FunctionCallback<Float> { aFloat, e ->
+            if (e == null) {
+                // ratings is 4.5
+            }
         })
     }
 }

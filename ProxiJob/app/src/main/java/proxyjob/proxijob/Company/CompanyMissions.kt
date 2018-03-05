@@ -27,7 +27,7 @@ class CompanyMissions : Fragment() {
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
-        var list = view.findViewById<ListView>(R.id.list_view)
+        var list = view.findViewById<ListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes annonces"
         APIManager.getShared().getCompany { b, error, arrayList ->
             APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->

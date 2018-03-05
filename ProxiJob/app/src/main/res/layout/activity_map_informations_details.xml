@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/company_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,13 +19,15 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
     <ImageView
         android:id="@+id/company_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
+        android:padding="5dp"
+        android:background="@drawable/imageview_border"
         android:src="@drawable/background"/>
     </RelativeLayout>
 
@@ -39,7 +42,10 @@
         android:id="@+id/job_startTW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Début" />
+        android:text="Début"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:textColor="@color/proxi_button_purple"/>
     <TextView
         android:id="@+id/job_start"
         android:layout_width="wrap_content"
@@ -53,6 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:textColor="@color/proxi_button_purple"
         android:text="Fin" />
     <TextView
         android:id="@+id/job_end"
@@ -69,6 +78,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:textColor="@color/proxi_button_purple"
         android:text="Job" />
     <TextView
         android:id="@+id/job_title"
@@ -86,6 +98,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="120dp"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:textColor="@color/proxi_button_purple"
         android:text="Rémunération" />
     <TextView
         android:id="@+id/job_cash"
@@ -102,20 +117,34 @@
         android:layout_alignLeft="@id/company_image"
         android:layout_below="@id/job_title"
         android:layout_marginTop="10dp"
-        android:text="Descriptif" />
-    <TextView
-        android:id="@+id/job_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/company_image"
-        android:layout_below="@id/job_detailTW"
-        android:layout_marginTop="10dp"
-        android:text="TextView" />
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:textColor="@color/proxi_button_purple"
+        android:text="Descriptif"
+        tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/job_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/company_image"
+            android:layout_below="@id/job_detailTW"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            tools:ignore="NotSibling" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/post"
-        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="Button"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:background="@color/proxi_button_purple"
+        android:textColor="@color/colorWhite"/>
 </LinearLayout>

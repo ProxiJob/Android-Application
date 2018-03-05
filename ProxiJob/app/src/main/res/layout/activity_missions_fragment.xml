@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,11 +18,23 @@
         android:textAlignment="center"
         android:textStyle="bold"
         android:textSize="30dp"/>
-    <ListView
-        android:id="@+id/list_view"
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info"/>
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/noMissions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/proxi_button_purple"
+            android:textSize="20dp"
+            android:text="Vous n'avez pas encore postulé \n à une offre" />
+    </LinearLayout>
 </RelativeLayout>
 </FrameLayout>
