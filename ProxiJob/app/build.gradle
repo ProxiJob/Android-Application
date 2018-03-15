@@ -43,5 +43,6 @@ dependencies {
     compile 'com.parse:parseui-widget-android:0.0.2'
     compile 'com.github.HotBitmapGG:RingProgressBar:V1.2.3'
     compile 'com.baoyz.swipemenulistview:library:1.3.0'
+    compile 'com.github.deano2390:MaterialShowcaseView:1.2.0'
 
 }

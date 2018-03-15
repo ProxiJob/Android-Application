@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/company_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/proxi_button_purple"
+        android:textStyle="bold"
+        android:textSize="30sp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:id="@+id/company_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:padding="5dp"
+            android:background="@drawable/imageview_border"
+            android:src="@drawable/background"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/job_startTW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Début"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textColor="@color/proxi_button_purple"/>
+        <EditText
+            android:id="@+id/job_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/job_startTW"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/job_endTW"
+            android:layout_toRightOf="@id/job_startTW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textColor="@color/proxi_button_purple"
+            android:text="Fin" />
+        <EditText
+            android:id="@+id/job_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/job_endTW"
+            android:layout_alignLeft="@+id/job_endTW"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/job_titleTW"
+            android:layout_below="@id/job_start"
+            android:layout_alignLeft="@+id/company_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textColor="@color/proxi_button_purple"
+            android:text="Job" />
+        <EditText
+            android:id="@+id/job_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/job_titleTW"
+            android:layout_alignLeft="@+id/company_image"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/job_cashTW"
+            android:layout_toRightOf="@id/job_startTW"
+            android:layout_below="@id/job_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="120dp"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textColor="@color/proxi_button_purple"
+            android:text="Rémunération" />
+        <EditText
+            android:id="@+id/job_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/job_cashTW"
+            android:layout_alignLeft="@+id/job_cashTW"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/job_detailTW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/company_image"
+            android:layout_below="@id/job_title"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textColor="@color/proxi_button_purple"
+            android:text="Descriptif"
+            tools:ignore="NotSibling" />
+
+        <EditText
+            android:id="@+id/job_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/company_image"
+            android:layout_below="@id/job_detailTW"
+            android:layout_marginTop="10dp"
+            tools:ignore="NotSibling" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/post"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="Button"
+        android:textAllCaps="true"
+        android:textSize="15dp"
+        android:background="@color/proxi_button_purple"
+        android:textColor="@color/colorWhite"/>
+</LinearLayout>

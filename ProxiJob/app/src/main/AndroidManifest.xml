@@ -45,6 +45,9 @@
         <activity android:name=".Client.SubscribeClient" />
         <activity android:name=".Login.Login" />
         <activity android:name=".Client.MapInformationDetails"></activity>
+        <activity android:name=".Company.ModifiedMission"></activity>
+        <activity android:name=".Company.AssignClient"></activity>
+        <activity android:name=".Company.CreateMission"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

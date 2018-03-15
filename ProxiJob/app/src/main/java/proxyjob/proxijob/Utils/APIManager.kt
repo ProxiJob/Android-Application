@@ -97,6 +97,18 @@ class APIManager {
         }
     }
 
+    fun getUsersPost(users : ArrayList<String>, completionHandler: (Boolean, Error?, ArrayList<KUser>) -> Unit) {
+        val innerQuery = ParseQuery.getQuery<KUser>("_User")
+        innerQuery.whereContainedIn("objectId", users)
+        innerQuery.findInBackground { objects, e ->
+            Log.i("DEBUG API", "" + objects.size)
+            var jobs = ArrayList<KUser>(objects)
+            e?.let {
+                completionHandler(false, null, jobs) //e
+            }
+            completionHandler(true, null, jobs)
+        }
+    }
     fun manageJob(job: Jobs, completionHandler: (Boolean, Error?) -> Unit) {
         job.saveInBackground { e: ParseException? ->
             e.let {

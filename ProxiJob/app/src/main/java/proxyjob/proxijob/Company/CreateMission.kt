@@ -1,18 +1,26 @@
 package proxyjob.proxijob.Company
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.android.gms.R.id.date
+import com.squareup.picasso.Picasso
+import org.jetbrains.anko.alert
 import proxyjob.proxijob.Client.MapFragment
 import proxyjob.proxijob.R
+import proxyjob.proxijob.Utils.APIManager
+import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.KUser
 import java.text.SimpleDateFormat
@@ -22,38 +30,43 @@ import kotlin.collections.ArrayList
 /**
  * Created by alexandre on 22/02/2018.
  */
-
-class CreateMission : Fragment() {
+class CreateMission: Activity()
+{
+    var postule: Boolean= false
+    var job: Jobs?= null
+    var company_name: TextView?= null
+    var company_image: ImageView?= null
+    var job_start: EditText?= null
+    var job_end: EditText?= null
+    var job_title: EditText?= null
+    var job_cash: EditText?= null
+    var job_detail: EditText?= null
+    var post: Button?= null
     var myCalendarStart = Calendar.getInstance()
     var myCalendarEnd = Calendar.getInstance()
-    var start : EditText?= null
-    var end : EditText?= null
-    var jobS : EditText?= null
-    var desc : EditText?= null
-    var price : EditText?= null
-    var add : Button?= null
-    fun newInstance(): CreateMission {
-        return CreateMission()
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view = inflater!!.inflate(R.layout.activity_create_mission, container, false)
-        start = view.findViewById(R.id.startText)
-        end = view.findViewById(R.id.endText)
-        jobS = view.findViewById(R.id.jobText)
-        desc = view.findViewById(R.id.descText)
-        price = view.findViewById(R.id.priceText)
-        add = view.findViewById(R.id.add)
+        var formatter = SimpleDateFormat("dd/MM/YY");
+        setContentView(R.layout.activity_details_mission)
+        company_name = findViewById(R.id.company_name)
+        company_name!!.text = "Créer une mission"
+        company_image = findViewById(R.id.company_image)
+        job_start = findViewById(R.id.job_start)
+        job_end = findViewById(R.id.job_end)
+        job_title = findViewById(R.id.job_title)
+        job_cash = findViewById(R.id.job_cash)
+        job_detail = findViewById(R.id.job_detail)
+        post = findViewById(R.id.post)
+        post!!.text = "Créer"
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             myCalendarStart.set(Calendar.YEAR, year)
             myCalendarStart.set(Calendar.MONTH, monthOfYear)
             myCalendarStart.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateStart()
         }
-        start!!.setOnClickListener({
-            DatePickerDialog(context, date, myCalendarStart
+        job_start!!.setOnClickListener({
+            DatePickerDialog(this, date, myCalendarStart
                     .get(Calendar.YEAR), myCalendarStart.get(Calendar.MONTH),
                     myCalendarStart.get(Calendar.DAY_OF_MONTH)).show()
 
@@ -64,53 +77,53 @@ class CreateMission : Fragment() {
             myCalendarEnd.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateEnd()
         }
-        end!!.setOnClickListener({
-            DatePickerDialog(context, date2, myCalendarEnd
+        job_end!!.setOnClickListener({
+            DatePickerDialog(this, date2, myCalendarEnd
                     .get(Calendar.YEAR), myCalendarEnd.get(Calendar.MONTH),
                     myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show()
 
         })
-        add!!.setOnClickListener {
-            createMission(view)
+        var logo = KUser.getCurrentUser().company!!.fetchIfNeeded<Company>()?.logo
+        Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+        post!!.setOnClickListener {
+            createMission()
         }
-        return view
     }
+
     private fun updateStart() {
-        val myFormat = "dd/MM/yy" //In which you need put here
+        val myFormat = "MM/dd/yy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.FRENCH)
 
-        start!!.setText(sdf.format(myCalendarStart.time))
+        job_start!!.setText(sdf.format(myCalendarStart.time))
     }
     private fun updateEnd() {
-        val myFormat = "dd/MM/yy" //In which you need put here
+        val myFormat = "MM/dd/yy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.FRENCH)
 
-        end!!.setText(sdf.format(myCalendarEnd.time))
+        job_end!!.setText(sdf.format(myCalendarEnd.time))
     }
 
-    private fun createMission(view: View)
+    private fun createMission()
     {
-        if (start!!.text.toString() != "" && end!!.text.toString() != "" &&
-                desc!!.text.toString() != "" && price!!.text.toString() != ""
-                && jobS!!.text.toString() != "") {
+        if (job_start!!.text.toString() != "" && job_end!!.text.toString() != "" &&
+                job_title!!.text.toString() != "" && job_cash!!.text.toString() != ""
+                && job_detail!!.text.toString() != "") {
             var job = Jobs()
 
-            job.dateStart = Date(start!!.text.toString())
-            job.dateEnd = Date(end!!.text.toString())
-            job.job = jobS!!.text.toString()
-            job.price = price!!.text.toString()
-            job.description = desc!!.text.toString()
+            job.dateStart = Date(job_start!!.text.toString())
+            job.dateEnd = Date(job_end!!.text.toString())
+            job.job = job_title!!.text.toString()
+            job.price = job_cash!!.text.toString()
+            job.description = job_detail!!.text.toString()
             job.company = KUser.getCurrentUser().company
+            job.postule = ArrayList<String>()
             job.saveInBackground({
-                val newGamefragment = CompanyMissions().newInstance()
-                val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.frame_layout, newGamefragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                finish()
             })
         } else {
-            Snackbar.make(view, "Hello World", Snackbar.LENGTH_LONG).show();
+            alert {
+                message("Merci de remplir toutes les informations nécessaires")
+            }
         }
-
     }
 }
