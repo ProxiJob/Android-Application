@@ -1,5 +1,6 @@
 package proxyjob.proxijob.Company
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -29,11 +30,7 @@ class AllMissions : Fragment() {
         mod = view.findViewById(R.id.mod)
 
         add!!.setOnClickListener {
-            val newGamefragment = CreateMission().newInstance()
-            val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frame_layout, newGamefragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+           startActivity(Intent(context, CreateMission::class.java))
         }
 
         mod!!.setOnClickListener {

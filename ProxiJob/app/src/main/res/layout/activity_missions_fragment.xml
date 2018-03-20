@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,18 +24,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info"/>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/plus"
+            app:backgroundTint="@color/proxi_button_purple"
+            app:rippleColor="@color/proxi_button_purple" />
+
         <TextView
             android:id="@+id/noMissions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Vous n'avez pas encore postulé \n à une offre"
             android:textAlignment="center"
             android:textColor="@color/proxi_button_purple"
-            android:textSize="20dp"
-            android:text="Vous n'avez pas encore postulé \n à une offre" />
+            android:textSize="20dp" />
+
     </LinearLayout>
+
 </RelativeLayout>
 </FrameLayout>

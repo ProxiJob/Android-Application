@@ -2,17 +2,13 @@ package proxyjob.proxijob.Client
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.TextView
-import io.netopen.hotbitmapgg.library.view.RingProgressBar
 import proxyjob.proxijob.Utils.APIManager
 import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Jobs
-import android.R.drawable.ic_delete
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -23,9 +19,11 @@ import com.baoyz.swipemenulistview.SwipeMenuListView
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.toast
 import proxyjob.proxijob.model.KUser
 import java.util.HashMap
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+
+
 
 
 /**
@@ -61,16 +59,15 @@ class Missions : Fragment() {
             val openItem = SwipeMenuItem(
                     context)
             // set item background
-            openItem.background = ColorDrawable(Color.rgb(0xC9, 0xC9,
-                    0xCE))
+
             // set item width
             openItem.width = 170
             // set item title
-            openItem.title = "Open"
+            openItem.setIcon(R.drawable.eye)
             // set item title fontsize
             openItem.titleSize = 18
             // set item title font color
-            openItem.titleColor = Color.WHITE
+            //openItem.titleColor = Color.WHITE
             // add to menu
             menu.addMenuItem(openItem)
 
@@ -78,12 +75,12 @@ class Missions : Fragment() {
             val deleteItem = SwipeMenuItem(
                     context)
             // set item background
-            deleteItem.background = ColorDrawable(Color.rgb(0xF9,
-                    0x3F, 0x25))
+            //deleteItem.background = ColorDrawable(Color.rgb(0xF9,
+                 //   0x3F, 0x25))
             // set item width
             deleteItem.width = 170
             // set a icon
-            //deleteItem.setIcon(android.R.drawable.ic_delete)
+            deleteItem.setIcon(R.drawable.garbage)
             // add to menu
             menu.addMenuItem(deleteItem)
         }

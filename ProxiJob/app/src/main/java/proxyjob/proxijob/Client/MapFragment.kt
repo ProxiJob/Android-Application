@@ -220,7 +220,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 val formatter = SimpleDateFormat("dd/MM/yyyy")
                 try {
 
-                    // Getting view from the layout file info_window_layout
+                    // Getting eye from the layout file info_window_layout
 
                     v = layoutInflater.inflate(R.layout.custom_infowindow, null)
                     var today = Calendar.getInstance().getTime();
