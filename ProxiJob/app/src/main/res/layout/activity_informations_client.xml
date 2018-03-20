@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:layout_alignParentStart="true"
+    tools:layout_alignParentTop="true">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/Inscription"
+            android:textSize="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Mes informations"
+            android:textAlignment="center"
+            android:textColor="@color/proxi_button_purple">
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorWhite"/>
+        <EditText
+            android:layout_below="@+id/lastname"
+            android:id="@+id/firstname"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimaryDark"
+
+            android:hint="Prénom"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:backgroundTint="@color/colorWhite"/>
+
+        <EditText
+            android:layout_below="@+id/firstname"
+            android:id="@+id/layoutDate"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColorHint="@color/colorPrimaryDark"
+
+            android:hint="Date de naissance"
+            android:clickable="true"
+            android:inputType="date"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:backgroundTint="@color/colorWhite"/>
+
+        <EditText
+            android:layout_below="@+id/layoutDate"
+            android:id="@+id/mail"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:inputType="textEmailAddress"
+            android:background="@null"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:backgroundTint="@color/colorWhite"/>
+
+        <Button
+            android:id="@+id/Valider"
+            android:layout_width="196dp"
+            android:layout_height="52dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/mail"
+            android:background="@color/proxi_button_green"
+            android:text="Valider"
+            android:textColor="@color/proxi_back"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

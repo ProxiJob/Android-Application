@@ -31,9 +31,8 @@ class Profil : Fragment() {
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_profil, container, false)
-        view.findViewById<Button>(R.id.logOut).setOnClickListener {
-            ParseUser.logOut()
-            startActivity(Intent(context, Login::class.java))
+        view.findViewById<Button>(R.id.informations).setOnClickListener {
+            startActivity(Intent(context, InformationsActivity::class.java))
         }
         return view
     }
