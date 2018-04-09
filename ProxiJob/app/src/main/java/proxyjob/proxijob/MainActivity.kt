@@ -17,6 +17,7 @@ import proxyjob.proxijob.Client.Missions
 import proxyjob.proxijob.Client.Profil
 import proxyjob.proxijob.Company.AllMissions
 import proxyjob.proxijob.Company.CompanyMissions
+import proxyjob.proxijob.Company.InformationsCompany
 import proxyjob.proxijob.Login.Login
 
 
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
         var selectedFragment : Fragment?= null
         when (item.itemId) {
             R.id.menu_home -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true ) CompanyMissions().newInstance() else MapFragment().newInstance() //null remplacée par la class Contact Entreprise
-            R.id.menu_1 -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true)  AllMissions().newInstance() else Missions().newInstance()
+            R.id.menu_1 -> selectedFragment = if (ParseUser.getCurrentUser().get("business") == true)  InformationsCompany().newInstance() else Missions().newInstance()
             R.id.menu_2 -> selectedFragment = Profil().newInstance()
         // OTHER FRAGMENT
         }
