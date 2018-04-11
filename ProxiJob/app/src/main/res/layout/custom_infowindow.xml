@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="250dp"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="5dip"
+    android:paddingTop="10dip"
     android:paddingLeft="10dip"
     android:paddingRight="20dip"
     android:paddingBottom="25dip">
@@ -22,7 +22,9 @@
             android:layout_width="80dip"
             android:layout_height="80dip"
             android:src="@drawable/proxijob"
-            android:layout_marginLeft="4dip"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_gravity="center_vertical"/>
 
         <TextView
@@ -34,7 +36,7 @@
             android:textSize="12dip"
             android:layout_marginLeft="4dip"
             android:gravity="center_vertical"
-            android:textColor="#000000"
+            android:textColor="@color/proxi_button_purple"
             android:textStyle="bold"/>
         <TextView
             android:layout_below="@+id/companyName"
@@ -45,7 +47,7 @@
             android:text="11 rue de la thé"
             android:textSize="10dip"
             android:gravity="center_vertical"
-            android:textColor="#000000"/>
+            android:textColor="@color/proxi_button_purple"/>
     </RelativeLayout>
 
 
@@ -62,7 +64,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="Plongeur"
-            android:textColor="#000000"
+            android:textColor="@color/proxi_button_purple"
             android:textSize="20dip"
             android:textStyle="bold" />
 
@@ -73,7 +75,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:text="XX/XX/XX au XX/XX/XX"
-            android:textColor="#000000"
+            android:textColor="@color/proxi_button_purple"
             android:textSize="10dip" />
 
         <TextView
@@ -82,7 +84,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:text="Description de la mission"
-            android:textColor="#000000"
+            android:textColor="@color/proxi_button_purple"
             android:textSize="12dip"
             android:textStyle="bold" />
 
@@ -97,7 +99,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:text="..............."
-                android:textColor="#000000"
+                android:textColor="@color/proxi_button_purple"
                 android:textSize="10dip" />
         </ScrollView>
 

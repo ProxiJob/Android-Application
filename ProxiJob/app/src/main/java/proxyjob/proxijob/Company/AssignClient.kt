@@ -71,8 +71,8 @@ class AssignClient: Activity() {
                 job_detail!!.text = job!!.description
                 company_name!!.text = job!!.company!!.fetchIfNeeded<Company>().name
                 var logo = job!!.company!!.fetchIfNeeded<Company>()?.logo
-
-                Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+                if (logo != null)
+                    Picasso.with(applicationContext).load(logo!!.url).into(company_image)
                 if (job!!.postule!!.size > 0)
                     APIManager.getShared().getUsersPost(job!!.postule!!, { b: Boolean, error: Error?, arrayList: ArrayList<KUser> ->
                         clients = arrayList

@@ -26,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         <meta-data
             android:name="com.parse.SERVER_URL"
             android:value="@string/parse_server_url" />
@@ -49,6 +50,7 @@
         <activity android:name=".Company.ModifiedMission"></activity>
         <activity android:name=".Company.AssignClient"></activity>
         <activity android:name=".Company.CreateMission"></activity>
+        <activity android:name=".Login.FakePoleEmploi"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

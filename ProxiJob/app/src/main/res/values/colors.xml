@@ -20,4 +20,5 @@
     <color name="proxi_back">#22093F</color>
     <color name="proxi_button_green">#03f3c9</color>
     <color name="proxi_button_purple">#2b0d4e</color>
+    <color name="proxi_purple_light">#80599b</color>
 </resources>

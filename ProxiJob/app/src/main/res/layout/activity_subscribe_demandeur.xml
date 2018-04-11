@@ -46,6 +46,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
 
             android:backgroundTint="@color/colorWhite"/>
         <EditText
@@ -56,7 +57,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:textColorHint="@color/colorWhite"
-
+            android:textColor="@color/colorWhite"
             android:hint="Prénom"
             android:maxLines="1"
             android:singleLine="true"
@@ -70,7 +71,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:textColorHint="@color/colorWhite"
-
+            android:textColor="@color/colorWhite"
             android:hint="Date de naissance"
             android:clickable="true"
             android:editable="false"
@@ -86,7 +87,7 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textColorHint="@color/colorWhite"
-
+            android:textColor="@color/colorWhite"
             android:background="@null"
             android:maxLines="1"
             android:singleLine="true"
@@ -99,12 +100,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorWhite"
-
+            android:textColor="@color/colorWhite"
             android:hint="Mot de passe"
             android:background="@null"
             android:layout_margin="10dp"
             android:maxLines="1"
             android:singleLine="true"
+            android:inputType="textPassword"
             android:backgroundTint="@color/colorWhite"/>
 
         <RelativeLayout

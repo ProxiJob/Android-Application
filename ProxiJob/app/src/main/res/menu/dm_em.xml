@@ -26,7 +26,7 @@
         android:title=""
         android:icon="@drawable/profil"
         app:showAsAction="ifRoom"
-        android:color="@color/colorAccent"
+        android:color="@color/proxi_button_purple"
         />
     </group>
 </menu>

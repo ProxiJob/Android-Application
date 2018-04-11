@@ -12,6 +12,7 @@ import proxyjob.proxijob.model.KUser
 import java.util.*
 import android.app.DatePickerDialog
 import android.content.Intent
+import proxyjob.proxijob.Login.FakePoleEmploi
 import proxyjob.proxijob.Login.Login
 import proxyjob.proxijob.R
 import java.text.SimpleDateFormat
@@ -72,7 +73,7 @@ class SubscribeClient : Activity() {
                     override fun done(e: ParseException?) {
                         if (e == null) {
                             alert( "INSCRIPTION ... OKAY") {
-                                startActivity(Intent(this@SubscribeClient, Login::class.java))
+                                startActivity(Intent(this@SubscribeClient, FakePoleEmploi::class.java))
 
                             }.show()
                         } else {

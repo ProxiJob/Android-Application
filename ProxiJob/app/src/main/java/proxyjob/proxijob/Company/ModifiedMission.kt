@@ -99,7 +99,8 @@ class ModifiedMission: Activity()
                 company_name!!.text = job!!.company!!.fetchIfNeeded<Company>().name
                 var logo = job!!.company!!.fetchIfNeeded<Company>()?.logo
                 post!!.text = "Modifier"
-                Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+                if (logo != null)
+                    Picasso.with(applicationContext).load(logo!!.url).into(company_image)
             }
         })
     }

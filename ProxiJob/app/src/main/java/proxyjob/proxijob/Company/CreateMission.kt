@@ -84,7 +84,8 @@ class CreateMission: Activity()
 
         })
         var logo = KUser.getCurrentUser().company!!.fetchIfNeeded<Company>()?.logo
-        Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+        if (logo != null)
+            Picasso.with(applicationContext).load(logo!!.url).into(company_image)
         post!!.setOnClickListener {
             createMission()
         }

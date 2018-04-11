@@ -32,11 +32,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.parse.FunctionCallback
+import com.parse.ParseCloud
 import com.squareup.picasso.Picasso
 import proxyjob.proxijob.Utils.APIManager
 import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
+import proxyjob.proxijob.model.KUser
 import proxyjob.proxijob.model.Localisation
 import java.io.IOException
 import java.lang.Thread.sleep
@@ -93,8 +96,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 }
             }
             createLocationRequest()
-    }
 
+
+    }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.activity_maps, container, false)
         val fm = childFragmentManager
@@ -231,7 +235,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                     // (3) create a new String using the date format we want
                     var folderName = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!);
-                    (v!!.findViewById<TextView>(R.id.date) as TextView).text = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
+                    (v!!.findViewById<TextView>(R.id.date) as TextView).text = "Du " + formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
                             formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)
                     (v!!.findViewById<TextView>(R.id.job) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).job
                     (v!!.findViewById<TextView>(R.id.desc) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).description

@@ -28,7 +28,8 @@ import java.util.HashMap
 import android.app.Activity
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 /**
@@ -51,6 +52,9 @@ class CompanyMissions : Fragment() {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes Annonces"
+        var arr = JSONArray()
+        var user = JSONObject();
+        user.put("userId", "xksmsoz, skzozidk, sjzis")
 
         val add = view.findViewById<FloatingActionButton>(R.id.add)
         add!!.setOnClickListener {

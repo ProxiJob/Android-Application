@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="275dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_proxijob"
+            android:id="@+id/image"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vous êtes en possession d'un compte Pôle Emploi? Connectez vous ci-dessous"
+            android:textColor="@color/colorWhite"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:hint="Identifiant P.E"
+            android:textColorHint="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:hint="Mot de passe P.E"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center"
+            android:layout_width="196dp"
+            android:layout_height="52dp"
+            android:background="@color/proxi_button_green"
+            android:text="Login"/>
+        <Button
+            android:id="@+id/btn1"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/proxi_button_purple"
+            android:text="Je n'ai pas de compte Pôle Emploi"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</LinearLayout>

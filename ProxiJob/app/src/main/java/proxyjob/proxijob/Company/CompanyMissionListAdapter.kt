@@ -66,7 +66,8 @@ class CompanyMissionListAdapter(private var activity: Activity, private var item
             viewHolder.txtName?.text = "Mission en attente d'assignation"
         viewHolder.txtJob?.text = job.job
         var logo = job.company!!.fetchIfNeeded<Company>()?.logo
-        Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
+        if (logo != null)
+            Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
         return view as View
     }
 
