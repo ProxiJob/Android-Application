@@ -32,7 +32,7 @@ class InformationsActivity: Activity()
         setContentView(R.layout.activity_informations_client)
         first_name = findViewById(R.id.lastname)
         last_name = findViewById(R.id.firstname)
-        email = findViewById(R.id.mail) // CONNARD ! MAIL PAS EMAIL !! CA FAIT 2 FOIS MELVIN :)
+        email = findViewById(R.id.mail)
         date = findViewById(R.id.layoutDate)
         validation = findViewById(R.id.Valider)
 
