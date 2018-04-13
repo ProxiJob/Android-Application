@@ -105,9 +105,29 @@ class AssignClient: Activity() {
                     override fun onMenuItemClick(position: Int, menu: SwipeMenu, index: Int): Boolean {
                         when (index) {
                             0 -> {
-                               job!!.client = clients!![position]
-                                job!!.status = "ACCEPTED"
-                                job!!.saveInBackground()
+                                if (job!!.status?.length == 0) {
+                                    alert("Assignation de mission\n" + "Voulez-vous assigner " + clients!![position].firstname + " " +
+                                            clients!![position].lastname + " à ce job ?") {
+                                        title = "Voulez-vous assigner " + clients!![position].firstname + " " +
+                                                clients!![position].lastname + " à ce sport ?"
+                                        yesButton { job!!.client = clients!![position]
+                                            job!!.status = "ACCEPTED"
+                                            job!!.saveInBackground()}
+                                        noButton { }
+                                    }.show()
+
+                                } else {
+                                    alert("Attention\nVoulez-vous supprimer cette personne de cette mission ?") {
+                                        title = "Voulez-vous supprimer cette personne de cette mission ?"
+                                        yesButton {
+                                            job!!.status = ""
+                                            job!!.client = KUser()
+                                            job!!.saveInBackground()}
+                                        noButton { }
+                                    }.show()
+
+                                }
+
                             }
 
                         }

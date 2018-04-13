@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -29,9 +30,8 @@ import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.maps.android.ui.IconGenerator
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.squareup.picasso.Picasso
@@ -85,7 +85,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         super.onCreate(savedInstanceState)
 
 
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this!!.activity!!)
 
             locationCallback = object : LocationCallback() {
                 override fun onLocationResult(p0: LocationResult) {
@@ -99,7 +99,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
 
     }
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.activity_maps, container, false)
         val fm = childFragmentManager
         var mapFragment: SupportMapFragment? = fm.findFragmentByTag("mapFragment") as SupportMapFragment?
@@ -118,6 +118,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         val position = LatLng(latitude, longitude)
         var marker = MarkerOptions().position(position)
+        var iconGenerator = IconGenerator(activity)
+
+// Possible color options:
+// STYLE_WHITE, STYLE_RED, STYLE_BLUE, STYLE_GREEN, STYLE_PURPLE, STYLE_ORANGE
+        iconGenerator.setStyle(IconGenerator.STYLE_GREEN);
+// Swap text here to live inside speech bubble
+        var bitmap = iconGenerator.makeIcon("test")
+// Use BitmapDescriptorFactory to create the marker
+        var icon = BitmapDescriptorFactory.fromResource(R.drawable.map_marker)
+        marker.icon(icon)
         map.addMarker(marker)
 
     }
@@ -188,9 +198,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     override fun onMarkerClick(p0: Marker?) = false
 
     private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(activity,
+        if (ActivityCompat.checkSelfPermission(this!!.activity!!,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
+            ActivityCompat.requestPermissions(this!!.activity!!,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
             return
         }
@@ -262,7 +272,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private fun placeMarkerOnMap(location: LatLng) {
         val markerOptions = MarkerOptions().position(location)
-
         val titleStr = getAddress(location)  // add these two lines
         markerOptions.title(titleStr)
 
@@ -293,9 +302,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(activity,
+        if (ActivityCompat.checkSelfPermission(this!!.activity!!,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
+            ActivityCompat.requestPermissions(this!!.activity!!,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                     1)
             return
@@ -311,7 +320,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         val builder = LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
-        val client = LocationServices.getSettingsClient(activity)
+        val client = LocationServices.getSettingsClient(this!!.activity!!)
         val task = client.checkLocationSettings(builder.build())
 
         task.addOnSuccessListener {

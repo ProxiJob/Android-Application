@@ -59,6 +59,7 @@ class SubscribeEntreprise : Activity() {
                 user.phoneNumber = phone!!.text.toString()
                 company.siret = nb_serie!!.text.toString()
                 company.name = entreprise!!.text.toString()
+                location.address = address!!.text.toString()
                 addresses = geocoder!!.getFromLocationName(address!!.text.toString().toLowerCase(), 1);
                 for (address in addresses!!) {
                     var outputAddress = ""

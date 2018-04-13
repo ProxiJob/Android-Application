@@ -30,6 +30,11 @@ class   Company : ParseObject() {
         set(value) {
             this.put("secteur", value)
         }
+    var description: String?
+        get() = this.getString("description")
+        set(value) {
+            this.put("description", value)
+        }
     var logo: ParseFile?
         get() = this.getParseFile("logo")
         set(value) {

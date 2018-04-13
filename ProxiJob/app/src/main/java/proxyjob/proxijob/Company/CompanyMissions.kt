@@ -28,6 +28,7 @@ import java.util.HashMap
 import android.app.Activity
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -38,6 +39,7 @@ import org.json.JSONObject
 class CompanyMissions : Fragment() {
     var jobs :ArrayList<Jobs>?= null
     var listAdapter: CompanyMissionListAdapter?= null
+    var mWaveSwipeRefreshLayout: WaveSwipeRefreshLayout?= null
     init {
 
     }
@@ -48,13 +50,10 @@ class CompanyMissions : Fragment() {
         super.onCreate(savedInstanceState)
     }
     @SuppressLint("WrongViewCast")
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes Annonces"
-        var arr = JSONArray()
-        var user = JSONObject();
-        user.put("userId", "xksmsoz, skzozidk, sjzis")
 
         val add = view.findViewById<FloatingActionButton>(R.id.add)
         add!!.setOnClickListener {
@@ -65,8 +64,25 @@ class CompanyMissions : Fragment() {
                 jobs = arrayList
                 if (jobs!!.size != 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
-                listAdapter = CompanyMissionListAdapter(activity, jobs!!)
+                listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                 list.adapter = listAdapter
+            })
+            mWaveSwipeRefreshLayout = view.findViewById<WaveSwipeRefreshLayout>(R.id.main_swipe) as WaveSwipeRefreshLayout
+            mWaveSwipeRefreshLayout!!.setColorSchemeColors(R.color.proxi_button_purple)
+            mWaveSwipeRefreshLayout!!.setWaveColor(R.color.proxi_button_purple)
+            mWaveSwipeRefreshLayout!!.setOnRefreshListener(WaveSwipeRefreshLayout.OnRefreshListener {
+                jobs!!.clear()
+                listAdapter = CompanyMissionListAdapter(this!!.activity!!, jobs!!)
+                list.adapter = listAdapter
+                APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
+                    jobs = arrayList
+                    if (jobs!!.size != 0)
+                        view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
+                    listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
+                    list.adapter = listAdapter
+                    mWaveSwipeRefreshLayout!!.setRefreshing(false)
+                })
+
             })
             val creator = SwipeMenuCreator { menu ->
                 // create "open" item
@@ -127,12 +143,12 @@ class CompanyMissions : Fragment() {
                             startActivity(intent)
                         }
                         2 -> {
-                            context.alert("Êtes-vous sûr de vouloir annuler cet événement ?") {
+                            context!!.alert("Êtes-vous sûr de vouloir annuler cet événement ?") {
                                 //title = "Alert"
                                 yesButton {
                                     jobs!![position].deleteInBackground {  }
                                     jobs!!.removeAt(position)
-                                    listAdapter = CompanyMissionListAdapter(activity, jobs!!)
+                                    listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                                     list.adapter = listAdapter
                                     if (jobs!!.size == 0)
                                         view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE

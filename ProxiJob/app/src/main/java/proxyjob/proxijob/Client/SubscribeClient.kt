@@ -15,6 +15,7 @@ import android.content.Intent
 import proxyjob.proxijob.Login.FakePoleEmploi
 import proxyjob.proxijob.Login.Login
 import proxyjob.proxijob.R
+import proxyjob.proxijob.Utils.ConditionGeneral
 import java.text.SimpleDateFormat
 
 
@@ -30,6 +31,7 @@ class SubscribeClient : Activity() {
     var homme : CheckBox?= null
     var femme : CheckBox?= null
     var subscribe : Button?=null
+    var condition: CheckBox?= null
     var myCalendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ class SubscribeClient : Activity() {
         password = findViewById(R.id.password)
         homme = findViewById(R.id.homme)
         femme = findViewById(R.id.femme)
+        condition = findViewById(R.id.condition)
         val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
@@ -56,6 +59,9 @@ class SubscribeClient : Activity() {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show()
 
         })
+        condition!!.setOnClickListener {
+            startActivity(Intent(this, ConditionGeneral::class.java))
+        }
         subscribe!!.setOnClickListener {
             if (firstname!!.text.toString() != "" && lastname!!.text.toString() != ""
                     && email!!.text.toString() != "" && password!!.text.toString() != ""
@@ -97,7 +103,7 @@ class SubscribeClient : Activity() {
     }
 
     private fun checkCheckBox() : Boolean{
-        if ((homme!!.isChecked && femme!!.isChecked) || (!homme!!.isChecked && !femme!!.isChecked)) {
+        if (((homme!!.isChecked && femme!!.isChecked) || (!homme!!.isChecked && !femme!!.isChecked)) && condition!!.isChecked) {
             return false
         }
         return true

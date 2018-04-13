@@ -12,22 +12,12 @@
     tools:layout_alignParentStart="true"
     tools:layout_alignParentTop="true">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:text="S'inscrire"
-        android:textSize="30sp" />
+
 
     <ImageView
         android:layout_width="500dp"
         android:layout_height="300dp"
         android:src="@drawable/logo_proxijob"
-        android:layout_below="@id/text"
         android:id="@+id/logo"/>
     <Button
         android:id="@+id/entreprise"

@@ -19,6 +19,7 @@ import proxyjob.proxijob.Company.AllMissions
 import proxyjob.proxijob.Company.CompanyMissions
 import proxyjob.proxijob.Company.InformationsCompany
 import proxyjob.proxijob.Login.Login
+import proxyjob.proxijob.Utils.SplashScreen
 
 
 class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         if (ParseUser.getCurrentUser() == null)
             startActivity(Intent(this, Login::class.java))
         navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView

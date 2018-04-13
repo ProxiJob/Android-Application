@@ -14,4 +14,9 @@ class Localisation : ParseObject() {
         set(value) {
             this.put("point", value)
         }
+    var address: String?
+        get() = this.getString("address")
+        set(value) {
+            this.put("address", value)
+        }
 }

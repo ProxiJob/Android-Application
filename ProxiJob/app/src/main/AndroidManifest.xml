@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
     <application
         android:name=".Utils.App"
@@ -34,7 +34,7 @@
             android:name="com.parse.APPLICATION_ID"
             android:value="@string/parse_app_id" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".Utils.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,6 +51,10 @@
         <activity android:name=".Company.AssignClient"></activity>
         <activity android:name=".Company.CreateMission"></activity>
         <activity android:name=".Login.FakePoleEmploi"></activity>
+        <activity android:name=".Utils.ConditionGeneral"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Utils.TutorialScreen"></activity>
+        <activity android:name=".Utils.ChoiceTutorial"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

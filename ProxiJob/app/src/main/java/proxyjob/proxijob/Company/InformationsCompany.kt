@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_subscribe.view.*
 import kotlinx.android.synthetic.main.fragment_informations_company.view.*
@@ -43,11 +44,11 @@ class InformationsCompany: Fragment()
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.fragment_informations_company, container, false)
 
         logo = view.findViewById<CircleImageView>(R.id.profile_image)
-        company_name = view.findViewById<EditText>(R.id.company_name)
+        company_name = view.findViewById(R.id.company_name)
         company_type = view.findViewById<EditText>(R.id.company_type)
         description = view.findViewById<EditText>(R.id.description)
         siret = view.findViewById<EditText>(R.id.nb_siret)
@@ -57,11 +58,15 @@ class InformationsCompany: Fragment()
         edit = view.findViewById<FloatingActionButton>(R.id.edit)
 
         var user = KUser.getCurrentUser()
-
-        company_name!!.text = SpannableStringBuilder(user.company.fetchIfNeeded<Company>().name)
-        siret!!.text = SpannableStringBuilder(user.company.fetchIfNeeded<Company>().siret)
-        company_type!!.text = SpannableStringBuilder(user.company.fetchIfNeeded<Company>().secteur)
-
+        println(user.objectId)
+        company_name!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.name)
+        siret!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.siret)
+        company_type!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.secteur)
+        description!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.description)
+        email!!.text = SpannableStringBuilder(user.email)
+        var logo1 = user?.company?.fetchIfNeeded<Company>()?.logo
+        if (logo != null)
+            Picasso.with(context).load(logo1!!.url).into(logo)
         return view
     }
 }

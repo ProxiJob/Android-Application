@@ -143,14 +143,26 @@
                 android:textColor="@color/colorWhite"
                 android:text="Femme" />
 
+            <CheckBox
+                android:id="@+id/condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/homme"
+                android:gravity="center"
+                android:buttonTint="@color/colorWhite"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="26dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="10sp"
+                android:text="J'accepte les conditions générales" />
+
             <Button
                 android:id="@+id/subscribe"
                 android:layout_width="196dp"
                 android:layout_height="52dp"
-                android:layout_below="@+id/homme"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="26dp"
+                android:layout_below="@+id/condition"
                 android:background="@color/proxi_button_green"
                 android:text="S'inscrire"
                 android:textColor="@color/proxi_back"

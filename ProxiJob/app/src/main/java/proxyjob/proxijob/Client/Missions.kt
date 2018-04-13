@@ -12,6 +12,8 @@ import proxyjob.proxijob.model.Jobs
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.AsyncTask
+import android.support.design.widget.FloatingActionButton
 import com.baoyz.swipemenulistview.SwipeMenuItem
 import com.baoyz.swipemenulistview.SwipeMenu
 import com.baoyz.swipemenulistview.SwipeMenuCreator
@@ -22,7 +24,7 @@ import org.jetbrains.anko.alert
 import proxyjob.proxijob.model.KUser
 import java.util.HashMap
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
-
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
 
 
 
@@ -33,6 +35,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 class Missions : Fragment() {
     var jobs :ArrayList<Jobs>?= null
     var listAdapter: MissionListAdapter?= null
+    var mWaveSwipeRefreshLayout: WaveSwipeRefreshLayout?= null
     init {
 
     }
@@ -42,18 +45,36 @@ class Missions : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes missions"
-
+        view.findViewById<FloatingActionButton>(R.id.add).visibility = View.GONE
             APIManager.getShared().getMissionsForUser { b, error, arrayList ->
                 jobs = arrayList
                 if (jobs!!.size != 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
-                listAdapter = MissionListAdapter(activity, jobs!!)
+                listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
                 list.adapter = listAdapter
             }
+        mWaveSwipeRefreshLayout = view.findViewById<WaveSwipeRefreshLayout>(R.id.main_swipe) as WaveSwipeRefreshLayout
+        mWaveSwipeRefreshLayout!!.setColorSchemeColors(R.color.proxi_button_purple)
+        mWaveSwipeRefreshLayout!!.setWaveColor(R.color.proxi_button_purple)
+        mWaveSwipeRefreshLayout!!.setOnRefreshListener(WaveSwipeRefreshLayout.OnRefreshListener {
+            jobs!!.clear()
+            listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+            list.adapter = listAdapter
+            APIManager.getShared().getMissionsForUser { b, error, arrayList ->
+                jobs = arrayList
+                if (jobs!!.size != 0)
+                    view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
+                listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+                list.adapter = listAdapter
+                mWaveSwipeRefreshLayout!!.setRefreshing(false)
+            }
+
+        })
+
         val creator = SwipeMenuCreator { menu ->
             // create "open" item
             val openItem = SwipeMenuItem(
@@ -96,7 +117,7 @@ class Missions : Fragment() {
                         startActivity(intent)
                     }
                     1 -> {
-                        context.alert("Êtes-vous sûr de vouloir annuler \nvotre participation à cette événement ?") {
+                        context!!.alert("Êtes-vous sûr de vouloir annuler \nvotre participation à cette événement ?") {
                             //title = "Alert"
                             yesButton {
                                 val params = HashMap<String, String>()
@@ -105,7 +126,7 @@ class Missions : Fragment() {
                                 ParseCloud.callFunctionInBackground("savePostule", params, FunctionCallback<Float> { aFloat, e ->
                                     if (e == null) {
                                         jobs!!.removeAt(position)
-                                        listAdapter = MissionListAdapter(activity, jobs!!)
+                                        listAdapter = MissionListAdapter(activity!!, jobs!!)
                                         list.adapter = listAdapter
                                         if (jobs!!.size == 0)
                                             view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
