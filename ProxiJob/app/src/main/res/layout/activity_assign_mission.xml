@@ -15,7 +15,8 @@
         android:textColor="@color/proxi_button_purple"
         android:textStyle="bold"
         android:textSize="30sp"
-        android:text="TextView"/>
+        android:text="TextView"
+        android:fontFamily="@font/avenirltstd_medium"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="150dp"
@@ -45,6 +46,7 @@
             android:text="Début"
             android:textAllCaps="true"
             android:textSize="15dp"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textColor="@color/proxi_button_purple"/>
         <TextView
             android:id="@+id/job_start"
@@ -52,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/job_startTW"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/avenirltstd_medium"
             android:text="TextView" />
         <TextView
             android:id="@+id/job_endTW"
@@ -61,6 +64,7 @@
             android:layout_marginLeft="120dp"
             android:textAllCaps="true"
             android:textSize="15dp"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textColor="@color/proxi_button_purple"
             android:text="Fin" />
         <TextView
@@ -68,6 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/job_endTW"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_alignLeft="@+id/job_endTW"
             android:layout_marginTop="10dp"
             android:text="TextView" />
@@ -77,6 +82,7 @@
             android:layout_alignLeft="@+id/company_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp"
             android:textAllCaps="true"
             android:textSize="15dp"
@@ -88,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/job_titleTW"
             android:layout_alignLeft="@+id/company_image"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp"
             android:text="TextView" />
         <TextView
@@ -96,6 +103,7 @@
             android:layout_below="@id/job_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="120dp"
             android:textAllCaps="true"
@@ -108,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/job_cashTW"
             android:layout_alignLeft="@+id/job_cashTW"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp"
             android:text="TextView" />
         <TextView
@@ -115,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/company_image"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_below="@id/job_title"
             android:layout_marginTop="10dp"
             android:textAllCaps="true"
@@ -130,6 +140,7 @@
             android:layout_alignLeft="@id/company_image"
             android:layout_below="@id/job_detailTW"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/avenirltstd_medium"
             android:text="TextView"
             tools:ignore="NotSibling" />
 
@@ -141,6 +152,7 @@
             android:layout_below="@id/job_detail"
             android:layout_marginTop="10dp"
             android:textAllCaps="true"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textSize="15dp"
             android:textColor="@color/proxi_button_purple"
             android:text="Clients ayant postulé"
@@ -152,6 +164,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/listView"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/avenirltstd_medium"
         android:layout_height="wrap_content"
         android:layout_below="@+id/post"/>
 </LinearLayout>

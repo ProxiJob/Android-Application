@@ -11,12 +11,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:fontFamily="@font/avenirltstd_medium"
         android:text="J'accepte"
         android:background="@color/proxi_button_green"/>
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/validate"
+        android:fontFamily="@font/avenirltstd_medium"
         android:id="@+id/webview"
     />
 </RelativeLayout>

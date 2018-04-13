@@ -11,6 +11,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/avenirltstd_medium"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:layout_marginLeft="15dp"
@@ -35,6 +36,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:id="@+id/cv"
+        android:fontFamily="@font/avenirltstd_medium"
         android:background="@color/proxi_button_purple"
         android:src="@drawable/cv"
         android:layout_below="@id/informations"
@@ -49,7 +51,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="30dp"
         android:paddingTop="30dp"
-
+        android:fontFamily="@font/avenirltstd_medium"
         android:layout_below="@id/cv"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"

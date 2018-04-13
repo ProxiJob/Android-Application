@@ -40,7 +40,8 @@
                 android:textColorHint="@color/colorWhite"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
-                android:backgroundTint="@color/colorWhite" />
+                android:backgroundTint="@color/colorWhite"
+                android:fontFamily="@font/avenirltstd_medium"/>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -64,7 +65,8 @@
                 android:inputType="textPassword"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/avenirltstd_medium"/>
         </android.support.design.widget.TextInputLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -83,7 +85,8 @@
         android:text="Se connecter"
         android:textAllCaps="false"
         android:textColor="@color/proxi_back"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:fontFamily="@font/avenirltstd_medium"/>
 
     <Button
         android:layout_below="@+id/login_button"
@@ -96,6 +99,7 @@
         android:text="S'inscrire"
         android:textAllCaps="false"
         android:textColor="@color/proxi_button_green"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:fontFamily="@font/avenirltstd_medium"/>
     </RelativeLayout>
 </LinearLayout>

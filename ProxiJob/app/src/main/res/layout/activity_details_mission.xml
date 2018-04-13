@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/proxi_button_purple"
+        android:fontFamily="@font/avenirltstd_medium"
         android:textStyle="bold"
         android:textSize="30sp" />
     <RelativeLayout
@@ -42,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Début"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textAllCaps="true"
             android:textSize="15dp"
             android:textColor="@color/proxi_button_purple"/>
@@ -49,6 +51,7 @@
             android:id="@+id/job_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_below="@id/job_startTW"
             android:layout_marginTop="10dp" />
         <TextView
@@ -57,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textAllCaps="true"
             android:textSize="15dp"
             android:textColor="@color/proxi_button_purple"
@@ -67,11 +71,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/job_endTW"
             android:layout_alignLeft="@+id/job_endTW"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp" />
         <TextView
             android:id="@+id/job_titleTW"
             android:layout_below="@id/job_start"
             android:layout_alignLeft="@+id/company_image"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -84,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/job_titleTW"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_alignLeft="@+id/company_image"
             android:layout_marginTop="10dp"
             />
@@ -92,6 +99,7 @@
             android:layout_toRightOf="@id/job_startTW"
             android:layout_below="@id/job_end"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="120dp"
@@ -104,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/job_cashTW"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_alignLeft="@+id/job_cashTW"
             android:layout_marginTop="10dp"
             />
@@ -112,6 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/company_image"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_below="@id/job_title"
             android:layout_marginTop="10dp"
             android:textAllCaps="true"
@@ -124,6 +134,7 @@
             android:id="@+id/job_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_alignLeft="@id/company_image"
             android:layout_below="@id/job_detailTW"
             android:layout_marginTop="10dp"
@@ -136,6 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:fontFamily="@font/avenirltstd_medium"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:text="Button"

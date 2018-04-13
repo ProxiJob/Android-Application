@@ -12,6 +12,7 @@
     <TextView
         android:id="@+id/info"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/avenirltstd_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="COUCOU"
@@ -23,12 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main_swipe"
+        android:fontFamily="@font/avenirltstd_medium"
         android:layout_below="@+id/info">
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/avenirltstd_medium"
         />
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
     <LinearLayout
@@ -41,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_margin="16dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -55,6 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Vous n'avez pas encore postulé \n à une offre"
             android:textAlignment="center"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_gravity="center"
             android:textColor="@color/proxi_button_purple"
             android:textSize="20dp" />

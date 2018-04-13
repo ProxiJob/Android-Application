@@ -23,6 +23,7 @@
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:text="Name"
             android:textSize="15dp"
             android:textStyle="bold"
@@ -32,6 +33,7 @@
             android:id="@+id/job"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
             android:text="status" />
 
     </LinearLayout>

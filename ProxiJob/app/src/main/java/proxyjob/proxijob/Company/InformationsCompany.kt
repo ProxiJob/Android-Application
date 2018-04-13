@@ -64,9 +64,6 @@ class InformationsCompany: Fragment()
         company_type!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.secteur)
         description!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.description)
         email!!.text = SpannableStringBuilder(user.email)
-        var logo1 = user?.company?.fetchIfNeeded<Company>()?.logo
-        if (logo != null)
-            Picasso.with(context).load(logo1!!.url).into(logo)
         return view
     }
 }

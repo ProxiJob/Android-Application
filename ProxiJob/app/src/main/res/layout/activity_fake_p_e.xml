@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="@font/avenirltstd_medium"
             android:text="Vous êtes en possession d'un compte Pôle Emploi? Connectez vous ci-dessous"
             android:textColor="@color/colorWhite"/>
 
@@ -36,6 +37,7 @@
             android:id="@+id/username"
             android:hint="Identifiant P.E"
             android:textColorHint="@color/colorWhite"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"/>
@@ -43,6 +45,7 @@
         <EditText
             android:id="@+id/password"
             android:textColorHint="@color/colorWhite"
+            android:fontFamily="@font/avenirltstd_medium"
             android:textColor="@color/colorWhite"
             android:hint="Mot de passe P.E"
             android:layout_width="match_parent"
@@ -51,6 +54,7 @@
 
         <Button
             android:id="@+id/btn"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="4dp"
             android:layout_gravity="center"
             android:layout_width="196dp"
@@ -61,6 +65,7 @@
             android:id="@+id/btn1"
             android:layout_marginTop="4dp"
             android:layout_width="match_parent"
+            android:fontFamily="@font/avenirltstd_medium"
             android:layout_height="wrap_content"
             android:background="@color/proxi_button_purple"
             android:text="Je n'ai pas de compte Pôle Emploi"

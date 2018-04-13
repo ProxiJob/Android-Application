@@ -10,13 +10,15 @@
         android:layout_height="wrap_content"
         android:text="Ajouter une mission"
         android:id="@+id/add"
+        android:fontFamily="@font/avenirltstd_medium"
         />
     <Button
         android:layout_below="@+id/add"
         android:id="@+id/mod"
         android:text="Modifier une mission"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenirltstd_medium"/>
 </RelativeLayout>
 
 </LinearLayout>
