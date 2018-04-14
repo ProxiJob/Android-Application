@@ -54,14 +54,26 @@ class CompanyMissions : Fragment() {
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes Annonces"
 
-        val add = view.findViewById<FloatingActionButton>(R.id.add)
+        val add = view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
         add!!.setOnClickListener {
             startActivity(Intent(context, CreateMission::class.java))
         }
+        val refresh = view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.refresh)
+        refresh!!.setOnClickListener {
+            jobs!!.clear()
+            APIManager.getShared().getCompany { b, error, arrayList ->
+                APIManager.getShared().getMissionsForCompany(arrayList, { b, error, arrayList ->
+                    jobs = arrayList
+                    if (jobs!!.size == 0)
+                        view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
+                    listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
+                    list.adapter = listAdapter
+                })
+            }
+        }
         APIManager.getShared().getCompany { b, error, arrayList ->
             APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
-                //jobs = arrayList
-                jobs = ArrayList()
+                jobs = arrayList
                 if (jobs!!.size == 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)

@@ -30,21 +30,47 @@
         android:fontFamily="@font/avenirltstd_medium"
         />
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/add"
+        android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        app:menu_colorRipple="@color/proxi_button_purple"
+        app:menu_shadowColor="@color/proxi_button_purple"
+        app:menu_colorPressed="@color/proxi_button_purple"
+        app:menu_colorNormal="@color/proxi_button_purple"
+        >
 
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             />
+            android:src="@drawable/plus"
+            android:fontFamily="@font/avenirltstd_medium"
+            app:fab_label="Ajouter une mission"
+            app:fab_size="mini"
+            app:fab_colorRipple="@color/proxi_button_purple"
+            app:fab_shadowColor="@color/proxi_button_purple"
+            app:fab_colorPressed="@color/proxi_button_purple"
+            app:fab_colorNormal="@color/proxi_button_purple"
+        />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plus"
+            android:fontFamily="@font/avenirltstd_medium"
+            app:fab_label="Actualiser"
+            app:fab_size="mini"
+            app:fab_colorRipple="@color/proxi_button_purple"
+            app:fab_shadowColor="@color/proxi_button_purple"
+            app:fab_colorPressed="@color/proxi_button_purple"
+            app:fab_colorNormal="@color/proxi_button_purple"
+            />
 
     </com.github.clans.fab.FloatingActionMenu>
     <LinearLayout
@@ -61,7 +87,8 @@
             android:fontFamily="@font/avenirltstd_medium"
             android:layout_gravity="center"
             android:textColor="@color/proxi_button_purple"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="gone"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

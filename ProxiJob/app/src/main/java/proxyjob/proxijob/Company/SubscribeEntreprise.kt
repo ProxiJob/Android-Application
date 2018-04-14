@@ -122,7 +122,7 @@ class SubscribeEntreprise : Activity() {
                                 if (e == null) {
                                     editor!!.putString("choice", "0")
                                     editor!!.apply()
-                                        startActivity(Intent(this@SubscribeEntreprise, MainActivity::class.java))
+                                    startActivity(Intent(this@SubscribeEntreprise, MainActivity::class.java))
                                 } else {
                                     alert(e.message.toString()) {
 

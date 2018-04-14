@@ -24,7 +24,7 @@ class AllMissions : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    overrgit ide fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_all_missions, container, false)
         add = view.findViewById(R.id.add)
         mod = view.findViewById(R.id.mod)

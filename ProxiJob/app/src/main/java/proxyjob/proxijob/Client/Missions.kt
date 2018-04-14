@@ -48,7 +48,7 @@ class Missions : Fragment() {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes missions"
-        view.findViewById<FloatingActionButton>(R.id.add).visibility = View.GONE
+        view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add).visibility = View.GONE
             APIManager.getShared().getMissionsForUser { b, error, arrayList ->
                 jobs = arrayList
                 if (jobs!!.size == 0)
