@@ -59,17 +59,27 @@ class InformationsCompany: Fragment()
         edit = view.findViewById<FloatingActionButton>(R.id.edit)
 
         var user = KUser.getCurrentUser()
-        println(user.objectId)
+
         company_name!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.name != "") user.company?.fetchIfNeeded<Company>()?.name else "Nom de l'entreprise")
         siret!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.siret != "") user.company?.fetchIfNeeded<Company>()?.siret else "N° Siret")
         company_type!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.secteur != "") user.company?.fetchIfNeeded<Company>()?.secteur else "SECTEUR")
+
         var des = if (user.company?.fetchIfNeeded<Company>()?.description?.length != 0) user.company?.fetchIfNeeded<Company>()?.description else "D"
+
         description!!.text = SpannableStringBuilder(if (des != null) des else "Description")
         email!!.text = SpannableStringBuilder(if (user.email != "") user.email else "Email")
-        telephone!!.text = SpannableStringBuilder(if (user.phoneNumber != "") user.phoneNumber else "N° Téléphone")
+        telephone!!.text = SpannableStringBuilder(if (user.phoneNumber != null) user.phoneNumber else "N° Téléphone")
+
         var oo = if (user.company?.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.address?.length != 0) user.company?.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.address else "Adresse"
-        println(oo)
+
         adresse!!.text = SpannableStringBuilder(if (oo != null) oo else "Adresse")
+
+        var image = user.company!!.fetchIfNeeded<Company>()?.logo
+
+        if (image != null) {
+            Picasso.with(activity).load(image.url).into(logo)
+        }
+
         return view
     }
 }
