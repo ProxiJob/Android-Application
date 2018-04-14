@@ -21,4 +21,7 @@
     <color name="proxi_button_green">#03f3c9</color>
     <color name="proxi_button_purple">#2b0d4e</color>
     <color name="proxi_purple_light">#80599b</color>
+    <color name="proxi_tuto">#ffffff</color>
+    <color name="proxi_tuto_police">#292929</color>
+    <color name="tuto_background">#66000000</color>
 </resources>
