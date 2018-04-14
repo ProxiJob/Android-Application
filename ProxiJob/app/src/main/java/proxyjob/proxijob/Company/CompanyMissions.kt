@@ -39,7 +39,6 @@ import org.json.JSONObject
 class CompanyMissions : Fragment() {
     var jobs :ArrayList<Jobs>?= null
     var listAdapter: CompanyMissionListAdapter?= null
-    var mWaveSwipeRefreshLayout: WaveSwipeRefreshLayout?= null
     init {
 
     }
@@ -61,28 +60,12 @@ class CompanyMissions : Fragment() {
         }
         APIManager.getShared().getCompany { b, error, arrayList ->
             APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
-                jobs = arrayList
-                if (jobs!!.size != 0)
-                    view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
+                //jobs = arrayList
+                jobs = ArrayList()
+                if (jobs!!.size == 0)
+                    view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                 list.adapter = listAdapter
-            })
-            mWaveSwipeRefreshLayout = view.findViewById<WaveSwipeRefreshLayout>(R.id.main_swipe) as WaveSwipeRefreshLayout
-            mWaveSwipeRefreshLayout!!.setColorSchemeColors(R.color.proxi_button_purple)
-            mWaveSwipeRefreshLayout!!.setWaveColor(R.color.proxi_button_purple)
-            mWaveSwipeRefreshLayout!!.setOnRefreshListener(WaveSwipeRefreshLayout.OnRefreshListener {
-                jobs!!.clear()
-                listAdapter = CompanyMissionListAdapter(this!!.activity!!, jobs!!)
-                list.adapter = listAdapter
-                APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
-                    jobs = arrayList
-                    if (jobs!!.size != 0)
-                        view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
-                    listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
-                    list.adapter = listAdapter
-                    mWaveSwipeRefreshLayout!!.setRefreshing(false)
-                })
-
             })
             val creator = SwipeMenuCreator { menu ->
                 // create "open" item

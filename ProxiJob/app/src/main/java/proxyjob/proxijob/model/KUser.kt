@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import com.parse.ParseClassName
+import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseUser
 import java.util.*
@@ -48,6 +49,11 @@ class KUser() : ParseUser() {
         get() = this.get("company") as Company
         set(value) {
             this.put("company", ParseObject.createWithoutData("Company", (value!!.objectId)))
+        }
+    var profilPicture: ParseFile?
+        get() = this.get("profilPicture") as ParseFile
+        set(value) {
+            this.put("profilPicture", value)
         }
 
     constructor(parcel: Parcel) : this() {

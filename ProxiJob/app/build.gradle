@@ -51,4 +51,5 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
     implementation 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
+    implementation 'com.github.clans:fab:1.6.4'
 }

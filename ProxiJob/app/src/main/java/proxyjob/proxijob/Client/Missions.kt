@@ -35,7 +35,6 @@ import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
 class Missions : Fragment() {
     var jobs :ArrayList<Jobs>?= null
     var listAdapter: MissionListAdapter?= null
-    var mWaveSwipeRefreshLayout: WaveSwipeRefreshLayout?= null
     init {
 
     }
@@ -52,29 +51,11 @@ class Missions : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.add).visibility = View.GONE
             APIManager.getShared().getMissionsForUser { b, error, arrayList ->
                 jobs = arrayList
-                if (jobs!!.size != 0)
-                    view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
+                if (jobs!!.size == 0)
+                    view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
                 list.adapter = listAdapter
             }
-        mWaveSwipeRefreshLayout = view.findViewById<WaveSwipeRefreshLayout>(R.id.main_swipe) as WaveSwipeRefreshLayout
-        mWaveSwipeRefreshLayout!!.setColorSchemeColors(R.color.proxi_button_purple)
-        mWaveSwipeRefreshLayout!!.setWaveColor(R.color.proxi_button_purple)
-        mWaveSwipeRefreshLayout!!.setOnRefreshListener(WaveSwipeRefreshLayout.OnRefreshListener {
-            jobs!!.clear()
-            listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
-            list.adapter = listAdapter
-            APIManager.getShared().getMissionsForUser { b, error, arrayList ->
-                jobs = arrayList
-                if (jobs!!.size != 0)
-                    view.findViewById<TextView>(R.id.noMissions).visibility = View.GONE
-                listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
-                list.adapter = listAdapter
-                mWaveSwipeRefreshLayout!!.setRefreshing(false)
-            }
-
-        })
-
         val creator = SwipeMenuCreator { menu ->
             // create "open" item
             val openItem = SwipeMenuItem(

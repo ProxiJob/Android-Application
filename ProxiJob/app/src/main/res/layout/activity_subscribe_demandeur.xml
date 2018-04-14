@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingBottom="16dp"
@@ -14,12 +14,12 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:layout_gravity="center">
         <TextView
             android:id="@+id/Inscription"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -29,20 +29,20 @@
             android:textAlignment="center"
             android:textColor="@color/colorWhite" />
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:src="@drawable/logo_proxijobs"/>
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/lastname"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Nom"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
             android:fontFamily="@font/avenirltstd_medium"
             android:background="@null"
             android:maxLines="1"
@@ -54,8 +54,9 @@
         <EditText
             android:layout_below="@+id/lastname"
             android:id="@+id/firstname"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
             android:fontFamily="@font/avenirltstd_medium"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -69,8 +70,9 @@
         <EditText
             android:layout_below="@+id/firstname"
             android:id="@+id/layoutDate"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:fontFamily="@font/avenirltstd_medium"
@@ -86,8 +88,9 @@
         <EditText
             android:layout_below="@+id/layoutDate"
             android:id="@+id/mail"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textColorHint="@color/colorWhite"
@@ -102,65 +105,81 @@
         <EditText
             android:layout_below="@+id/mail"
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:hint="Mot de passe"
             android:fontFamily="@font/avenirltstd_medium"
             android:background="@null"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:maxLines="1"
             android:singleLine="true"
             android:inputType="textPassword"
             android:backgroundTint="@color/colorWhite"/>
 
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/addPhoto"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:layout_gravity="center"
+            android:layout_below="@+id/password"
+            android:background="@color/proxi_button_green"
+            android:text="Ajouter une photo de profil"
+            android:textColor="@color/proxi_back"
+            android:textSize="12sp" />
+
         <RelativeLayout
             android:id="@+id/sexe"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/password">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_below="@+id/addPhoto"
+            android:layout_marginTop="15dp">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/other"
+        android:layout_marginLeft="10dp">
+        <CheckBox
+            android:id="@+id/homme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:buttonTint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:text="Homme" />
 
-            <CheckBox
-                android:id="@+id/homme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/avenirltstd_medium"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="44dp"
-                android:layout_marginRight="44dp"
-                android:layout_toLeftOf="@+id/femme"
-                android:layout_toStartOf="@+id/femme"
-                android:buttonTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
-                android:text="Homme" />
-
-            <CheckBox
-                android:id="@+id/femme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/avenirltstd_medium"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="62dp"
-                android:layout_marginRight="62dp"
-                android:buttonTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
-                android:text="Femme" />
+        <CheckBox
+            android:id="@+id/femme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:buttonTint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:text="Femme" />
+    </LinearLayout>
 
             <CheckBox
                 android:id="@+id/condition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/homme"
                 android:gravity="center"
+
                 android:buttonTint="@color/colorWhite"
                 android:fontFamily="@font/avenirltstd_medium"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="75dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="10sp"
                 android:text="J'accepte les conditions générales" />
@@ -172,6 +191,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/avenirltstd_medium"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/condition"
                 android:background="@color/proxi_button_green"
                 android:text="S'inscrire"

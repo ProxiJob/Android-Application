@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingBottom="16dp"
@@ -14,7 +14,7 @@
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:layout_gravity="center">
         <TextView
@@ -29,8 +29,8 @@
             android:textAlignment="center"
             android:textColor="@color/colorWhite" />
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:src="@drawable/logo_proxijobs"/>
     </RelativeLayout>
 
@@ -110,8 +110,7 @@
             android:singleLine="true"
             android:inputType="textPassword"
             android:textColorHint="@color/colorWhite"
-
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorWhite" />
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
@@ -141,18 +140,47 @@
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite" />
 
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/addPhoto"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:layout_gravity="center"
+            android:layout_below="@+id/secteur"
+            android:background="@color/proxi_button_green"
+            android:text="Ajouter une photo de profil"
+            android:textColor="@color/proxi_back"
+            android:textSize="12sp" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/subscribe"
-            android:layout_width="196dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/addPhoto">
+        <CheckBox
+            android:id="@+id/condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:buttonTint="@color/colorWhite"
             android:fontFamily="@font/avenirltstd_medium"
-            android:layout_height="52dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="10sp"
+            android:text="J'accepte les conditions générales" />
+
+        <Button
+            android:layout_below="@id/condition"
+            android:id="@+id/subscribe"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@color/proxi_button_green"
             android:text="S'inscrire"
