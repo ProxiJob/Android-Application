@@ -21,6 +21,7 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import com.parse.ParseFile
 import android.util.Log
+import android.view.View
 import com.parse.LogInCallback
 import com.parse.ParseUser
 import org.jetbrains.anko.alert
@@ -51,9 +52,9 @@ class Login : Activity() {
         login = findViewById(R.id.login_button)
         subscribe = findViewById(R.id.signup_button)
         login!!.setOnClickListener({
-
+            findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.VISIBLE
             findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
-           Log.i("INFO", "ID : " + ident!!.text + " PASS : " + pass!!.text)
+            Log.i("INFO", "ID : " + ident!!.text + " PASS : " + pass!!.text)
             ParseUser.logInInBackground(ident!!.text.toString(), pass!!.text.toString(), LogInCallback { user, e ->
                 if (user != null)
                 {

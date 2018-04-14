@@ -53,13 +53,16 @@ class CompanyMissions : Fragment() {
         var view = inflater!!.inflate(R.layout.activity_missions_fragment, container, false)
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes Annonces"
-
+        view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
         val add = view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add)
+        //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.VISIBLE
         add!!.setOnClickListener {
             startActivity(Intent(context, CreateMission::class.java))
         }
         val refresh = view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.refresh)
         refresh!!.setOnClickListener {
+            //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
+            //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.VISIBLE
             jobs!!.clear()
             APIManager.getShared().getCompany { b, error, arrayList ->
                 APIManager.getShared().getMissionsForCompany(arrayList, { b, error, arrayList ->
@@ -68,9 +71,12 @@ class CompanyMissions : Fragment() {
                         view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                     listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                     list.adapter = listAdapter
+                    //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
+                    //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
                 })
             }
         }
+        //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
         APIManager.getShared().getCompany { b, error, arrayList ->
             APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
                 jobs = arrayList
@@ -78,6 +84,8 @@ class CompanyMissions : Fragment() {
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                 list.adapter = listAdapter
+                //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
+                //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
             })
             val creator = SwipeMenuCreator { menu ->
                 // create "open" item

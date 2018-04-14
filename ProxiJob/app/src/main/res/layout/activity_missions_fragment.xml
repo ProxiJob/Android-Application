@@ -34,6 +34,21 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/info">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorName="BallPulseIndicator"
+            android:foregroundGravity="center"
+            app:indicatorColor="@color/proxi_button_purple"
+            android:visibility="gone"
+            />
+    </LinearLayout>
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
         android:layout_width="wrap_content"

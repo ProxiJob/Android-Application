@@ -67,6 +67,19 @@ class APIManager {
         }
     }
 
+    fun getCompany(obj: String, completionHandler: (Boolean, Error?, ArrayList<Company>) -> Unit) {
+        var company: ParseQuery<Company> = ParseQuery.getQuery<Company>("Company")
+        company.whereEqualTo("objectId", obj)
+        company.include("logo")
+        company.findInBackground { objects, e ->
+            Log.i("DEBUG API", "" + objects.size)
+            var jobs = ArrayList<Company>(objects)
+            e?.let {
+                completionHandler(false, null, jobs) //e
+            }
+            completionHandler(true, null, jobs)
+        }
+    }
     fun getMissionsForCompany(company : ArrayList<Company>, completionHandler: (Boolean, Error?, ArrayList<Jobs>) -> Unit) {
         val innerQuery = ParseQuery.getQuery<Jobs>("Jobs")
         innerQuery.whereEqualTo("company", company[0])

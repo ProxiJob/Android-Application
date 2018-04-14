@@ -112,7 +112,9 @@ class AssignClient: Activity() {
                                                 clients!![position].lastname + " à ce sport ?"
                                         yesButton { job!!.client = clients!![position]
                                             job!!.status = "ACCEPTED"
-                                            job!!.saveInBackground()}
+                                            job!!.saveInBackground()
+
+                                        }
                                         noButton { }
                                     }.show()
 

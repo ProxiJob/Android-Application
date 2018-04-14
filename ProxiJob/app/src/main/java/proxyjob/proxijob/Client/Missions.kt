@@ -25,7 +25,7 @@ import proxyjob.proxijob.model.KUser
 import java.util.HashMap
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
-
+import proxyjob.proxijob.Company.CompanyMissionListAdapter
 
 
 /**
@@ -49,12 +49,33 @@ class Missions : Fragment() {
         var list = view.findViewById<SwipeMenuListView>(R.id.listView)
         view.findViewById<TextView>(R.id.info).text = "Mes missions"
         view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add).visibility = View.GONE
+        //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
+        //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.VISIBLE
+        val refresh = view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.refresh)
+        refresh!!.setOnClickListener {
+            //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.VISIBLE
+            //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
+            jobs!!.clear()
+            listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+            list.adapter = listAdapter
             APIManager.getShared().getMissionsForUser { b, error, arrayList ->
                 jobs = arrayList
                 if (jobs!!.size == 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
                 list.adapter = listAdapter
+                //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
+                //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
+            }
+        }
+            APIManager.getShared().getMissionsForUser { b, error, arrayList ->
+                jobs = arrayList
+                if (jobs!!.size == 0)
+                    view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
+                listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+                list.adapter = listAdapter
+                view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
+                view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
             }
         val creator = SwipeMenuCreator { menu ->
             // create "open" item

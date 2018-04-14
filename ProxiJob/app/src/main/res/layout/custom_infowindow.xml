@@ -17,7 +17,7 @@
         android:layout_marginLeft="2dip"
         android:layout_gravity="center_vertical">
 
-        <ImageView
+        <com.parse.ParseImageView
             android:id="@+id/clientPic"
             android:layout_width="80dip"
             android:layout_height="80dip"

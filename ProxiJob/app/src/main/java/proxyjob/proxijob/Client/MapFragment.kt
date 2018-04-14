@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.*
 import com.google.maps.android.ui.IconGenerator
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
+import com.parse.ParseImageView
 import com.squareup.picasso.Picasso
 import proxyjob.proxijob.Manifest
 import proxyjob.proxijob.Utils.APIManager
@@ -60,8 +61,6 @@ import java.util.*
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     override fun onLocationChanged(p0: Location?) {
 
-
-
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -71,8 +70,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     override fun onConnectionSuspended(p0: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
 
     override fun onInfoWindowClick(p0: Marker?) {
         var intent = Intent(activity, MapInformationDetails::class.java)
@@ -98,7 +95,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private lateinit var locationRequest: LocationRequest
     private var locationUpdateState = false
     private lateinit var myContext: FragmentActivity
-
+    private lateinit var saveView: View
+    private lateinit var saveURL:String
     override fun onAttach(context: Context?) {
         myContext = activity as FragmentActivity
         super.onAttach(context)
@@ -225,7 +223,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
             map.uiSettings.isZoomControlsEnabled = true
             map.setOnMarkerClickListener(this)
-            if (checkSelfPermission(context, ACCESS_FINE_LOCATION)
+            if (checkSelfPermission(context!!, ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED)
                 buildGoogleApiClient()
                 map.isMyLocationEnabled = true
@@ -235,7 +233,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onMarkerClick(p0: Marker?) = false
-
+    fun saveView()
+    {
+        if (saveURL != null && saveView !=  null)
+            Picasso.with(context).load(saveURL!!).into(saveView!!.findViewById<ParseImageView>(R.id.clientPic))
+    }
     private fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(this!!.activity!!,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -247,7 +249,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         map.isMyLocationEnabled = true
         map.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        fusedLocationClient.lastLocation.addOnSuccessListener(activity) { location ->
+        fusedLocationClient.lastLocation.addOnSuccessListener(activity!!) { location ->
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
                 lastLocation = location
@@ -270,6 +272,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             @SuppressLint("SimpleDateFormat")
             override fun getInfoContents(arg0: Marker): View? {
                 var v: View?= null
+                var bool = true
                 val formatter = SimpleDateFormat("dd/MM/yyyy")
                 try {
 
@@ -277,31 +280,32 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                     v = layoutInflater.inflate(R.layout.custom_infowindow, null)
                     var today = Calendar.getInstance().getTime();
-                    var imageV = (v!!.findViewById<ImageView>(R.id.clientPic))
+                    var imageV = v!!.findViewById<ParseImageView>(R.id.clientPic)
 
                     // (2) create a date "formatter" (the date format we want)
                     var formatter = SimpleDateFormat("dd/MM/YY")
 
                     // (3) create a new String using the date format we want
-                    var folderName = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!);
-                    (v!!.findViewById<TextView>(R.id.date) as TextView).text = "Du " + formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
-                            formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)
-                    (v!!.findViewById<TextView>(R.id.job) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).job
-                    (v!!.findViewById<TextView>(R.id.desc) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).description
-                    (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.get("name") as String
-                    var geo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.localisation
-                    (v!!.findViewById<TextView>(R.id.address) as TextView).text = getAddress(LatLng(geo!!.latitude, geo!!.longitude))
                     var logo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.logo
-                    Picasso.with(context).load(logo!!.url).into(imageV).run {
-                        return v
 
-                    }
-                    sleep(100)
-                } catch (ev: Exception) {
-                    print(ev.message)
+                    saveURL = logo!!.url
+                    Picasso.with(context).load(logo!!.url).placeholder(R.drawable.proxijob).into(v!!.findViewById<ParseImageView>(R.id.clientPic))
+                        var folderName = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!);
+                        (v!!.findViewById<TextView>(R.id.date) as TextView).text = "Du " + formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
+                                formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)
+                        (v!!.findViewById<TextView>(R.id.job) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).job
+                        (v!!.findViewById<TextView>(R.id.desc) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).description
+                        (v!!.findViewById<TextView>(R.id.companyName) as TextView).text = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.get("name") as String
+                        var geo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.localisation
+                        //Picasso.with(context).load(logo!!.url).into(imageV)
+                        (v!!.findViewById<TextView>(R.id.address) as TextView).text = getAddress(LatLng(geo!!.latitude, geo!!.longitude))
+                    //}
+                    //sleep(100)
+                } catch (e: Exception) {
+                    print(e.message)
                 }
+               // println("JE RETURN")
                 return v
-
             }
         })
         map.setOnInfoWindowClickListener { marker ->
@@ -396,7 +400,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
     @Synchronized protected fun buildGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClient.Builder(context)
+        mGoogleApiClient = GoogleApiClient.Builder(context!!)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)

@@ -53,6 +53,7 @@ class Profil : Fragment() {
         managePost()
     }
     fun managePost() {
+
         /*println("JE CREER LE CONTRACT")
         val params = HashMap<String, String>()
         params.put("jobId", "GIK8YJoTVx-Y8C81fAZbg")
@@ -103,7 +104,7 @@ class Profil : Fragment() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             filePath = data.data
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, filePath)
+                bitmap = MediaStore.Images.Media.getBitmap(context!!.contentResolver, filePath)
                 KUser.getCurrentUser().profilPicture = conversionBitmapParseFile(bitmap!!)
                 KUser.getCurrentUser().saveInBackground()
             } catch (e: IOException) {
@@ -115,13 +116,13 @@ class Profil : Fragment() {
 
     //method to get the file path from uri
     fun getPath(uri: Uri): String {
-        var cursor = context.contentResolver.query(uri, null, null, null, null)
+        var cursor = context!!.contentResolver.query(uri, null, null, null, null)
         cursor!!.moveToFirst()
         var document_id = cursor.getString(0)
         document_id = document_id.substring(document_id.lastIndexOf(":") + 1)
         cursor.close()
 
-        cursor = context.contentResolver.query(
+        cursor = context!!.contentResolver.query(
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", arrayOf(document_id), null)
         cursor!!.moveToFirst()
         val path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
@@ -133,16 +134,16 @@ class Profil : Fragment() {
 
     //Requesting permission
     private fun requestStoragePermission() {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
             return
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             //If the user has denied the permission previously your code will come to this block
             //Here you can explain why you need this permission
             //Explain here why you need this permission
         }
         //And finally ask for the permission
-        ActivityCompat.requestPermissions(activity, arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
+        ActivityCompat.requestPermissions(activity!!, arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
     }
 
 

@@ -102,6 +102,9 @@ class MapInformationDetails: Activity()
         params.put("userID", KUser.getCurrentUser().objectId)
         ParseCloud.callFunctionInBackground("savePostule", params, FunctionCallback<Float> { aFloat, e ->
             if (e == null) {
+                if (post!!.text == "Postuler") {
+
+                }
                 // ratings is 4.5
             }
         })
