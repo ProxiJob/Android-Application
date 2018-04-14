@@ -26,19 +26,19 @@ class SplashScreen : Activity() {
         val background = object : Thread() {
             override fun run() {
                 try {
-                    // Thread will sleep for 5 seconds
+                    // Thread will sleep for 2 seconds
                     Thread.sleep((2 * 1000).toLong())
 
                     // After 5 seconds redirect to another intent
-                   // if (settings!!.getString("first", "0") == "0") {
+                    if (settings!!.getString("first", "0") == "0") {
                         editor!!.putString("first", "1")
                         editor!!.apply()
                         val i = Intent(baseContext, ChoiceTutorial::class.java)
                         startActivity(i)
-                    /*} else {
+                    } else {
                         val i = Intent(baseContext, MainActivity::class.java)
                         startActivity(i)
-                    }*/
+                    }
 
                     //Remove activity
                     finish()

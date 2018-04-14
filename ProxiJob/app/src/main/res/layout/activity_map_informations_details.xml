@@ -29,7 +29,7 @@
         android:layout_marginStart="30dp"
         android:padding="5dp"
         android:background="@drawable/imageview_border"
-        android:src="@drawable/background"/>
+        android:src="@drawable/logo_proxijobs"/>
     </RelativeLayout>
 
     <RelativeLayout

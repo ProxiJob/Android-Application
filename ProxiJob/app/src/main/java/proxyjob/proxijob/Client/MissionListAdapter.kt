@@ -47,7 +47,8 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
         viewHolder.txtName?.text = checkStatusMission(job)
         viewHolder.txtJob?.text = job.job
         var logo = job.company!!.fetchIfNeeded<Company>()?.logo
-        Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
+        if (logo != null)
+            Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
         return view as View
     }
 
