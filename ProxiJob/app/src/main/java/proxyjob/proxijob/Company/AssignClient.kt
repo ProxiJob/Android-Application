@@ -105,6 +105,8 @@ class AssignClient: Activity() {
                     override fun onMenuItemClick(position: Int, menu: SwipeMenu, index: Int): Boolean {
                         when (index) {
                             0 -> {
+                                println("IIIIIIIIIIII")
+                                println(job!!.status?.length)
                                 if (job!!.status?.length == 0) {
                                     alert("Assignation de mission\n" + "Voulez-vous assigner " + clients!![position].firstname + " " +
                                             clients!![position].lastname + " à ce job ?") {
@@ -114,6 +116,20 @@ class AssignClient: Activity() {
                                             job!!.status = "ACCEPTED"
                                             job!!.saveInBackground()
 
+                                            val paramspdf = HashMap<String, String>()
+                                            paramspdf.put("jobId", job!!.objectId)
+                                            paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
+                                            paramspdf.put("userId", clients!![position].objectId)
+                                            paramspdf.put("choice", "0")
+                                            ParseCloud.callFunctionInBackground("createPDFAtBlock", paramspdf, FunctionCallback<String> { id, e ->
+                                                if (e == null) {
+                                                    println("NO ERROR")
+                                                    println(id)
+                                                    // ratings is 4.5
+                                                } else {
+                                                    println("ERROR")
+                                                }
+                                            })
                                         }
                                         noButton { }
                                     }.show()

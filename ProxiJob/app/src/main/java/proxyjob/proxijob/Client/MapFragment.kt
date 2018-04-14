@@ -223,10 +223,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
             map.uiSettings.isZoomControlsEnabled = true
             map.setOnMarkerClickListener(this)
-            if (checkSelfPermission(context!!, ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED)
-                buildGoogleApiClient()
-                map.isMyLocationEnabled = true
+
+
             setUpMap()
         }
 
@@ -346,14 +344,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private fun startLocationUpdates() {
         println("JE DEMANDE !!!")
-        if (ActivityCompat.checkSelfPermission(this!!.activity!!,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this!!.activity!!,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+        if (ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
+                != null && ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(activity,
+                    arrayOf(ACCESS_FINE_LOCATION),
                     1)
-            return
-        }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+            //fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+
+        } else
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+
     }
 
     @SuppressLint("RestrictedApi")
