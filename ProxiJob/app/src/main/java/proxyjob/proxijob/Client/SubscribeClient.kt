@@ -12,6 +12,8 @@ import proxyjob.proxijob.model.KUser
 import java.util.*
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.SharedPreferences
+import com.parse.ParseUser
 import proxyjob.proxijob.Login.FakePoleEmploi
 import proxyjob.proxijob.Login.Login
 import proxyjob.proxijob.R
@@ -33,7 +35,8 @@ class SubscribeClient : Activity() {
     var subscribe : Button?=null
     var condition: CheckBox?= null
     var myCalendar = Calendar.getInstance()
-
+    var settings: SharedPreferences?= null
+    var editor: SharedPreferences.Editor ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscribe_demandeur)
@@ -78,10 +81,9 @@ class SubscribeClient : Activity() {
                 user.signUpInBackground(object : SignUpCallback {
                     override fun done(e: ParseException?) {
                         if (e == null) {
-                            alert( "INSCRIPTION ... OKAY") {
+                            println(ParseUser.getCurrentUser().objectId)
                                 startActivity(Intent(this@SubscribeClient, FakePoleEmploi::class.java))
 
-                            }.show()
                         } else {
                             alert( e.message.toString()) {
 

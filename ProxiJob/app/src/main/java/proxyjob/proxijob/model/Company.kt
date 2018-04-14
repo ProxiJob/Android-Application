@@ -18,7 +18,7 @@ class   Company : ParseObject() {
     var siret: String?
         get() = this.getString("siret")
         set(value) {
-            this.put("name", value)
+            this.put("siret", value)
         }
     var localisation: Localisation?
         get() = this.get("localisation") as Localisation

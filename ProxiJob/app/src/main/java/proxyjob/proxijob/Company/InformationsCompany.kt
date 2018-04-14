@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_informations_company.view.*
 import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.KUser
+import proxyjob.proxijob.model.Localisation
 
 /**
  * Created by Melvin on 20/03/18.
@@ -59,11 +60,15 @@ class InformationsCompany: Fragment()
 
         var user = KUser.getCurrentUser()
         println(user.objectId)
-        company_name!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.name)
-        siret!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.siret)
-        company_type!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.secteur)
-        description!!.text = SpannableStringBuilder(user.company?.fetchIfNeeded<Company>()?.description)
-        email!!.text = SpannableStringBuilder(user.email)
+        company_name!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.name != "") user.company?.fetchIfNeeded<Company>()?.name else "Nom de l'entreprise")
+        siret!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.siret != "") user.company?.fetchIfNeeded<Company>()?.siret else "N° Siret")
+        company_type!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.secteur != "") user.company?.fetchIfNeeded<Company>()?.secteur else "SECTEUR")
+        description!!.text = SpannableStringBuilder(if (user.company?.fetchIfNeeded<Company>()?.description?.length != 0) user.company?.fetchIfNeeded<Company>()?.description else "Description")
+        email!!.text = SpannableStringBuilder(if (user.email != "") user.email else "Email")
+        telephone!!.text = SpannableStringBuilder(if (user.phoneNumber != "") user.phoneNumber else "N° Téléphone")
+        var oo = if (user.company?.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.address?.length != 0) user.company?.fetchIfNeeded<Company>()?.localisation?.fetchIfNeeded<Localisation>()?.address else "Adresse"
+        println(oo)
+        adresse!!.text = SpannableStringBuilder(if (oo != null) oo else "Adresse")
         return view
     }
 }

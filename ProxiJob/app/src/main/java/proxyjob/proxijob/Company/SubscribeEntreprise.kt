@@ -17,6 +17,7 @@ import proxyjob.proxijob.model.Localisation
 import java.util.*
 import com.parse.ParseGeoPoint
 import proxyjob.proxijob.Login.Login
+import proxyjob.proxijob.MainActivity
 import proxyjob.proxijob.R
 
 /**
@@ -33,7 +34,7 @@ class SubscribeEntreprise : Activity() {
     var subscribe : Button?=null
     var geocoder: Geocoder?= null
     var addresses: List<Address>? = null
-
+    var secteur : EditText?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscribe_entreprise)
@@ -45,10 +46,11 @@ class SubscribeEntreprise : Activity() {
         subscribe = findViewById(R.id.subscribe)
         address = findViewById(R.id.address)
         geocoder = Geocoder(this, Locale.getDefault())
+        secteur = findViewById(R.id.secteur)
         subscribe!!.setOnClickListener {
             if (entreprise!!.text.toString() != "" && nb_serie!!.text.toString() != "" &&
                     email!!.text.toString() != "" && password!!.text.toString() != "" &&
-                    phone!!.text.toString() != "" && address!!.text.toString() != "") {
+                    phone!!.text.toString() != "" && address!!.text.toString() != "" && subscribe!!.text.toString() != "") {
                 val user = KUser()
                 val company = Company()
                 val location = Localisation()
@@ -59,6 +61,7 @@ class SubscribeEntreprise : Activity() {
                 user.phoneNumber = phone!!.text.toString()
                 company.siret = nb_serie!!.text.toString()
                 company.name = entreprise!!.text.toString()
+                company.secteur = secteur!!.text.toString()
                 location.address = address!!.text.toString()
                 addresses = geocoder!!.getFromLocationName(address!!.text.toString().toLowerCase(), 1);
                 for (address in addresses!!) {
@@ -84,10 +87,7 @@ class SubscribeEntreprise : Activity() {
                         user.signUpInBackground(object : SignUpCallback {
                             override fun done(e: ParseException?) {
                                 if (e == null) {
-                                    alert("INSCRIPTION ... OKAY") {
-                                        startActivity(Intent(this@SubscribeEntreprise, Login::class.java))
-
-                                    }.show()
+                                        startActivity(Intent(this@SubscribeEntreprise, MainActivity::class.java))
                                 } else {
                                     alert(e.message.toString()) {
 

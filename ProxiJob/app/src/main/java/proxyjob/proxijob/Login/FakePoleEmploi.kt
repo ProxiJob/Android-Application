@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import proxyjob.proxijob.MainActivity
 import proxyjob.proxijob.R
 import java.text.SimpleDateFormat
 
@@ -22,11 +23,11 @@ class FakePoleEmploi : Activity()
         button2 = findViewById(R.id.btn1)
 
         button!!.setOnClickListener {
-            startActivity(Intent(this@FakePoleEmploi, Login::class.java))
+            startActivity(Intent(this@FakePoleEmploi, MainActivity::class.java))
         }
 
         button2!!.setOnClickListener {
-            startActivity(Intent(this@FakePoleEmploi, Login::class.java))
+            startActivity(Intent(this@FakePoleEmploi, MainActivity::class.java))
         }
     }
 }

@@ -93,7 +93,6 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/colorWhite"
-
             android:textColor="@color/colorWhite"
             android:backgroundTint="@color/colorWhite"/>
 
@@ -126,8 +125,21 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/colorWhite"
-
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorWhite" />
+        <EditText
+            android:id="@+id/secteur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="Secteur d'activité"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite" />
 
     </RelativeLayout>
 
