@@ -112,7 +112,22 @@ class AssignClient: Activity() {
                                                 clients!![position].lastname + " à ce sport ?"
                                         yesButton { job!!.client = clients!![position]
                                             job!!.status = "ACCEPTED"
-                                            job!!.saveInBackground()}
+                                            job!!.saveInBackground()
+                                            val paramspdf = HashMap<String, String>()
+                                            paramspdf.put("jobId", job!!.objectId)
+                                            paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
+                                            paramspdf.put("userId", clients!![position].objectId)
+                                            paramspdf.put("choice", "0")
+                                            ParseCloud.callFunctionInBackground("createPDFAtBlock", paramspdf, FunctionCallback<String> { id, e ->
+                                                if (e == null) {
+                                                    println("NO ERROR")
+                                                    println(id)
+                                                    // ratings is 4.5
+                                                } else {
+                                                    println("ERROR")
+                                                }
+                                            })
+                                        }
                                         noButton { }
                                     }.show()
 

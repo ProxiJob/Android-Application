@@ -20,6 +20,7 @@ import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.parse.ParseException
 import com.squareup.picasso.Picasso
+import kotlin.collections.HashMap
 
 /**
  * Created by alexandre on 10/02/2018.
@@ -102,6 +103,21 @@ class MapInformationDetails: Activity()
         params.put("userID", KUser.getCurrentUser().objectId)
         ParseCloud.callFunctionInBackground("savePostule", params, FunctionCallback<Float> { aFloat, e ->
             if (e == null) {
+                if (post!!.text == "Postuler") {
+                    val paramspdf = HashMap<String, String>()
+                    paramspdf.put("jobId", job!!.objectId)
+                    paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
+                    paramspdf.put("userId", KUser.getCurrentUser().objectId)
+                    paramspdf.put("choice", "1")
+                    ParseCloud.callFunctionInBackground("createPDFAtBlock", paramspdf, FunctionCallback<String> { id, e ->
+                        if (e == null) {
+                            println("NO ERROR")
+                            println(id)
+                            // ratings is 4.5
+                        } else {
+                            println("ERROR")
+                        }
+                    })
                 // ratings is 4.5
             }
         })
