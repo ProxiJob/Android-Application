@@ -24,4 +24,6 @@
     <color name="proxi_tuto">#ffffff</color>
     <color name="proxi_tuto_police">#292929</color>
     <color name="tuto_background">#66000000</color>
+    <color name="photo_background">#cccccc</color>
+    <color name="item_list">#eff0f1</color>
 </resources>

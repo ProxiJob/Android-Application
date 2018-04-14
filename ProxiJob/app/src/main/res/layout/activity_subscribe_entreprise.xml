@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingBottom="16dp"
@@ -60,6 +61,7 @@
             android:fontFamily="@font/avenirltstd_medium"
             android:background="@null"
             android:hint="N° SIRET"
+            android:inputType="number"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/colorWhite"
@@ -79,6 +81,7 @@
             android:background="@null"
             android:maxLines="1"
             android:singleLine="true"
+            android:inputType="textEmailAddress"
             android:textColor="@color/colorWhite"/>
 
         <EditText
@@ -88,6 +91,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenirltstd_medium"
             android:hint="N° Télephone"
+            android:inputType="phone"
             android:layout_margin="10dp"
             android:background="@null"
             android:maxLines="1"
@@ -95,7 +99,20 @@
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:backgroundTint="@color/colorWhite"/>
-
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/mail">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorName="BallPulseIndicator"
+            android:visibility="gone"
+            android:foregroundGravity="center"
+            />
+        </LinearLayout>
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
@@ -111,7 +128,7 @@
             android:inputType="textPassword"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite" />
-        <EditText
+        <TextView
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,7 +141,8 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/colorWhite"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:textSize="18dp"/>
         <EditText
             android:id="@+id/secteur"
             android:layout_width="match_parent"

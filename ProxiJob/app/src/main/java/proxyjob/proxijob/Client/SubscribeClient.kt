@@ -16,6 +16,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -93,6 +95,7 @@ class SubscribeClient : Activity() {
             if (firstname!!.text.toString() != "" && lastname!!.text.toString() != ""
                     && email!!.text.toString() != "" && password!!.text.toString() != ""
                     && birthday!!.text.toString() != "" && checkCheckBox() && photoIsAdd == true) {
+                findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
                 val user = KUser()
                 user.username = email!!.getText().toString()
                 user.setPassword(password!!.getText().toString())
@@ -147,7 +150,26 @@ class SubscribeClient : Activity() {
 
     fun conversionBitmapParseFile(imageBitmap: Bitmap): ParseFile {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        var maxSize = 100
+        var outWidth = 0
+        var outHeight = 0
+        var inWidth = imageBitmap.getWidth();
+        var inHeight = imageBitmap.getHeight();
+        if(inWidth > inHeight){
+            outWidth = maxSize;
+            outHeight = (inHeight * maxSize) / inWidth;
+        } else {
+            outHeight = maxSize;
+            outWidth = (inWidth * maxSize) / inHeight;
+        }
+        var resizeBitmap = Bitmap.createScaledBitmap(imageBitmap, outWidth, outHeight, false)
+        var newBitmap = Bitmap.createBitmap(100, 100, resizeBitmap.getConfig())
+        var centreX = (100  - resizeBitmap.width) /2
+        var centreY = (100 - resizeBitmap.height) /2
+        val canvas = Canvas(newBitmap)
+        canvas.drawColor(resources.getColor(R.color.photo_background))
+        canvas.drawBitmap(resizeBitmap, centreX.toFloat(), centreY.toFloat(), null)
+        newBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val imageByte = byteArrayOutputStream.toByteArray()
         return ParseFile("image_file.png", imageByte)
     }

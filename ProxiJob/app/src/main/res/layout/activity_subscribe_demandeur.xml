@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     android:orientation="vertical"
     android:paddingBottom="16dp"
@@ -84,11 +85,26 @@
             android:maxLines="1"
             android:singleLine="true"
             android:backgroundTint="@color/colorWhite"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/mail">
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorName="BallPulseIndicator"
+                android:visibility="gone"
+                android:foregroundGravity="center"
+                />
+        </LinearLayout>
 
         <EditText
             android:layout_below="@+id/layoutDate"
             android:id="@+id/mail"
             android:layout_marginLeft="10dp"
+            android:inputType="textEmailAddress"
             android:layout_marginTop="20dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Address
 import android.os.Bundle
 import android.widget.Button
@@ -22,6 +23,8 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.CheckBox
+import android.widget.TextView
+import com.codemybrainsout.placesearch.PlaceSearchDialog
 import com.parse.ParseFile
 import proxyjob.proxijob.model.Localisation
 import java.util.*
@@ -43,7 +46,7 @@ class SubscribeEntreprise : Activity() {
     var email : EditText?= null
     var password : EditText?= null
     var phone : EditText?= null
-    var address : EditText?= null
+    var address : TextView?= null
     var subscribe : Button?=null
     var geocoder: Geocoder?= null
     var addresses: List<Address>? = null
@@ -78,11 +81,19 @@ class SubscribeEntreprise : Activity() {
         findViewById<CheckBox>(R.id.condition).setOnClickListener {
             startActivity(Intent(this, ConditionGeneral::class.java))
         }
+        var placeSearchDialog =  PlaceSearchDialog.Builder(this)
+                .setLocationNameListener { locationName ->
+                    address!!.text = locationName
+                }.build()
+        address!!.setOnClickListener {
+            placeSearchDialog.show()
+        }
         subscribe!!.setOnClickListener {
             if (entreprise!!.text.toString() != "" && nb_serie!!.text.toString() != "" &&
                     email!!.text.toString() != "" && password!!.text.toString() != "" &&
                     phone!!.text.toString() != "" && address!!.text.toString() != "" && subscribe!!.text.toString() != "" &&
                     photoIsAdd == true &&  findViewById<CheckBox>(R.id.condition).isChecked) {
+                findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
                 val user = KUser()
                 val company = Company()
                 val location = Localisation()
@@ -122,6 +133,7 @@ class SubscribeEntreprise : Activity() {
                                 if (e == null) {
                                     editor!!.putString("choice", "0")
                                     editor!!.apply()
+                                    findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                                     startActivity(Intent(this@SubscribeEntreprise, MainActivity::class.java))
                                 } else {
                                     alert(e.message.toString()) {
@@ -147,7 +159,26 @@ class SubscribeEntreprise : Activity() {
 
     fun conversionBitmapParseFile(imageBitmap: Bitmap): ParseFile {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        var maxSize = 100
+        var outWidth = 0
+        var outHeight = 0
+        var inWidth = imageBitmap.getWidth();
+        var inHeight = imageBitmap.getHeight();
+        if(inWidth > inHeight){
+            outWidth = maxSize;
+            outHeight = (inHeight * maxSize) / inWidth;
+        } else {
+            outHeight = maxSize;
+            outWidth = (inWidth * maxSize) / inHeight;
+        }
+        var resizeBitmap = Bitmap.createScaledBitmap(imageBitmap, outWidth, outHeight, false)
+        var newBitmap = Bitmap.createBitmap(100, 100, resizeBitmap.getConfig())
+        var centreX = (100  - resizeBitmap.width) /2
+        var centreY = (100 - resizeBitmap.height) /2
+        val canvas = Canvas(newBitmap)
+        canvas.drawColor(resources.getColor(R.color.photo_background))
+        canvas.drawBitmap(resizeBitmap, centreX.toFloat(), centreY.toFloat(), null)
+        newBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val imageByte = byteArrayOutputStream.toByteArray()
         return ParseFile("image_file.png", imageByte)
     }

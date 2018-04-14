@@ -27,7 +27,12 @@
         android:layout_below="@id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/avenirltstd_medium"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
         />
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -62,7 +67,7 @@
             android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/plus"
+            android:src="@drawable/reload"
             android:fontFamily="@font/avenirltstd_medium"
             app:fab_label="Actualiser"
             app:fab_size="mini"

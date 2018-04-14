@@ -52,7 +52,7 @@ class Login : Activity() {
         subscribe = findViewById(R.id.signup_button)
         login!!.setOnClickListener({
 
-
+            findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).show()
            Log.i("INFO", "ID : " + ident!!.text + " PASS : " + pass!!.text)
             ParseUser.logInInBackground(ident!!.text.toString(), pass!!.text.toString(), LogInCallback { user, e ->
                 if (user != null)
@@ -60,7 +60,7 @@ class Login : Activity() {
                         startActivity(Intent(this@Login, MainActivity::class.java))
                 } else {
                     alert( e.message.toString()) {
-
+                        findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                     }.show()
                 }
             })

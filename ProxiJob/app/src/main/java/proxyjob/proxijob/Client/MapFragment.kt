@@ -1,5 +1,6 @@
 package proxyjob.proxijob.Client
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
@@ -15,18 +16,23 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.checkSelfPermission
 import android.util.Log
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.places.ui.PlacePicker
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -35,6 +41,7 @@ import com.google.maps.android.ui.IconGenerator
 import com.parse.FunctionCallback
 import com.parse.ParseCloud
 import com.squareup.picasso.Picasso
+import proxyjob.proxijob.Manifest
 import proxyjob.proxijob.Utils.APIManager
 import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
@@ -50,7 +57,23 @@ import java.util.*
 /**
  * Created by alexandre on 09/02/2018.
  */
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+    override fun onLocationChanged(p0: Location?) {
+
+
+
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+
     override fun onInfoWindowClick(p0: Marker?) {
         var intent = Intent(activity, MapInformationDetails::class.java)
         intent.putExtra("objectID", Jobs!!.get(p0!!.id.toString().replace("m", "").toInt()).objectId)
@@ -70,7 +93,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
-
+    private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private var locationUpdateState = false
@@ -97,6 +120,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
             createLocationRequest()
 
+
+    }
+    @SuppressLint("RestrictedApi")
+    override fun onConnected(p0: Bundle?) {
+        locationRequest = LocationRequest()
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+            //buildGoogleApiClient()
+
+            //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, this);
 
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -175,6 +210,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
      */
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+
         APIManager.getShared().getJobs { b, error, arrayList ->
             this.Jobs = arrayList
             Log.i("DEBUG JOBS", "" + Jobs)
@@ -189,7 +225,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             }
             map.uiSettings.isZoomControlsEnabled = true
             map.setOnMarkerClickListener(this)
-
+            if (checkSelfPermission(context, ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)
+                buildGoogleApiClient()
+                map.isMyLocationEnabled = true
             setUpMap()
         }
 
@@ -208,15 +247,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         map.isMyLocationEnabled = true
         map.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        /*fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+        fusedLocationClient.lastLocation.addOnSuccessListener(activity) { location ->
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 //placeMarkerOnMap(currentLatLng)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
-            }*/
-
+            }
+        }
 
 
         map.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
@@ -302,6 +341,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     private fun startLocationUpdates() {
+        println("JE DEMANDE !!!")
         if (ActivityCompat.checkSelfPermission(this!!.activity!!,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this!!.activity!!,
@@ -312,6 +352,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
     }
 
+    @SuppressLint("RestrictedApi")
     private fun createLocationRequest() {
         locationRequest = LocationRequest()
         locationRequest.interval = 10000
@@ -353,5 +394,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         } catch (e: GooglePlayServicesNotAvailableException) {
             e.printStackTrace()
         }
+    }
+    @Synchronized protected fun buildGoogleApiClient() {
+        mGoogleApiClient = GoogleApiClient.Builder(context)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
+        mGoogleApiClient.connect()
     }
 }
