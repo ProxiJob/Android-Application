@@ -157,14 +157,33 @@
             android:textColor="@color/proxi_button_purple"
             android:text="Clients ayant postulé"
             tools:ignore="NotSibling" />
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:layout_marginTop="10dp"
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/avenirltstd_medium"
+            android:layout_height="120dp"
+            android:layout_below="@+id/post"
+            />
+
+        <Button
+            android:id="@+id/contract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_below="@+id/listView"
+            android:textColor="@color/white"
+            android:background="@color/proxi_button_purple"
+            android:text="Voir le contrat"
+            android:textAllCaps="false"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:visibility="invisible"
+            android:textAlignment="center"/>
     </RelativeLayout>
 
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:layout_marginTop="10dp"
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:fontFamily="@font/avenirltstd_medium"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/post"/>
+
 </LinearLayout>

@@ -62,4 +62,5 @@ class Jobs : ParseObject() {
         set(value) {
             this.put("postule", value)
         }
+
 }

@@ -41,6 +41,7 @@ class AssignClient: Activity() {
     var job_title: TextView? = null
     var job_cash: TextView? = null
     var job_detail: TextView? = null
+    var contract: Button?= null
     var adapter: CompanyUsersPostAdapter?= null
     var list: SwipeMenuListView?= null
     var clients: ArrayList<KUser>?= null
@@ -56,6 +57,7 @@ class AssignClient: Activity() {
         job_title = findViewById(R.id.job_title)
         job_cash = findViewById(R.id.job_cash)
         job_detail = findViewById(R.id.job_detail)
+        contract = findViewById(R.id.contract)
         list = findViewById<SwipeMenuListView>(R.id.listView)
 
         APIManager.getShared().getJob(objectID!!, { b: Boolean, error: Error?, arrayList: ArrayList<Jobs> ->
@@ -65,7 +67,8 @@ class AssignClient: Activity() {
                 job_start!!.text = formatter.format(job!!.dateStart)
                 job_end!!.text = formatter.format(job!!.dateEnd)
                 Log.i("DEBUG OBJ", job!!.objectId)
-
+                //if (job!!.file != null)
+                  //  contract!!.visibility = View.VISIBLE
                 job_title!!.text = job!!.job
                 job_cash!!.text = job!!.price + "€ /h"
                 job_detail!!.text = job!!.description
@@ -111,25 +114,30 @@ class AssignClient: Activity() {
                                     alert("Assignation de mission\n" + "Voulez-vous assigner " + clients!![position].firstname + " " +
                                             clients!![position].lastname + " à ce job ?") {
                                         title = "Voulez-vous assigner " + clients!![position].firstname + " " +
-                                                clients!![position].lastname + " à ce sport ?"
+                                                clients!![position].lastname + " à ce job ?"
                                         yesButton { job!!.client = clients!![position]
                                             job!!.status = "ACCEPTED"
                                             job!!.saveInBackground()
-
-                                            val paramspdf = HashMap<String, String>()
-                                            paramspdf.put("jobId", job!!.objectId)
-                                            paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
-                                            paramspdf.put("userId", clients!![position].objectId)
-                                            paramspdf.put("choice", "0")
-                                            ParseCloud.callFunctionInBackground("createPDFAtBlock", paramspdf, FunctionCallback<String> { id, e ->
-                                                if (e == null) {
-                                                    println("NO ERROR")
-                                                    println(id)
-                                                    // ratings is 4.5
-                                                } else {
-                                                    println("ERROR")
+                                            alert {
+                                                message("Signature de contrat\nVoulez vous signer le contrat de mission avec " +  clients!![position].firstname +  " " + clients!![position].lastname)
+                                                yesButton {
+                                                    val paramspdf = HashMap<String, String>()
+                                                    paramspdf.put("jobId", job!!.objectId)
+                                                    paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
+                                                    paramspdf.put("userId", clients!![position].objectId)
+                                                    paramspdf.put("choice", "0")
+                                                    ParseCloud.callFunctionInBackground("createPDFAtBlock", paramspdf, FunctionCallback<String> { id, e ->
+                                                        if (e == null) {
+                                                            println("NO ERROR")
+                                                            println(id)
+                                                            // ratings is 4.5
+                                                        } else {
+                                                            println("ERROR")
+                                                        }
+                                                    })
                                                 }
-                                            })
+                                            }.show()
+
                                         }
                                         noButton { }
                                     }.show()

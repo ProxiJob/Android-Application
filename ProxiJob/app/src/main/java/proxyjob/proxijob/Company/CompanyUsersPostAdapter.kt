@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.parse.ParseFile
 import com.squareup.picasso.Picasso
 import proxyjob.proxijob.R
 import proxyjob.proxijob.model.Company
@@ -45,10 +46,10 @@ class CompanyUsersPostAdapter(private var activity: Activity, private var items:
         }
 
         var user = items[position]
-        var logo = user.profilPicture
+        var logo = user.get("profilPicture")
         viewHolder.txtName!!.text = user.lastname + " " + user.firstname
         if (logo != null)
-            Picasso.with(activity).load(logo.url).into(viewHolder.imageAvatar)
+            Picasso.with(activity).load((logo as ParseFile).url).into(viewHolder.imageAvatar)
         return view as View
     }
 
