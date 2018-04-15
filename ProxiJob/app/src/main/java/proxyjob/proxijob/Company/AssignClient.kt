@@ -1,6 +1,7 @@
 package proxyjob.proxijob.Company
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -26,6 +27,12 @@ import proxyjob.proxijob.model.KUser
 import java.text.SimpleDateFormat
 import java.util.ArrayList
 import java.util.HashMap
+import android.content.DialogInterface
+import android.widget.EditText
+import android.view.LayoutInflater
+import de.hdodenhof.circleimageview.CircleImageView
+import org.w3c.dom.Text
+
 
 /**
  * Created by alexandre on 07/03/2018.
@@ -69,7 +76,7 @@ class AssignClient: Activity() {
                 job_start!!.text = formatter.format(job!!.dateStart)
                 job_end!!.text = formatter.format(job!!.dateEnd)
                 Log.i("DEBUG OBJ", job!!.objectId)
-                if (job!!.contract != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
+                if (job!!.get("contracts") != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
                     contract!!.visibility = View.VISIBLE
                 job_title!!.text = job!!.job
                 job_cash!!.text = job!!.price + "€ /h"
@@ -165,6 +172,9 @@ class AssignClient: Activity() {
                                 }
 
                             }
+                            1 -> {
+                                showChangeLangDialog(clients!![position])
+                            }
 
                         }
                         return false
@@ -185,5 +195,25 @@ class AssignClient: Activity() {
                 // ratings is 4.5
             }
         })
+    }
+
+    fun showChangeLangDialog(client: KUser) {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.activity_information_client_for_company, null)
+        dialogView.findViewById<TextView>(R.id.firstname).text = client.firstname
+        dialogView.findViewById<TextView>(R.id.lastname).text = client.lastname
+        if (client.get("profilPicture") != null)
+        Picasso.with(this).load(client.profilPicture!!.url).into(dialogView.findViewById<CircleImageView>(R.id.profile_image))
+        dialogBuilder.setView(dialogView)
+
+        //val edt = dialogView.findViewById(R.id.edit1) as EditText
+
+        dialogBuilder.setTitle("Profil : " + client.get("firstname") + " " + client.get("lastname"))
+        dialogBuilder.setPositiveButton("Fermer", DialogInterface.OnClickListener { dialog, whichButton ->
+            //do something with edt.getText().toString();
+        })
+        val b = dialogBuilder.create()
+        b.show()
     }
 }
