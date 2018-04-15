@@ -99,6 +99,8 @@ class CompanyMissionListAdapter(private var activity: Activity, private var item
                 "CONTRACTED" -> sentence = "La mission est acceptée avec " + lib + name
                 "CANCELED" -> sentence = "Vous avez refuser " + lib + name + "pour le job " + job.job
             }
+            if (job.get("contractClient") != null)
+                sentence = "La mission est acceptée avec " + lib + name
          } else {
             if (job!!.postule!!.size == 1)
                 sentence = " personne a postulé à votre offre."

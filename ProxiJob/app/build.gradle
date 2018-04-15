@@ -5,6 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'release'
+            keyPassword 'proxijob2018'
+            storePassword 'proxijob2018'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         multiDexEnabled true
@@ -24,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'

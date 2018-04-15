@@ -18,6 +18,7 @@ import android.net.Uri
 import android.support.v4.app.ActivityCompat
 import java.io.IOException
 import android.graphics.Bitmap
+import android.support.v4.app.FragmentManager
 import android.widget.ImageView
 import com.parse.ParseFile
 import android.util.Log
@@ -58,7 +59,11 @@ class Login : Activity() {
             ParseUser.logInInBackground(ident!!.text.toString(), pass!!.text.toString(), LogInCallback { user, e ->
                 if (user != null)
                 {
-                        startActivity(Intent(this@Login, MainActivity::class.java))
+                        this.fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                        //startActivity(Intent(this@Login, MainActivity::class.java))
                         finish()
                 } else {
                     alert( e.message.toString()) {
@@ -70,6 +75,8 @@ class Login : Activity() {
         })
 
         subscribe!!.setOnClickListener({
+            println("CHOICE = " )
+            println(settings!!.getString("choice", "0"))
             var choice = settings!!.getString("choice", "0")
             when (choice) {
                 "0" -> startActivity(Intent(this, Subscribe::class.java))

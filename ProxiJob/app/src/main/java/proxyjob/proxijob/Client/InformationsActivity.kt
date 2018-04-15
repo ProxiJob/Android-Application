@@ -2,15 +2,19 @@ package proxyjob.proxijob.Client
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.annotation.RequiresApi
 import android.support.design.widget.FloatingActionButton
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -59,9 +63,12 @@ class InformationsActivity: Activity()
     private var filePath: Uri? = null
     private var bitmap: Bitmap? = null
     var photoIsAdd = false
+    var settings: SharedPreferences?= null
+    var editor: SharedPreferences.Editor ?= null
     //storage permission code
     private val STORAGE_PERMISSION_CODE = 123
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informations_client)
@@ -78,7 +85,8 @@ class InformationsActivity: Activity()
         geocoder = Geocoder(this, Locale.getDefault())
         var user = KUser.getCurrentUser()
         var formatter = SimpleDateFormat("MM/dd/YY")
-
+        settings = this.getSharedPreferences("proxyjob.proxijob", 0)
+        editor = settings!!.edit()
         if (user.get("profilPicture") != null)
             Picasso.with(this).load(user.profilPicture!!.url).into(photo)
         else
@@ -130,9 +138,16 @@ class InformationsActivity: Activity()
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun leaveFunc() {
+        editor!!.putString("choice", "0")
+        editor!!.apply()
         KUser.logOut()
-        startActivity(Intent(this, Login::class.java))
+
+        var intent = Intent(this, Login::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        this.getFragmentManager().popBackStack()
         finish()
     }
 

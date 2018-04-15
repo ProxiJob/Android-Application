@@ -24,6 +24,7 @@ import proxyjob.proxijob.model.KUser
 import proxyjob.proxijob.model.Localisation
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -69,6 +70,8 @@ class InformationsCompany: Fragment()
     var addresses: List<Address>? = null
     var changedAdress = false
     var changedPhoto = false
+    var settings: SharedPreferences?= null
+    var editor: SharedPreferences.Editor ?= null
     private val PICK_IMAGE_REQUEST = 1
     private var filePath: Uri? = null
     private var bitmap: Bitmap? = null
@@ -92,7 +95,8 @@ class InformationsCompany: Fragment()
         adresse = view.findViewById<TextView>(R.id.adresse)
         edit = view.findViewById<FloatingActionButton>(R.id.edit)
         geocoder = Geocoder(activity, Locale.getDefault())
-
+        settings = context.getSharedPreferences("proxyjob.proxijob", 0)
+        editor = settings!!.edit()
 
         var user = KUser.getCurrentUser()
         description!!.setOnClickListener {
@@ -126,8 +130,12 @@ class InformationsCompany: Fragment()
             changedPhoto = true
         }
         view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.add).setOnClickListener {
+            editor!!.putString("choice", "0")
+            editor!!.apply()
             KUser.logOut()
-            startActivity(Intent(activity, Login::class.java))
+            var intent = Intent(activity, Login::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
             activity.finish()
         }
         view.findViewById<com.github.clans.fab.FloatingActionButton>(R.id.refresh).setOnClickListener {

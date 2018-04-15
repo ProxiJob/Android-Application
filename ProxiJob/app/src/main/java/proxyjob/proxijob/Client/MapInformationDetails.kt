@@ -44,7 +44,7 @@ class MapInformationDetails: Activity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var formatter = SimpleDateFormat("dd/MM/YY à HH.MM");
+        var formatter = SimpleDateFormat("dd/MM/YY");
         setContentView(R.layout.activity_map_informations_details)
         objectID = getIntent().getExtras().getString("objectID")
         company_name = findViewById(R.id.company_name)

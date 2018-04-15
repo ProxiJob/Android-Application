@@ -40,7 +40,9 @@
             android:fontFamily="@font/avenirltstd_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorWhite"
+            />
 
         <EditText
             android:id="@+id/password"

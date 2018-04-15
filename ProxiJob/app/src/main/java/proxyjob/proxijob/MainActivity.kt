@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() , BottomNavigationView.OnNavigationItem
         if (ParseUser.getCurrentUser() == null)
             startActivity(Intent(this, Login::class.java))
         navigationView = findViewById<BottomNavigationView>(R.id.navigation) as BottomNavigationView
+        ParseUser.getCurrentUser()
         if (ParseUser.getCurrentUser() != null && ParseUser.getCurrentUser().get("business") != true) {
             navigationView.inflateMenu(R.menu.dm_em)
             val menuView = navigationView.getChildAt(0) as BottomNavigationMenuView

@@ -2,6 +2,7 @@ package proxyjob.proxijob.Client
 
 import android.Manifest
 import android.app.Activity
+import android.app.FragmentManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -51,6 +52,7 @@ class Profil : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         managePost()
+
     }
     fun managePost() {
 

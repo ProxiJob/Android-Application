@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenirltstd_medium"
             android:layout_below="@id/job_startTW"
-
+            android:text="Non renseigné"
             android:textColor="@color/proxi_button_purple"
             android:textSize="15dp"
             android:layout_marginTop="10dp" />
@@ -65,6 +65,7 @@
             android:layout_marginLeft="120dp"
             android:fontFamily="@font/avenirltstd_medium"
             android:textAllCaps="true"
+
             android:textSize="15dp"
             android:textColor="@color/proxi_button_purple"
             android:text="Fin" />
@@ -76,6 +77,7 @@
             android:layout_alignLeft="@+id/job_endTW"
             android:textColor="@color/proxi_button_purple"
             android:textSize="15dp"
+            android:text="Non renseigné"
             android:fontFamily="@font/avenirltstd_medium"
             android:layout_marginTop="10dp" />
         <TextView
@@ -96,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/job_titleTW"
             android:fontFamily="@font/avenirltstd_medium"
+            android:text="Non renseigné"
             android:layout_alignLeft="@+id/company_image"
             android:background="@android:color/transparent"
             android:textSize="15dp"
@@ -110,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="120dp"
+
             android:textAllCaps="true"
             android:textSize="15dp"
             android:textColor="@color/proxi_button_purple"
@@ -124,6 +128,7 @@
             android:layout_alignLeft="@+id/job_cashTW"
             android:layout_marginTop="10dp"
             android:textSize="15dp"
+            android:text="Non renseigné"
             android:inputType="number" />
         <TextView
             android:id="@+id/job_detailTW"
@@ -147,6 +152,7 @@
             android:layout_alignLeft="@id/company_image"
             android:background="@android:color/transparent"
             android:layout_below="@id/job_detailTW"
+            android:text="Non renseigné"
             android:layout_marginTop="10dp"
             android:textSize="15dp"
             tools:ignore="NotSibling" />

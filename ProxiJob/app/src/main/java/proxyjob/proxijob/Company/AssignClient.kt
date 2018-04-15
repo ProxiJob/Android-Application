@@ -76,7 +76,7 @@ class AssignClient: Activity() {
                 job_start!!.text = formatter.format(job!!.dateStart)
                 job_end!!.text = formatter.format(job!!.dateEnd)
                 Log.i("DEBUG OBJ", job!!.objectId)
-                if (job!!.get("contract") != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
+                if (job!!.get("contract") != null)
                     contract!!.visibility = View.VISIBLE
                 job_title!!.text = job!!.job
                 job_cash!!.text = job!!.price + "€ /h"
@@ -128,7 +128,7 @@ class AssignClient: Activity() {
                             0 -> {
                                 println("IIIIIIIIIIII")
                                 println(job!!.status?.length)
-                                if (job!!.status?.length == 0) {
+                                if (job!!.status == null || job!!.status?.length == 0) {
                                     alert("Assignation de mission\n" + "Voulez-vous assigner " + clients!![position].firstname + " " +
                                             clients!![position].lastname + " à ce job ?") {
                                         title = "Voulez-vous assigner " + clients!![position].firstname + " " +
@@ -148,6 +148,11 @@ class AssignClient: Activity() {
                                                         if (e == null) {
                                                             println("NO ERROR")
                                                             println(id)
+                                                            val intent = Intent()
+                                                            intent.action = Intent.ACTION_VIEW
+                                                            intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                                                            intent.data = Uri.parse(job!!.contract?.fetchIfNeeded<Contracts>()?.pdfFile!!.url)
+                                                            startActivity(intent)
                                                             // ratings is 4.5
                                                         } else {
                                                             println("ERROR")
@@ -158,16 +163,6 @@ class AssignClient: Activity() {
                                             }.show()
 
                                         }
-                                        negativeButton("Non") {}
-                                    }.show()
-
-                                } else {
-                                    alert("Attention\nVoulez-vous supprimer cette personne de cette mission ?") {
-                                        title = "Voulez-vous supprimer cette personne de cette mission ?"
-                                        positiveButton("Oui") {
-                                            job!!.status = ""
-                                            job!!.client = KUser()
-                                            job!!.saveInBackground()}
                                         negativeButton("Non") {}
                                     }.show()
 
@@ -213,7 +208,7 @@ class AssignClient: Activity() {
 
         //val edt = dialogView.findViewById(R.id.edit1) as EditText
 
-        dialogBuilder.setTitle("Profil : " + client.get("firstname") + " " + client.get("lastname"))
+        dialogBuilder.setTitle("Profil : " + client.firstname + " " + client.lastname)
         dialogBuilder.setPositiveButton("Fermer", DialogInterface.OnClickListener { dialog, whichButton ->
             //do something with edt.getText().toString();
         })
