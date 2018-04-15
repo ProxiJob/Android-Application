@@ -2,6 +2,7 @@ package proxyjob.proxijob.Company
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,6 +20,7 @@ import org.jetbrains.anko.alert
 import proxyjob.proxijob.R
 import proxyjob.proxijob.Utils.APIManager
 import proxyjob.proxijob.model.Company
+import proxyjob.proxijob.model.Contracts
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.KUser
 import java.text.SimpleDateFormat
@@ -67,8 +69,8 @@ class AssignClient: Activity() {
                 job_start!!.text = formatter.format(job!!.dateStart)
                 job_end!!.text = formatter.format(job!!.dateEnd)
                 Log.i("DEBUG OBJ", job!!.objectId)
-                //if (job!!.file != null)
-                  //  contract!!.visibility = View.VISIBLE
+                if (job!!.contract != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
+                    contract!!.visibility = View.VISIBLE
                 job_title!!.text = job!!.job
                 job_cash!!.text = job!!.price + "€ /h"
                 job_detail!!.text = job!!.description
@@ -82,6 +84,13 @@ class AssignClient: Activity() {
                         adapter = CompanyUsersPostAdapter(this, arrayList!!)
                         list!!.adapter = adapter
                     })
+                contract!!.setOnClickListener {
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_VIEW
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                    intent.data = Uri.parse(job!!.contract?.fetchIfNeeded<Contracts>()?.pdfFile!!.url)
+                    startActivity(intent)
+                }
                 val creator = SwipeMenuCreator { menu ->
                     // create "open" item
                     val assignItem = SwipeMenuItem(
@@ -115,12 +124,12 @@ class AssignClient: Activity() {
                                             clients!![position].lastname + " à ce job ?") {
                                         title = "Voulez-vous assigner " + clients!![position].firstname + " " +
                                                 clients!![position].lastname + " à ce job ?"
-                                        yesButton { job!!.client = clients!![position]
+                                        positiveButton("Oui") { job!!.client = clients!![position]
                                             job!!.status = "ACCEPTED"
                                             job!!.saveInBackground()
                                             alert {
                                                 message("Signature de contrat\nVoulez vous signer le contrat de mission avec " +  clients!![position].firstname +  " " + clients!![position].lastname)
-                                                yesButton {
+                                                positiveButton("Oui") {
                                                     val paramspdf = HashMap<String, String>()
                                                     paramspdf.put("jobId", job!!.objectId)
                                                     paramspdf.put("companyId", job!!.company!!.fetchIfNeeded<Company>().objectId)
@@ -136,20 +145,21 @@ class AssignClient: Activity() {
                                                         }
                                                     })
                                                 }
+                                                negativeButton("Non") {}
                                             }.show()
 
                                         }
-                                        noButton { }
+                                        negativeButton("Non") {}
                                     }.show()
 
                                 } else {
                                     alert("Attention\nVoulez-vous supprimer cette personne de cette mission ?") {
                                         title = "Voulez-vous supprimer cette personne de cette mission ?"
-                                        yesButton {
+                                        positiveButton("Oui") {
                                             job!!.status = ""
                                             job!!.client = KUser()
                                             job!!.saveInBackground()}
-                                        noButton { }
+                                        negativeButton("Non") {}
                                     }.show()
 
                                 }
