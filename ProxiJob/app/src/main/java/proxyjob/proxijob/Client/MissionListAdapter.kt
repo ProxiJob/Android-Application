@@ -76,6 +76,8 @@ class MissionListAdapter(private var activity: Activity, private var items: Arra
             "CONTRACTED" -> sentence = "Mission confirmée avec " + name + "."
             "CANCELED" -> sentence = "Votre candidature n'a pas été retenue."
         }
+        if (job.get("contractClient") != null)
+            sentence = "Votre mission est confirmée ! Bon courage"
         return sentence
     }
 }

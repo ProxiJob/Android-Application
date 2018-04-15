@@ -32,10 +32,15 @@ class Jobs : ParseObject() {
         set(value) {
             this.put("status", value)
         }
-    var contract: ParseFile?
-        get() = this.getParseFile("contract")
+    var contract: Contracts?
+        get() = this.get("contract") as Contracts
         set(value) {
-            this.put("contract", value)
+            this.put("contract", ParseObject.createWithoutData("Contracts", (value!!.objectId)))
+        }
+    var contractClient: Contracts?
+        get() = this.get("contractClient") as Contracts
+        set(value) {
+            this.put("contractClient", ParseObject.createWithoutData("Contracts", (value!!.objectId)))
         }
     var dateStart: Date?
         get() = this.getDate("dateStart")
