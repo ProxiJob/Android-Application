@@ -55,6 +55,16 @@ class KUser() : ParseUser() {
         set(value) {
             this.put("profilPicture", value)
         }
+    var secu: String?
+        get() = this.getString("secu")
+        set(value) {
+            this.put("secu", value)
+        }
+    var address: String?
+        get() = this.getString("address")
+        set(value) {
+            this.put("address", value)
+        }
 
     constructor(parcel: Parcel) : this() {
     }
