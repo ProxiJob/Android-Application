@@ -59,9 +59,11 @@ class Login : Activity() {
                 if (user != null)
                 {
                         startActivity(Intent(this@Login, MainActivity::class.java))
+                        finish()
                 } else {
                     alert( e.message.toString()) {
                         findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
+                        findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
                     }.show()
                 }
             })

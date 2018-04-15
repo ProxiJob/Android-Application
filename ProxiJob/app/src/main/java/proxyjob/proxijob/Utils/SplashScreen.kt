@@ -35,9 +35,11 @@ class SplashScreen : Activity() {
                         editor!!.apply()
                         val i = Intent(baseContext, ChoiceTutorial::class.java)
                         startActivity(i)
+                        finish()
                     } else {
                         val i = Intent(baseContext, MainActivity::class.java)
                         startActivity(i)
+                        finish()
                     }
 
                     //Remove activity

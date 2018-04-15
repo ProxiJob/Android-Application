@@ -26,6 +26,7 @@ import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.KUser
 import java.util.HashMap
 import android.app.Activity
+import android.widget.AbsListView
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
@@ -70,6 +71,10 @@ class CompanyMissions : Fragment() {
                     if (jobs!!.size == 0)
                         view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                     listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
+                    var listFooter = View(context)
+                    listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)
+                    list.addFooterView(listFooter)
+                    list.addFooterView(listFooter)
                     list.adapter = listAdapter
                     //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                     //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
@@ -83,6 +88,10 @@ class CompanyMissions : Fragment() {
                 if (jobs!!.size == 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
+                var listFooter = View(context)
+                listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)
+                list.addFooterView(listFooter)
+                list.addFooterView(listFooter)
                 list.adapter = listAdapter
                 //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                 //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE

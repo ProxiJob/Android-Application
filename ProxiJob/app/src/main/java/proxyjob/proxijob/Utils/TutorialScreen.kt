@@ -22,6 +22,7 @@ class TutorialScreen : AhoyOnboarderActivity() {
     var choice = -1
     override fun onFinishButtonPressed() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

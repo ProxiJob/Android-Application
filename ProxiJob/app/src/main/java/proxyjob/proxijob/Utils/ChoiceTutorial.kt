@@ -30,6 +30,7 @@ class ChoiceTutorial : Activity()
             editor!!.apply()
             intent.putExtra("choice", 1)
             startActivity(intent)
+            finish()
         }
         entreprise!!.setOnClickListener {
             var intent = Intent(this, TutorialScreen::class.java)
@@ -37,6 +38,7 @@ class ChoiceTutorial : Activity()
             editor!!.putString("choice", "2")
             editor!!.apply()
             startActivity(intent)
+            finish()
         }
     }
 }

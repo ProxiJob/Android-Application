@@ -14,6 +14,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.support.design.widget.FloatingActionButton
+import android.widget.AbsListView
 import com.baoyz.swipemenulistview.SwipeMenuItem
 import com.baoyz.swipemenulistview.SwipeMenu
 import com.baoyz.swipemenulistview.SwipeMenuCreator
@@ -63,6 +64,10 @@ class Missions : Fragment() {
                 if (jobs!!.size == 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+                var listFooter = View(context)
+                listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)
+                list.addFooterView(listFooter)
+                list.addFooterView(listFooter)
                 list.adapter = listAdapter
                 //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                 //view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE
@@ -73,6 +78,10 @@ class Missions : Fragment() {
                 if (jobs!!.size == 0)
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
                 listAdapter = MissionListAdapter(this!!.activity!!, jobs!!)
+                var listFooter = View(context)
+                listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)
+                list.addFooterView(listFooter)
+                list.addFooterView(listFooter)
                 list.adapter = listAdapter
                 view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                 view.findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).visibility = View.GONE

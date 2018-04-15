@@ -135,6 +135,7 @@ class SubscribeEntreprise : Activity() {
                                     editor!!.apply()
                                     findViewById<com.wang.avi.AVLoadingIndicatorView>(R.id.avi).hide()
                                     startActivity(Intent(this@SubscribeEntreprise, MainActivity::class.java))
+                                    finish()
                                 } else {
                                     alert(e.message.toString()) {
 
