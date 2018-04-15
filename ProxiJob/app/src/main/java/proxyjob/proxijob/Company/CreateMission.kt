@@ -24,6 +24,7 @@ import proxyjob.proxijob.model.Company
 import proxyjob.proxijob.model.Jobs
 import proxyjob.proxijob.model.KUser
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -106,12 +107,24 @@ class CreateMission: Activity()
 
     private fun createMission()
     {
+        val myFormat = "MM/dd/yy"
+        val current = Date()
+        val sdf = SimpleDateFormat(myFormat, Locale.FRENCH)
+        var current_date = sdf.format(current)
+
         if (job_start!!.text.toString() != "" && job_end!!.text.toString() != "" &&
                 job_title!!.text.toString() != "" && job_cash!!.text.toString() != ""
                 && job_detail!!.text.toString() != "") {
             var job = Jobs()
+            var actually_date = Date(current_date.toString())
             job.dateStart = Date(job_start!!.text.toString())
             job.dateEnd = Date(job_end!!.text.toString())
+            if (job.dateEnd!! < job.dateStart!! || job.dateStart!! < actually_date) {
+                alert {
+                    message("Les dates de la mission ne sont pas correctes")
+                }.show()
+                return
+            }
             job.job = job_title!!.text.toString()
             job.price = job_cash!!.text.toString()
             if (job.price!!.toFloat() <= 9.76) {
