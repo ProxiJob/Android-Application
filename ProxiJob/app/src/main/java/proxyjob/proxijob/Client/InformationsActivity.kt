@@ -38,8 +38,8 @@ class InformationsActivity: Activity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informations_client)
-        first_name = findViewById(R.id.lastname)
-        last_name = findViewById(R.id.firstname)
+        first_name = findViewById(R.id.firstname)
+        last_name = findViewById(R.id.lastname)
         email = findViewById(R.id.email)
         date = findViewById(R.id.birthday)
         secu = findViewById(R.id.nb_secu)
@@ -51,20 +51,36 @@ class InformationsActivity: Activity()
         var user = KUser.getCurrentUser()
         var formatter = SimpleDateFormat("MM/dd/YY")
 
-        if (user.firstname != null)
+        if (user.firstname != null && user.firstname != "")
             first_name!!.text = SpannableStringBuilder(user.firstname)
-        if (user.lastname != null)
+        else {
+            first_name!!.text = SpannableStringBuilder("Non renseigné")
+            println("OUIIII")
+        }
+        if (user.lastname != null && user.lastname != "")
             last_name!!.text = SpannableStringBuilder(user.lastname)
-        if (user.email != null)
+        else
+            last_name!!.text = SpannableStringBuilder("Non renseigné")
+        if (user.email != null && user.email != "")
             email!!.text = SpannableStringBuilder(user.email as String)
-        if (user.birthday != null)
+        else
+            email!!.text = SpannableStringBuilder("Non renseigné")
+        if (user.birthday != null && user.birthday.toString() != "")
             date!!.text = SpannableStringBuilder(formatter.format(user.birthday))
-        if (user.phoneNumber != null)
+        else
+            date!!.text = SpannableStringBuilder("Non renseigné")
+        if (user.phoneNumber != null && user.phoneNumber != "")
             telephone!!.text = SpannableStringBuilder(user.phoneNumber)
-        if (user.secu != null)
+        else
+            telephone!!.text = SpannableStringBuilder("Non renseigné")
+        if (user.secu != null && user.secu != "")
             secu!!.text = SpannableStringBuilder(user.secu)
-        if (user.address != null)
+        else
+            secu!!.text = SpannableStringBuilder("Non renseigné")
+        if (user.address != null && user.address != "")
             address!!.text = SpannableStringBuilder(user.address)
+        else
+            address!!.text = SpannableStringBuilder("Non renseigné")
         validation!!.setOnClickListener { saveProfile() }
         leave!!.setOnClickListener{leaveFunc() }
 
