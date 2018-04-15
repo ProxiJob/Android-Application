@@ -30,14 +30,14 @@ class TutorialScreen : AhoyOnboarderActivity() {
         val intent = intent
         choice = intent.getIntExtra("choice", -1)
         //setContentView(R.layout.activity_subscribe_choice)
-        val ahoyOnboarderCard1 = AhoyOnboarderCard("Inscrivez-vous", "Distes nous qui vous etes.", R.drawable.user)
+        val ahoyOnboarderCard1 = AhoyOnboarderCard("Inscrivez-vous", "Dites nous qui vous êtes.", R.drawable.user)
         ahoyOnboarderCard1.setBackgroundColor(R.color.white)
         ahoyOnboarderCard1.setTitleColor(R.color.proxi_button_purple)
         ahoyOnboarderCard1.setDescriptionColor(R.color.proxi_purple_light)
         ahoyOnboarderCard1.setTitleTextSize(dpToPixels(10, this))
         ahoyOnboarderCard1.setDescriptionTextSize(dpToPixels(8, this))
 
-        val ahoyOnboarderCard2 = AhoyOnboarderCard("Décrouvrez", "Grâce à ProxiJob, vous allez découvrir diffèrents secteurs d'activités en travaillant.", R.drawable.test)
+        val ahoyOnboarderCard2 = AhoyOnboarderCard("Découvrez", "Grâce à ProxiJob, vous allez découvrir différents secteurs d'activités en travaillant.", R.drawable.test)
         ahoyOnboarderCard2.setBackgroundColor(R.color.white)
         ahoyOnboarderCard2.setTitleColor(R.color.proxi_button_purple)
         ahoyOnboarderCard2.setDescriptionColor(R.color.proxi_purple_light)
@@ -51,7 +51,7 @@ class TutorialScreen : AhoyOnboarderActivity() {
         ahoyOnboarderCard3.setTitleTextSize(dpToPixels(10, this))
         ahoyOnboarderCard3.setDescriptionTextSize(dpToPixels(8, this))
 
-        val ahoyOnboarderCard4 = AhoyOnboarderCard("Postulez", "Exprimez votre intêret pour un emploi.", R.drawable.travail)
+        val ahoyOnboarderCard4 = AhoyOnboarderCard("Postulez", "Exprimez votre intérêt pour un emploi.", R.drawable.travail)
         ahoyOnboarderCard4.setBackgroundColor(R.color.white)
         ahoyOnboarderCard4.setTitleColor(R.color.proxi_button_purple)
         ahoyOnboarderCard4.setDescriptionColor(R.color.proxi_purple_light)
@@ -73,7 +73,7 @@ class TutorialScreen : AhoyOnboarderActivity() {
         ahoyOnboarderCard6.setDescriptionTextSize(dpToPixels(8, this))
         //ahoyOnboarderCard1.setIconLayoutParams(10, 10, 50, 50, 50, 50)
 
-        val ahoyOnboarderCard7 = AhoyOnboarderCard("Inscrivez-vous", "Dites nous qui vous etes.", R.drawable.user)
+        val ahoyOnboarderCard7 = AhoyOnboarderCard("Inscrivez-vous", "Dites nous qui vous êtes.", R.drawable.user)
         ahoyOnboarderCard7.setBackgroundColor(R.color.white)
         ahoyOnboarderCard7.setTitleColor(R.color.proxi_button_purple)
         ahoyOnboarderCard7.setDescriptionColor(R.color.proxi_purple_light)
