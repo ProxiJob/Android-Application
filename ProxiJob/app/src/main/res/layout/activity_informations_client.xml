@@ -52,7 +52,7 @@
         android:fontFamily="@font/avenirltstd_medium"
         android:text="INFORMATIONS"
         android:textColor="@color/proxi_purple_light"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="15dp"
@@ -99,7 +99,6 @@
         android:textAlignment="center"
         android:textColor="@color/proxi_button_purple"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailT"
@@ -129,7 +128,6 @@
         android:textAlignment="center"
         android:textColor="@color/proxi_button_purple"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/firstnameT"
@@ -253,8 +251,8 @@
         android:textSize="20sp"
         android:layout_marginLeft="15dp"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edit"
-        app:layout_constraintTop_toBottomOf="@id/birthdayT"/>
+        app:layout_constraintBottom_toTopOf="@id/birthdayT"
+        app:layout_constraintTop_toBottomOf="@id/menu"/>
 
     <EditText
         android:id="@+id/telephone"
@@ -268,8 +266,8 @@
         android:layout_marginLeft="100dp"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birthdayT"
-        app:layout_constraintBottom_toTopOf="@id/edit"/>
+        app:layout_constraintTop_toBottomOf="@id/menu"
+        app:layout_constraintBottom_toTopOf="@id/birthdayT"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/edit"
@@ -298,6 +296,7 @@
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/telephoneT"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu_colorNormal="@color/proxi_button_purple"
         app:menu_colorPressed="@color/proxi_button_purple"
         app:menu_colorRipple="@color/proxi_button_purple"
