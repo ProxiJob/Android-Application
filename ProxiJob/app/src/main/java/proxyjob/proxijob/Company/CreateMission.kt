@@ -110,11 +110,16 @@ class CreateMission: Activity()
                 job_title!!.text.toString() != "" && job_cash!!.text.toString() != ""
                 && job_detail!!.text.toString() != "") {
             var job = Jobs()
-
             job.dateStart = Date(job_start!!.text.toString())
             job.dateEnd = Date(job_end!!.text.toString())
             job.job = job_title!!.text.toString()
             job.price = job_cash!!.text.toString()
+            if (job.price!!.toFloat() <= 9.76) {
+                alert {
+                    message("Le minimum légal est de 9.76/H")
+                }.show()
+                return
+            }
             job.description = job_detail!!.text.toString()
             job.company = KUser.getCurrentUser().company
             job.postule = ArrayList<String>()
@@ -124,7 +129,7 @@ class CreateMission: Activity()
         } else {
             alert {
                 message("Merci de remplir toutes les informations nécessaires")
-            }
+            }.show()
         }
     }
 }
