@@ -5,6 +5,7 @@ import android.app.Activity
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.text.SpannableStringBuilder
 import android.widget.Button
 import android.widget.EditText
@@ -25,7 +26,7 @@ class InformationsActivity: Activity()
     var last_name : EditText?= null
     var email : EditText?= null
     var date : EditText?= null
-    var validation : Button? = null
+    var validation : FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
