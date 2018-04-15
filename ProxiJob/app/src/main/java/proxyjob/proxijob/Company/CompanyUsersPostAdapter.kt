@@ -45,8 +45,10 @@ class CompanyUsersPostAdapter(private var activity: Activity, private var items:
         }
 
         var user = items[position]
+        var logo = user.profilPicture
         viewHolder.txtName!!.text = user.lastname + " " + user.firstname
-        //Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
+        if (logo != null)
+            Picasso.with(activity).load(logo.url).into(viewHolder.imageAvatar)
         return view as View
     }
 
