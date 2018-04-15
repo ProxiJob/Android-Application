@@ -34,7 +34,7 @@ class InformationsActivity: Activity()
         last_name = findViewById(R.id.firstname)
         email = findViewById(R.id.mail)
         date = findViewById(R.id.layoutDate)
-        validation = findViewById(R.id.Valider)
+        validation = findViewById(R.id.edit)
 
         var user = KUser.getCurrentUser()
         var formatter = SimpleDateFormat("MM/dd/YY")
