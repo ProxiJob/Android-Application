@@ -68,6 +68,8 @@ class CompanyMissionListAdapter(private var activity: Activity, private var item
         var logo = job.company!!.fetchIfNeeded<Company>()?.logo
         if (logo != null)
             Picasso.with(activity).load(logo!!.url).into(viewHolder.imageAvatar)
+        else
+            Picasso.with(activity).load(R.drawable.default_company).into(viewHolder.imageAvatar)
         return view as View
     }
 

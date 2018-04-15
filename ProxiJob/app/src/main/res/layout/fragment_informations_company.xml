@@ -108,6 +108,7 @@
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
         android:maxLines="1"
+        android:textSize="18sp"
         android:isScrollContainer="true"
         android:inputType="textMultiLine"
         android:enabled="true"

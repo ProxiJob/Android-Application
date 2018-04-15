@@ -50,6 +50,8 @@ class CompanyUsersPostAdapter(private var activity: Activity, private var items:
         viewHolder.txtName!!.text = user.lastname + " " + user.firstname
         if (logo != null)
             Picasso.with(activity).load((logo as ParseFile).url).into(viewHolder.imageAvatar)
+        else
+            Picasso.with(activity).load(R.drawable.default_avatar).into(viewHolder.imageAvatar)
         return view as View
     }
 

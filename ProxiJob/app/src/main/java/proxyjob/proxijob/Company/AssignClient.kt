@@ -76,7 +76,7 @@ class AssignClient: Activity() {
                 job_start!!.text = formatter.format(job!!.dateStart)
                 job_end!!.text = formatter.format(job!!.dateEnd)
                 Log.i("DEBUG OBJ", job!!.objectId)
-                if (job!!.get("contracts") != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
+                if (job!!.get("contract") != null && job!!.contract?.fetchIfNeeded<Contracts>()?.contract != null)
                     contract!!.visibility = View.VISIBLE
                 job_title!!.text = job!!.job
                 job_cash!!.text = job!!.price + "€ /h"
@@ -85,6 +85,8 @@ class AssignClient: Activity() {
                 var logo = job!!.company!!.fetchIfNeeded<Company>()?.logo
                 if (logo != null)
                     Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+                else
+                    Picasso.with(applicationContext).load(R.drawable.default_company).into(company_image)
                 if (job!!.postule!!.size > 0)
                     APIManager.getShared().getUsersPost(job!!.postule!!, { b: Boolean, error: Error?, arrayList: ArrayList<KUser> ->
                         clients = arrayList
@@ -204,7 +206,9 @@ class AssignClient: Activity() {
         dialogView.findViewById<TextView>(R.id.firstname).text = client.firstname
         dialogView.findViewById<TextView>(R.id.lastname).text = client.lastname
         if (client.get("profilPicture") != null)
-        Picasso.with(this).load(client.profilPicture!!.url).into(dialogView.findViewById<CircleImageView>(R.id.profile_image))
+            Picasso.with(this).load(client.profilPicture!!.url).into(dialogView.findViewById<CircleImageView>(R.id.profile_image))
+        else
+            Picasso.with(this).load(R.drawable.default_avatar).into(dialogView.findViewById<CircleImageView>(R.id.profile_image))
         dialogBuilder.setView(dialogView)
 
         //val edt = dialogView.findViewById(R.id.edit1) as EditText

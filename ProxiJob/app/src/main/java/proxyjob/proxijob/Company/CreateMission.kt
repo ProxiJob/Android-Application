@@ -36,8 +36,8 @@ class CreateMission: Activity()
     var job: Jobs?= null
     var company_name: TextView?= null
     var company_image: ImageView?= null
-    var job_start: EditText?= null
-    var job_end: EditText?= null
+    var job_start: TextView?= null
+    var job_end: TextView?= null
     var job_title: EditText?= null
     var job_cash: EditText?= null
     var job_detail: EditText?= null
@@ -86,6 +86,8 @@ class CreateMission: Activity()
         var logo = KUser.getCurrentUser().company!!.fetchIfNeeded<Company>()?.logo
         if (logo != null)
             Picasso.with(applicationContext).load(logo!!.url).into(company_image)
+        else
+            Picasso.with(applicationContext).load(R.drawable.default_company).into(company_image)
         post!!.setOnClickListener {
             createMission()
         }

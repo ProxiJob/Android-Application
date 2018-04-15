@@ -81,7 +81,6 @@ class Profil : Fragment() {
         view.findViewById<Button>(R.id.informations).setOnClickListener {
             startActivity(Intent(context, InformationsActivity::class.java))
         }
-        view.findViewById<Button>(R.id.cv).setOnClickListener { showFileChooser() }
         return view
     }
 

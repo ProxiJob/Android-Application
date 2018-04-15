@@ -80,6 +80,7 @@ class SubscribeEntreprise : Activity() {
         }
         findViewById<CheckBox>(R.id.condition).setOnClickListener {
             startActivity(Intent(this, ConditionGeneral::class.java))
+
         }
         var placeSearchDialog =  PlaceSearchDialog.Builder(this)
                 .setLocationNameListener { locationName ->

@@ -287,7 +287,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     var logo = Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).company!!.fetchIfNeeded<Company>()?.logo
 
                     saveURL = logo!!.url
-                    Picasso.with(context).load(logo!!.url).placeholder(R.drawable.proxijob).into(v!!.findViewById<ParseImageView>(R.id.clientPic))
+                    Picasso.with(context).load(logo!!.url).placeholder(R.drawable.default_company).into(v!!.findViewById<ParseImageView>(R.id.clientPic))
                         var folderName = formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!);
                         (v!!.findViewById<TextView>(R.id.date) as TextView).text = "Du " + formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateStart!!) + "  au  " +
                                 formatter.format(Jobs!!.get(arg0.id.toString().replace("m", "").toInt()).dateEnd!!)

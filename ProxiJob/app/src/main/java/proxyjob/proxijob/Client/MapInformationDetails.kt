@@ -56,7 +56,6 @@ class MapInformationDetails: Activity()
         job_detail = findViewById(R.id.job_detail)
         contract = findViewById(R.id.contract)
         post = findViewById(R.id.post)
-
         post!!.setOnClickListener {
             managePost()
         }
@@ -130,7 +129,8 @@ class MapInformationDetails: Activity()
             }
             if (logo != null) {
                 Picasso.with(applicationContext).load(logo!!.url).into(company_image)
-            }
+            } else
+                Picasso.with(applicationContext).load(R.drawable.default_company).into(company_image)
         }
             })
     }

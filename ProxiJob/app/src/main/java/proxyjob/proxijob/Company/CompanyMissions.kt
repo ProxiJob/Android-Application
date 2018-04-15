@@ -68,8 +68,12 @@ class CompanyMissions : Fragment() {
             APIManager.getShared().getCompany { b, error, arrayList ->
                 APIManager.getShared().getMissionsForCompany(arrayList, { b, error, arrayList ->
                     jobs = arrayList
-                    if (jobs!!.size == 0)
+                    if (jobs!!.size == 0) {
                         view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
+                        view.findViewById<TextView>(R.id.noMissions).text = "Vous n'avez pas encore deposé\nd'offre d'emploi"
+                    } else {
+                        view.findViewById<TextView>(R.id.noMissions).visibility = View.INVISIBLE
+                    }
                     listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                     var listFooter = View(context)
                     listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)
@@ -85,8 +89,12 @@ class CompanyMissions : Fragment() {
         APIManager.getShared().getCompany { b, error, arrayList ->
             APIManager.getShared().getMissionsForCompany( arrayList, { b, error, arrayList ->
                 jobs = arrayList
-                if (jobs!!.size == 0)
+                if (jobs!!.size == 0) {
                     view.findViewById<TextView>(R.id.noMissions).visibility = View.VISIBLE
+                    view.findViewById<TextView>(R.id.noMissions).text = "Vous n'avez pas encore deposé\nd'offre d'emploi"
+                } else {
+                    view.findViewById<TextView>(R.id.noMissions).visibility = View.INVISIBLE
+                }
                 listAdapter = CompanyMissionListAdapter(activity!!, jobs!!)
                 var listFooter = View(context)
                 listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.FILL_PARENT, 70)

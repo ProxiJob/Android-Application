@@ -151,7 +151,8 @@ class InformationsCompany: Fragment()
 
         if (image != null) {
             Picasso.with(activity).load(image.url).into(logo)
-        }
+        } else
+            Picasso.with(activity).load(R.drawable.default_company).into(logo)
 
         return view
     }
