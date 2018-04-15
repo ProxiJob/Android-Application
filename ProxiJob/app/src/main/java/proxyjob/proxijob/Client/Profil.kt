@@ -65,7 +65,7 @@ class Profil : Fragment() {
                 println("ERROR")
             }
         })*/
-        ParseCloud.callFunctionInBackground("createPDFAtBlock", params, FunctionCallback<String> { id, e ->
+        /*ParseCloud.callFunctionInBackground("createPDFAtBlock", params, FunctionCallback<String> { id, e ->
             if (e == null) {
                 println("NO ERROR")
                 println(id)
@@ -73,7 +73,7 @@ class Profil : Fragment() {
             } else {
                 println("ERROR")
             }
-        })
+        })*/
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater!!.inflate(R.layout.activity_profil, container, false)

@@ -118,6 +118,7 @@ class MapInformationDetails: Activity()
                             println("ERROR")
                         }
                     })
+                }
                 // ratings is 4.5
             }
         })
